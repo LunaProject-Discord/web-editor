@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 import { EditorCommand, EditorRibbonButton } from '../interfaces';
 
 export const asRibbonButton = (
-    command: EditorCommand,
+    command: EditorCommand | EditorRibbonButton,
     button: Partial<EditorRibbonButton>
 ) => deepmerge<EditorRibbonButton>(
     {
@@ -10,6 +10,7 @@ export const asRibbonButton = (
         name: command.name,
         icon: command.icon,
         label: command.label,
+        tooltip: command.type === 'ribbonButton' ? command.tooltip : undefined,
         enabled: command.enabled,
         selected: command.selected,
         perform: command.perform

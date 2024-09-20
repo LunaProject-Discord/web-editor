@@ -1,5 +1,3 @@
-'use client';
-
 import { FormatBoldOutlined } from '@mui/icons-material';
 import { markInputRule, markPasteRule } from '@tiptap/core';
 import { Bold, BoldOptions, starInputRegex, starPasteRegex } from '@tiptap/extension-bold';
