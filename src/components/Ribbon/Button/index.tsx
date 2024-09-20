@@ -36,8 +36,7 @@ export const RibbonButtonRoot = styled(
             }
             {...props}
         />
-    )),
-    { shouldForwardProp: (prop) => prop !== 'selected' }
+    ))
 )<RibbonButtonRootProps>(({ theme }) => ({
     padding: theme.spacing(1),
     gap: theme.spacing(1),
