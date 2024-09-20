@@ -1,0 +1,99 @@
+{
+    "name": "@lunaproject/web-editor",
+    "version": "1.0.0",
+    "license": "GPL-3.0",
+    "packageManager": "yarn@4.4.1",
+    "volta": {
+        "node": "20.11.0",
+        "yarn": "4.4.1"
+    },
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LunaProject-Discord/web-editor.git"
+    },
+    "scripts": {
+        "build": "tsc && mkdir dist/@types && cp src/@types/* dist/@types/"
+    },
+    "dependencies": {
+        "@tiptap/core": "^2.7.2",
+        "@tiptap/extension-bold": "^2.7.2",
+        "@tiptap/extension-bubble-menu": "^2.7.2",
+        "@tiptap/extension-bullet-list": "^2.7.2",
+        "@tiptap/extension-code": "^2.7.2",
+        "@tiptap/extension-color": "^2.7.2",
+        "@tiptap/extension-document": "^2.7.2",
+        "@tiptap/extension-hard-break": "^2.7.2",
+        "@tiptap/extension-heading": "^2.7.2",
+        "@tiptap/extension-highlight": "^2.7.2",
+        "@tiptap/extension-history": "^2.7.2",
+        "@tiptap/extension-image": "^2.7.2",
+        "@tiptap/extension-italic": "^2.7.2",
+        "@tiptap/extension-link": "^2.7.2",
+        "@tiptap/extension-list-item": "^2.7.2",
+        "@tiptap/extension-ordered-list": "^2.7.2",
+        "@tiptap/extension-paragraph": "^2.7.2",
+        "@tiptap/extension-placeholder": "^2.7.2",
+        "@tiptap/extension-strike": "^2.7.2",
+        "@tiptap/extension-subscript": "^2.7.2",
+        "@tiptap/extension-superscript": "^2.7.2",
+        "@tiptap/extension-task-item": "^2.7.2",
+        "@tiptap/extension-task-list": "^2.7.2",
+        "@tiptap/extension-text": "^2.7.2",
+        "@tiptap/extension-text-align": "^2.7.2",
+        "@tiptap/extension-text-style": "^2.7.2",
+        "@tiptap/extension-underline": "^2.7.2",
+        "@tiptap/pm": "^2.7.2",
+        "@tiptap/react": "^2.7.2"
+    },
+    "devDependencies": {
+        "@emotion/react": "^11.13.3",
+        "@emotion/styled": "^11.13.0",
+        "@lunaproject/web-core": "^2.0.0-beta.12",
+        "@mui/icons-material": "^6.0.2",
+        "@mui/lab": "^6.0.0-beta.8",
+        "@mui/material": "^6.0.2",
+        "@types/node": "~20.11.30",
+        "@types/react": "18.3.3",
+        "@types/react-dom": "18.3.0",
+        "next": "^14.2.7",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "typescript": "^5.5.3"
+    },
+    "peerDependencies": {
+        "@emotion/react": "^11.13.0",
+        "@emotion/styled": "^11.13.0",
+        "@lunaproject/web-core": "^2.0.0-beta.12",
+        "@mui/icons-material": "^6.0.0",
+        "@mui/lab": "^6.0.0-beta.8",
+        "@mui/material": "^6.0.0",
+        "@types/react": "^18.2.0 || ^18.3.0",
+        "@types/react-dom": "^18.2.0 || ^18.3.0",
+        "next": "^14.2.0",
+        "react": "^18.2.0 || ^18.3.0",
+        "react-dom": "^18.2.0 || ^18.3.0"
+    },
+    "peerDependenciesMeta": {
+        "@emotion/react": {
+            "optional": true
+        },
+        "@emotion/styled": {
+            "optional": true
+        },
+        "@types/react": {
+            "optional": true
+        },
+        "@types/react-dom": {
+            "optional": true
+        }
+    },
+    "publishConfig": {
+        "access": "public",
+        "directory": "dist"
+    },
+    "files": [
+        "dist"
+    ]
+}
