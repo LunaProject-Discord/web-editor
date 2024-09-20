@@ -4,7 +4,7 @@ import { ButtonBase } from '@lunaproject/web-core/dist/components/ButtonBase';
 import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { alpha, ButtonBaseProps, styled, Tooltip } from '@mui/material';
 import clsx from 'clsx';
-import React, { forwardRef, useCallback } from 'react';
+import React, { forwardRef } from 'react';
 import { EditorRibbonButton } from '../../../interfaces';
 import { getEditorPredicate } from '../../../utils';
 import { EditorComponentProps, useCurrentEditor } from '../../index';
@@ -81,11 +81,11 @@ export const RibbonButton = (
     const isDisabled = !getEditorPredicate(enabled, editor, true);
     const isSelected = getEditorPredicate(selected, editor);
 
-    const handleButtonClick = useCallback(() => perform({
+    const handleButtonClick = () => perform({
         editor,
         view: editor.view,
         state: editor.state
-    }), [editor, perform]);
+    });
 
     const children = (
         <RibbonButtonRoot onClick={handleButtonClick} disabled={isDisabled} selected={isSelected}>

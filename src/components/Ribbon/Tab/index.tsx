@@ -3,7 +3,7 @@
 import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { Box, BoxProps, styled } from '@mui/material';
 import clsx from 'clsx';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { EditorRibbonTab } from '../../../interfaces';
 import { getEditorPredicate } from '../../../utils';
 import { EditorComponentProps, RibbonGroup, useCurrentEditor } from '../../index';
@@ -41,20 +41,18 @@ export const RibbonTab = ({ label, visible, content, editor: _editor }: RibbonTa
     if (!isVisible)
         return null;
 
-    const children = useMemo(() => content.map((item, index) => {
-        switch (item.type) {
-            case 'divider':
-                return (<RibbonGroupDivider />);
-
-            case 'ribbonGroup':
-            default:
-                return (<RibbonGroup {...item} editor={_editor} />);
-        }
-    }), [content]);
-
     return (
         <RibbonTabRoot>
-            {children}
+            {content.map((item, index) => {
+                switch (item.type) {
+                    case 'divider':
+                        return (<RibbonGroupDivider />);
+
+                    case 'ribbonGroup':
+                    default:
+                        return (<RibbonGroup {...item} editor={_editor} />);
+                }
+            })}
         </RibbonTabRoot>
     );
 };

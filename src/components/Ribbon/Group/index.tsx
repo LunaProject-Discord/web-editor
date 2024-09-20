@@ -3,10 +3,9 @@
 import { borderAndBoxShadow, generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { Box, BoxProps, styled } from '@mui/material';
 import clsx from 'clsx';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { EditorRibbonGroup } from '../../../interfaces';
-import { getEditorPredicate } from '../../../utils';
-import { EditorComponentProps, RibbonButton, RibbonTabRoot, useCurrentEditor } from '../../index';
+import { EditorComponentProps, RibbonButton, useCurrentEditor } from '../../index';
 import { RibbonGroupDivider } from '../GroupDivider';
 
 export const ribbonGroupClasses = generateComponentClasses(
@@ -76,20 +75,20 @@ export const RibbonGroup = ({ label, content, editor: _editor }: RibbonGroupProp
     if (!editor)
         return null;
 
-    const children = useMemo(() => content.map((item, index) => {
-        switch (item.type) {
-            case 'divider':
-                return (<RibbonGroupDivider />);
-
-            default:
-                return (<RibbonButton {...item} editor={_editor} />);
-        }
-    }), [content]);
-
     return (
         <RibbonGroupRoot>
             {label && <RibbonGroupLabel>{label}</RibbonGroupLabel>}
-            <RibbonGroupContent>{children}</RibbonGroupContent>
+            <RibbonGroupContent>
+                {content.map((item, index) => {
+                    switch (item.type) {
+                        case 'divider':
+                            return (<RibbonGroupDivider />);
+
+                        default:
+                            return (<RibbonButton {...item} editor={_editor} />);
+                    }
+                })}
+            </RibbonGroupContent>
         </RibbonGroupRoot>
     );
-}
+};
