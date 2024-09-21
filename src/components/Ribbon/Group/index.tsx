@@ -58,6 +58,7 @@ export const RibbonGroupLabel = styled(
     left: '50%',
     display: 'none',
     fontSize: theme.typography.body2.fontSize,
+    lineHeight: 'normal',
     whiteSpace: 'nowrap',
     userSelect: 'none',
     zIndex: 1,

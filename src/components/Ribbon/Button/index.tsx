@@ -40,6 +40,8 @@ export const RibbonButtonRoot = styled(
 )<RibbonButtonRootProps>(({ theme }) => ({
     padding: theme.spacing(1),
     gap: theme.spacing(1),
+    fontWeight: 500,
+    lineHeight: 'normal',
     color: (theme.vars || theme).palette.action.active,
     [`&.${ribbonButtonClasses.selected}`]: {
         color: (theme.vars || theme).palette.text.primary,
