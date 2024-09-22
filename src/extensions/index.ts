@@ -1,5 +1,4 @@
 import { Extensions } from '@tiptap/core';
-import Gapcursor from '@tiptap/extension-gapcursor';
 import { BoldExtension } from './bold';
 import { BulletListExtension } from './bullet_list';
 import { CodeExtension } from './code';
@@ -54,7 +53,7 @@ export const DefaultExtensions: Extensions = [
 
     HistoryExtension,
     HardBreakExtension,
-    Gapcursor,
+    // GapcursorExtension,
     TextAlignExtension
 ];
 
