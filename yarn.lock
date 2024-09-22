@@ -423,6 +423,10 @@ __metadata:
     "@tiptap/extension-strike": "npm:^2.7.2"
     "@tiptap/extension-subscript": "npm:^2.7.2"
     "@tiptap/extension-superscript": "npm:^2.7.2"
+    "@tiptap/extension-table": "npm:^2.7.2"
+    "@tiptap/extension-table-cell": "npm:^2.7.2"
+    "@tiptap/extension-table-header": "npm:^2.7.2"
+    "@tiptap/extension-table-row": "npm:^2.7.2"
     "@tiptap/extension-task-item": "npm:^2.7.2"
     "@tiptap/extension-task-list": "npm:^2.7.2"
     "@tiptap/extension-text": "npm:^2.7.2"
@@ -1006,6 +1010,43 @@ __metadata:
   peerDependencies:
     "@tiptap/core": ^2.7.0
   checksum: 10c0/b4c6fd2fa02ec5a900d951a378bb0477d3d7535d4a45d5678397a260400f731883a579d70529da670954dce300005e19c056ab3a149324c3d11897c43e8ece40
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-table-cell@npm:^2.7.2":
+  version: 2.7.2
+  resolution: "@tiptap/extension-table-cell@npm:2.7.2"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+  checksum: 10c0/36572d8a2caa98afb408adaa8e2d4ee7a052e5885e01d2bca0366dbfca6d11c936f25d006a5e18ec119f8fb2dde626fbd5a7276534a0e3328ea6d06873dec03e
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-table-header@npm:^2.7.2":
+  version: 2.7.2
+  resolution: "@tiptap/extension-table-header@npm:2.7.2"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+  checksum: 10c0/2fbef7536e0ae0a15127a7aec1cb89a72d806ff0799da1ea34eb41e46bf160c32fb1530e1a4fc57ca8df5176001258d8f997c5c3cfc34a97949b664ac3910514
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-table-row@npm:^2.7.2":
+  version: 2.7.2
+  resolution: "@tiptap/extension-table-row@npm:2.7.2"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+  checksum: 10c0/42c2d650eed94f5a96dceeb6e6b765b299284dd9e54273f76a1352003614718363a3f6921456d0c1f24dc11cfac048fe18f5b45d325a0fb9f9b8cd22365873e1
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-table@npm:^2.7.2":
+  version: 2.7.2
+  resolution: "@tiptap/extension-table@npm:2.7.2"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+    "@tiptap/pm": ^2.7.0
+  checksum: 10c0/0642131f39c341b98dbe92066f551333fcf519538d279aa1dc48f22149224afc803f71b6fc91cdfa874e1c8ec67d1ff079809bb9080d3db01c0b0ff233049f90
   languageName: node
   linkType: hard
 

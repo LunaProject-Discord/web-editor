@@ -15,6 +15,10 @@ import { ParagraphExtension } from './paragraph';
 import { StrikeExtension } from './strike';
 import { SubscriptExtension } from './subscript';
 import { SuperscriptExtension } from './superscript';
+import { TableExtension } from './table';
+import { TableCellExtension } from './table_cell';
+import { TableHeaderExtension } from './table_header';
+import { TableRowExtension } from './table_row';
 import { TaskItemExtension } from './task_item';
 import { TaskListExtension } from './task_list';
 import { TextExtension } from './text';
@@ -32,6 +36,10 @@ export const DefaultExtensions: Extensions = [
     ListItemExtension,
     TaskListExtension,
     TaskItemExtension,
+    TableExtension,
+    TableRowExtension,
+    TableCellExtension,
+    TableHeaderExtension,
     ImageExtension,
 
     BoldExtension,
@@ -64,6 +72,10 @@ export * from './paragraph';
 export * from './strike';
 export * from './subscript';
 export * from './superscript';
+export * from './table';
+export * from './table_cell';
+export * from './table_header';
+export * from './table_row';
 export * from './task_item';
 export * from './task_list';
 export * from './text';
