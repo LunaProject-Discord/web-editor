@@ -98,23 +98,9 @@ export const TableDeleteRibbonButton = asRibbonButton(
     }
 );
 
-export const TableAddRowBeforeRibbonButton = asRibbonButton(
-    TableAddRowBeforeCommand,
-    {
-        tooltip: {
-            children: '上に行を追加'
-        }
-    }
-);
+export const TableAddRowBeforeRibbonButton = asRibbonButton(TableAddRowBeforeCommand, {});
 
-export const TableAddRowAfterRibbonButton = asRibbonButton(
-    TableAddRowAfterCommand,
-    {
-        tooltip: {
-            children: '下に行を追加'
-        }
-    }
-);
+export const TableAddRowAfterRibbonButton = asRibbonButton(TableAddRowAfterCommand, {});
 
 export const TableDeleteRowRibbonButton = asRibbonButton(
     TableDeleteRowCommand,
@@ -125,23 +111,9 @@ export const TableDeleteRowRibbonButton = asRibbonButton(
     }
 );
 
-export const TableAddColumnBeforeRibbonButton = asRibbonButton(
-    TableAddColumnBeforeCommand,
-    {
-        tooltip: {
-            children: '左に列を追加'
-        }
-    }
-);
+export const TableAddColumnBeforeRibbonButton = asRibbonButton(TableAddColumnBeforeCommand, {});
 
-export const TableAddColumnAfterRibbonButton = asRibbonButton(
-    TableAddColumnAfterCommand,
-    {
-        tooltip: {
-            children: '右に列を追加'
-        }
-    }
-);
+export const TableAddColumnAfterRibbonButton = asRibbonButton(TableAddColumnAfterCommand, {});
 
 export const TableDeleteColumnRibbonButton = asRibbonButton(
     TableDeleteColumnCommand,

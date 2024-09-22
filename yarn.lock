@@ -409,6 +409,7 @@ __metadata:
     "@tiptap/extension-code": "npm:^2.7.2"
     "@tiptap/extension-color": "npm:^2.7.2"
     "@tiptap/extension-document": "npm:^2.7.2"
+    "@tiptap/extension-gapcursor": "npm:^2.7.2"
     "@tiptap/extension-hard-break": "npm:^2.7.2"
     "@tiptap/extension-heading": "npm:^2.7.2"
     "@tiptap/extension-highlight": "npm:^2.7.2"
@@ -879,6 +880,16 @@ __metadata:
     "@tiptap/core": ^2.7.0
     "@tiptap/pm": ^2.7.0
   checksum: 10c0/3e363b199b55fe5d1ca8e861ee5a12a8a0c3f23baabce918fe554da9756ee674d155ab3baaf7bff52ab9009d3625922cc3c2966e4f258aa94e52c73678da1714
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-gapcursor@npm:^2.7.2":
+  version: 2.7.2
+  resolution: "@tiptap/extension-gapcursor@npm:2.7.2"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+    "@tiptap/pm": ^2.7.0
+  checksum: 10c0/7b0ec647da77ba0f79a79824bdcbc63aa17b90bf8789ae41e69d0faa752b90f473a9c6fa86b39eccc430d4f3c17af3d5abbc7d5da9aa71fb992337b30a2fb35a
   languageName: node
   linkType: hard
 
