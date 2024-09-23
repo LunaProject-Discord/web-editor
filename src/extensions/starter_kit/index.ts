@@ -53,36 +53,36 @@ import {
 } from '..';
 
 export interface StarterKitOptions {
-    document: false;
-    text: false;
+    document?: false;
+    text?: false;
 
-    heading: Partial<HeadingOptions> | false;
-    paragraph: Partial<ParagraphOptions> | false;
-    bulletList: Partial<BulletListOptions> | false;
-    orderedList: Partial<OrderedListOptions> | false;
-    listItem: Partial<ListItemOptions> | false;
-    taskList: Partial<TaskListOptions> | false;
-    taskItem: Partial<TaskItemOptions> | false;
-    table: Partial<TableOptions> | false;
-    tableRow: Partial<TableRowOptions> | false;
-    tableCell: Partial<TableCellOptions> | false;
-    tableHeader: Partial<TableHeaderOptions> | false;
-    image: Partial<ImageOptions> | false;
+    heading?: Partial<HeadingOptions> | false;
+    paragraph?: Partial<ParagraphOptions> | false;
+    bulletList?: Partial<BulletListOptions> | false;
+    orderedList?: Partial<OrderedListOptions> | false;
+    listItem?: Partial<ListItemOptions> | false;
+    taskList?: Partial<TaskListOptions> | false;
+    taskItem?: Partial<TaskItemOptions> | false;
+    table?: Partial<TableOptions> | false;
+    tableRow?: Partial<TableRowOptions> | false;
+    tableCell?: Partial<TableCellOptions> | false;
+    tableHeader?: Partial<TableHeaderOptions> | false;
+    image?: Partial<ImageOptions> | false;
 
-    bold: Partial<BoldOptions> | false;
-    italic: Partial<ItalicOptions> | false;
-    underline: Partial<UnderlineOptions> | false;
-    strike: Partial<StrikeOptions> | false;
-    code: Partial<CodeOptions> | false;
-    link: Partial<LinkOptions> | false;
-    subscript: Partial<SubscriptExtensionOptions> | false;
-    superscript: Partial<SuperscriptExtensionOptions> | false;
+    bold?: Partial<BoldOptions> | false;
+    italic?: Partial<ItalicOptions> | false;
+    underline?: Partial<UnderlineOptions> | false;
+    strike?: Partial<StrikeOptions> | false;
+    code?: Partial<CodeOptions> | false;
+    link?: Partial<LinkOptions> | false;
+    subscript?: Partial<SubscriptExtensionOptions> | false;
+    superscript?: Partial<SuperscriptExtensionOptions> | false;
 
-    history: Partial<HistoryOptions> | false;
-    hardBreak: Partial<HardBreakOptions> | false;
-    gapCursor: false;
-    dropCursor: false;
-    textAlign: Partial<TextAlignOptions> | false;
+    history?: Partial<HistoryOptions> | false;
+    hardBreak?: Partial<HardBreakOptions> | false;
+    gapCursor?: false;
+    dropCursor?: false;
+    textAlign?: Partial<TextAlignOptions> | false;
 }
 
 export const StarterKitExtension = Extension.create<StarterKitOptions>({
@@ -91,63 +91,63 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
     addExtensions() {
         const extensions: Extensions = [];
 
-        if (this.options.document)
+        if (this.options.document !== false)
             extensions.push(DocumentExtension);
-        if (this.options.text)
+        if (this.options.text !== false)
             extensions.push(TextExtension);
 
         if (this.options.heading !== false)
-            extensions.push(HeadingExtension.configure(this.options.heading));
+            extensions.push(HeadingExtension.configure(this.options?.heading));
         if (this.options.paragraph !== false)
-            extensions.push(ParagraphExtension.configure(this.options.paragraph));
+            extensions.push(ParagraphExtension.configure(this.options?.paragraph));
         if (this.options.bulletList !== false)
-            extensions.push(BulletListExtension.configure(this.options.bulletList));
+            extensions.push(BulletListExtension.configure(this.options?.bulletList));
         if (this.options.orderedList !== false)
-            extensions.push(OrderedListExtension.configure(this.options.orderedList));
+            extensions.push(OrderedListExtension.configure(this.options?.orderedList));
         if (this.options.listItem !== false)
-            extensions.push(ListItemExtension.configure(this.options.listItem));
+            extensions.push(ListItemExtension.configure(this.options?.listItem));
         if (this.options.taskList !== false)
-            extensions.push(TaskListExtension.configure(this.options.taskList));
+            extensions.push(TaskListExtension.configure(this.options?.taskList));
         if (this.options.taskItem !== false)
-            extensions.push(TaskItemExtension.configure(this.options.taskItem));
+            extensions.push(TaskItemExtension.configure(this.options?.taskItem));
         if (this.options.table !== false)
-            extensions.push(TableExtension.configure(this.options.table));
+            extensions.push(TableExtension.configure(this.options?.table));
         if (this.options.tableRow !== false)
-            extensions.push(TableRowExtension.configure(this.options.tableRow));
+            extensions.push(TableRowExtension.configure(this.options?.tableRow));
         if (this.options.tableCell !== false)
-            extensions.push(TableCellExtension.configure(this.options.tableCell));
+            extensions.push(TableCellExtension.configure(this.options?.tableCell));
         if (this.options.tableHeader !== false)
-            extensions.push(TableHeaderExtension.configure(this.options.tableHeader));
+            extensions.push(TableHeaderExtension.configure(this.options?.tableHeader));
         if (this.options.image !== false)
-            extensions.push(ImageExtension.configure(this.options.image));
+            extensions.push(ImageExtension.configure(this.options?.image));
 
         if (this.options.bold !== false)
-            extensions.push(BoldExtension.configure(this.options.bold));
+            extensions.push(BoldExtension.configure(this.options?.bold));
         if (this.options.italic !== false)
-            extensions.push(ItalicExtension.configure(this.options.italic));
+            extensions.push(ItalicExtension.configure(this.options?.italic));
         if (this.options.underline !== false)
-            extensions.push(UnderlineExtension.configure(this.options.underline));
+            extensions.push(UnderlineExtension.configure(this.options?.underline));
         if (this.options.strike !== false)
-            extensions.push(StrikeExtension.configure(this.options.strike));
+            extensions.push(StrikeExtension.configure(this.options?.strike));
         if (this.options.code !== false)
-            extensions.push(CodeExtension.configure(this.options.code));
+            extensions.push(CodeExtension.configure(this.options?.code));
         if (this.options.link !== false)
-            extensions.push(LinkExtension.configure(this.options.link));
+            extensions.push(LinkExtension.configure(this.options?.link));
         if (this.options.subscript !== false)
-            extensions.push(SubscriptExtension.configure(this.options.subscript));
+            extensions.push(SubscriptExtension.configure(this.options?.subscript));
         if (this.options.superscript !== false)
-            extensions.push(SuperscriptExtension.configure(this.options.superscript));
+            extensions.push(SuperscriptExtension.configure(this.options?.superscript));
 
         if (this.options.history !== false)
-            extensions.push(HistoryExtension.configure(this.options.history));
+            extensions.push(HistoryExtension.configure(this.options?.history));
         if (this.options.hardBreak !== false)
-            extensions.push(HardBreakExtension.configure(this.options.hardBreak));
-        if (this.options.gapCursor)
+            extensions.push(HardBreakExtension.configure(this.options?.hardBreak));
+        if (this.options.gapCursor !== false)
             extensions.push(GapcursorExtension);
-        if (this.options.dropCursor)
+        if (this.options.dropCursor !== false)
             extensions.push(DropcursorExtension);
         if (this.options.textAlign !== false)
-            extensions.push(TextAlignExtension.configure(this.options.textAlign));
+            extensions.push(TextAlignExtension.configure(this.options?.textAlign));
 
         return extensions;
     }
