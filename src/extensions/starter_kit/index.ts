@@ -88,6 +88,41 @@ export interface StarterKitOptions {
 export const StarterKitExtension = Extension.create<StarterKitOptions>({
     name: 'starterKit',
 
+    addOptions(): StarterKitOptions {
+        return {
+            document: undefined,
+            text: undefined,
+
+            heading: undefined,
+            paragraph: undefined,
+            bulletList: undefined,
+            orderedList: undefined,
+            listItem: undefined,
+            taskList: undefined,
+            taskItem: undefined,
+            table: undefined,
+            tableRow: undefined,
+            tableCell: undefined,
+            tableHeader: undefined,
+            image: undefined,
+
+            bold: undefined,
+            italic: undefined,
+            underline: undefined,
+            strike: undefined,
+            code: undefined,
+            link: undefined,
+            subscript: undefined,
+            superscript: undefined,
+
+            history: undefined,
+            hardBreak: undefined,
+            gapCursor: undefined,
+            dropCursor: undefined,
+            textAlign: undefined
+        };
+    },
+
     addExtensions() {
         const extensions: Extensions = [];
 
