@@ -4,14 +4,19 @@ import {
     FormatAlignLeftOutlined,
     FormatAlignRightOutlined
 } from '@mui/icons-material';
-import { TextAlign } from '@tiptap/extension-text-align';
+import { TextAlign, TextAlignOptions } from '@tiptap/extension-text-align';
 import { EditorActionProps, EditorCommand } from '../../interfaces';
 import { asRibbonButton } from '../../utils';
 
 export type Align = 'left' | 'center' | 'right' | 'justify';
 
-export const TextAlignExtension = TextAlign.configure({
-    types: ['heading', 'paragraph', 'image']
+export const TextAlignExtension = TextAlign.extend<TextAlignOptions>({
+    addOptions(): TextAlignOptions {
+        return {
+            ...this.parent?.(),
+            types: ['heading', 'paragraph', 'image']
+        };
+    }
 });
 
 const handleTextAlign = (align: Align) => ({ editor }: EditorActionProps) => {

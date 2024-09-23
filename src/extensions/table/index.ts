@@ -1,10 +1,15 @@
 import { AddOutlined, DeleteOutlined, GridOnOutlined } from '@mui/icons-material';
-import { Table } from '@tiptap/extension-table';
+import { Table, TableOptions } from '@tiptap/extension-table';
 import { EditorCommand } from '../../interfaces';
 import { asRibbonButton } from '../../utils';
 
-export const TableExtension = Table.configure({
-    resizable: true
+export const TableExtension = Table.extend<TableOptions>({
+    addOptions(): TableOptions {
+        return {
+            ...this.parent?.(),
+            resizable: true
+        };
+    }
 });
 
 export const TableInsertCommand: EditorCommand = {

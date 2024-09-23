@@ -1,5 +1,10 @@
-import { Link } from '@tiptap/extension-link';
+import { Link, LinkOptions } from '@tiptap/extension-link';
 
-export const LinkExtension = Link.configure({
-    openOnClick: false
+export const LinkExtension = Link.extend<LinkOptions>({
+    addOptions(): LinkOptions {
+        return {
+            ...this.parent?.(),
+            openOnClick: false
+        };
+    }
 });

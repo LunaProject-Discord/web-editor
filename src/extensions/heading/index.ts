@@ -2,10 +2,10 @@ import { textblockTypeInputRule } from '@tiptap/core';
 import { Heading, HeadingOptions } from '@tiptap/extension-heading';
 
 export const HeadingExtension = Heading.extend<HeadingOptions>({
-    addOptions() {
+    addOptions(): HeadingOptions {
         return {
-            levels: [2, 3, 4],
-            HTMLAttributes: {}
+            ...this.parent?.(),
+            levels: [2, 3, 4]
         };
     },
 
