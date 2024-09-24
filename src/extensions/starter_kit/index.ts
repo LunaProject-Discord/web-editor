@@ -2,6 +2,8 @@ import { Extension, Extensions } from '@tiptap/core';
 import { BoldOptions } from '@tiptap/extension-bold';
 import { BulletListOptions } from '@tiptap/extension-bullet-list';
 import { CodeOptions } from '@tiptap/extension-code';
+import Dropcursor from '@tiptap/extension-dropcursor';
+import Gapcursor from '@tiptap/extension-gapcursor';
 import { HardBreakOptions } from '@tiptap/extension-hard-break';
 import { HeadingOptions } from '@tiptap/extension-heading';
 import { HistoryOptions } from '@tiptap/extension-history';
@@ -27,8 +29,6 @@ import {
     BulletListExtension,
     CodeExtension,
     DocumentExtension,
-    DropcursorExtension,
-    GapcursorExtension,
     HardBreakExtension,
     HeadingExtension,
     HistoryExtension,
@@ -178,9 +178,9 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
         if (this.options.hardBreak !== false)
             extensions.push(HardBreakExtension.configure(this.options?.hardBreak));
         if (this.options.gapCursor !== false)
-            extensions.push(GapcursorExtension);
+            extensions.push(Gapcursor);
         if (this.options.dropCursor !== false)
-            extensions.push(DropcursorExtension);
+            extensions.push(Dropcursor);
         if (this.options.textAlign !== false)
             extensions.push(TextAlignExtension.configure(this.options?.textAlign));
 

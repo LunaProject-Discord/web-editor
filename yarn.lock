@@ -353,9 +353,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lunaproject/web-core@npm:^2.0.0-beta.12":
-  version: 2.0.0-beta.12
-  resolution: "@lunaproject/web-core@npm:2.0.0-beta.12"
+"@lunaproject/web-core@npm:^2.0.0-beta.13":
+  version: 2.0.0-beta.13
+  resolution: "@lunaproject/web-core@npm:2.0.0-beta.13"
   dependencies:
     "@types/color": "npm:^3.0.6"
     "@types/deep-equal": "npm:^1.0.4"
@@ -388,7 +388,7 @@ __metadata:
       optional: true
     "@types/react-dom":
       optional: true
-  checksum: 10c0/9d48c717bc89cff2be7f376b76bfb8ddf3faeec57cf38ceda9616b52c111363a6ca106d963f68eecd027fb6db317008a4f44cd680af11b55b72f122f7e59360f
+  checksum: 10c0/67bedeb5e43608b9d2335cb22150ce9982d35576a05ee351a037ecf326350b5208073efdeecbe724c0731ee14a8eaad68d13e2399d7dd103c587d2c66ec39aa6
   languageName: node
   linkType: hard
 
@@ -398,7 +398,7 @@ __metadata:
   dependencies:
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
-    "@lunaproject/web-core": "npm:^2.0.0-beta.12"
+    "@lunaproject/web-core": "npm:^2.0.0-beta.13"
     "@mui/icons-material": "npm:^6.0.2"
     "@mui/lab": "npm:^6.0.0-beta.8"
     "@mui/material": "npm:^6.0.2"
@@ -447,7 +447,7 @@ __metadata:
   peerDependencies:
     "@emotion/react": ^11.13.0
     "@emotion/styled": ^11.13.0
-    "@lunaproject/web-core": ^2.0.0-beta.12
+    "@lunaproject/web-core": ^2.0.0-beta.13
     "@mui/icons-material": ^6.0.0
     "@mui/lab": ^6.0.0-beta.8
     "@mui/material": ^6.0.0

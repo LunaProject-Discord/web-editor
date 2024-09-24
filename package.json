@@ -56,7 +56,7 @@
     "devDependencies": {
         "@emotion/react": "^11.13.3",
         "@emotion/styled": "^11.13.0",
-        "@lunaproject/web-core": "^2.0.0-beta.12",
+        "@lunaproject/web-core": "^2.0.0-beta.13",
         "@mui/icons-material": "^6.0.2",
         "@mui/lab": "^6.0.0-beta.8",
         "@mui/material": "^6.0.2",
@@ -71,7 +71,7 @@
     "peerDependencies": {
         "@emotion/react": "^11.13.0",
         "@emotion/styled": "^11.13.0",
-        "@lunaproject/web-core": "^2.0.0-beta.12",
+        "@lunaproject/web-core": "^2.0.0-beta.13",
         "@mui/icons-material": "^6.0.0",
         "@mui/lab": "^6.0.0-beta.8",
         "@mui/material": "^6.0.0",
