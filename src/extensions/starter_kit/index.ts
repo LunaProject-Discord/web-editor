@@ -2,8 +2,7 @@ import { Extension, Extensions } from '@tiptap/core';
 import { BoldOptions } from '@tiptap/extension-bold';
 import { BulletListOptions } from '@tiptap/extension-bullet-list';
 import { CodeOptions } from '@tiptap/extension-code';
-import Dropcursor from '@tiptap/extension-dropcursor';
-import Gapcursor from '@tiptap/extension-gapcursor';
+import { DropcursorOptions } from '@tiptap/extension-dropcursor';
 import { HardBreakOptions } from '@tiptap/extension-hard-break';
 import { HeadingOptions } from '@tiptap/extension-heading';
 import { HistoryOptions } from '@tiptap/extension-history';
@@ -29,6 +28,8 @@ import {
     BulletListExtension,
     CodeExtension,
     DocumentExtension,
+    DropcursorExtension,
+    GapcursorExtension,
     HardBreakExtension,
     HeadingExtension,
     HistoryExtension,
@@ -80,8 +81,8 @@ export interface StarterKitOptions {
 
     history?: Partial<HistoryOptions> | false;
     hardBreak?: Partial<HardBreakOptions> | false;
+    dropCursor?: Partial<DropcursorOptions> | false;
     gapCursor?: false;
-    dropCursor?: false;
     textAlign?: Partial<TextAlignOptions> | false;
 }
 
@@ -127,9 +128,9 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
         const extensions: Extensions = [];
 
         if (this.options.document !== false)
-            extensions.push(DocumentExtension);
+            extensions.push(DocumentExtension.configure(this.options?.document));
         if (this.options.text !== false)
-            extensions.push(TextExtension);
+            extensions.push(TextExtension.configure(this.options?.text));
 
         if (this.options.heading !== false)
             extensions.push(HeadingExtension.configure(this.options?.heading));
@@ -177,10 +178,10 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
             extensions.push(HistoryExtension.configure(this.options?.history));
         if (this.options.hardBreak !== false)
             extensions.push(HardBreakExtension.configure(this.options?.hardBreak));
-        if (this.options.gapCursor !== false)
-            extensions.push(Gapcursor);
         if (this.options.dropCursor !== false)
-            extensions.push(Dropcursor);
+            extensions.push(DropcursorExtension.configure(this.options?.dropCursor));
+        if (this.options.gapCursor !== false)
+            extensions.push(GapcursorExtension.configure(this.options?.gapCursor));
         if (this.options.textAlign !== false)
             extensions.push(TextAlignExtension.configure(this.options?.textAlign));
 
