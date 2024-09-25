@@ -1,6 +1,6 @@
 {
     "name": "@lunaproject/web-editor",
-    "version": "1.0.14",
+    "version": "1.0.15",
     "license": "GPL-3.0",
     "packageManager": "yarn@4.5.0",
     "volta": {
