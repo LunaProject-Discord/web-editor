@@ -26,14 +26,15 @@ export interface EditorRibbonButton extends Omit<EditorCommand, 'type' | 'descri
     tooltip?: EditorRibbonTooltip;
 }
 
-export interface EditorRibbonDropdownButton extends Omit<EditorRibbonButton, 'type' | 'perform'> {
+export interface EditorRibbonDropdownButton extends Omit<EditorCommand, 'type' | 'keywords' | 'perform'> {
     type: 'ribbonDropdownButton';
+    tooltip?: EditorRibbonTooltip;
     options: EditorRibbonDropdownButtonItem[];
 }
 
 export type EditorRibbonDropdownButtonItem = EditorRibbonDropdownButtonOption | EditorDivider;
 
-export interface EditorRibbonDropdownButtonOption extends Omit<EditorCommand, 'type'> {
+export interface EditorRibbonDropdownButtonOption extends Omit<EditorCommand, 'type' | 'keywords'> {
     type?: 'ribbonDropdownOption';
     label: ReactNode;
 }
