@@ -11,6 +11,7 @@ export const BulletListCommand: EditorCommand = {
     label: '箇条書きリスト',
     description: '箇条書きリストを挿入します。',
     keywords: ['bullet', 'list', 'bullet list', '箇条書き', 'リスト', '箇条書きリスト'],
+    disabled: ({ editor }) => !editor.can().toggleBulletList(),
     selected: ({ editor }) => editor.isActive('bulletList'),
     perform: ({ editor }) => editor.chain().focus().toggleBulletList().run()
 };

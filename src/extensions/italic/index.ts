@@ -11,6 +11,7 @@ export const ItalicCommand: EditorCommand = {
     label: '斜体',
     description: '選択したテキストを斜体にします。',
     keywords: ['italic', '斜体', 'イタリック'],
+    disabled: ({ editor }) => !editor.can().toggleItalic(),
     selected: ({ editor }) => editor.isActive('italic'),
     perform: ({ editor }) => editor.chain().focus().toggleItalic().run()
 };

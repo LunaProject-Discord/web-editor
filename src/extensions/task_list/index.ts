@@ -9,6 +9,7 @@ export const TaskListCommand: EditorCommand = {
     label: 'チェックリスト',
     description: 'チェックリストを挿入します。',
     keywords: ['check', 'list', 'check list', 'task', 'task list', 'todo', 'チェック', 'リスト', 'チェックリスト', 'タスク', 'タスクリスト'],
+    disabled: ({ editor }) => !editor.can().toggleTaskList(),
     selected: ({ editor }) => editor.isActive('taskList'),
     perform: ({ editor }) => editor.chain().focus().toggleTaskList().run()
 };

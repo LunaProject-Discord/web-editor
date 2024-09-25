@@ -32,6 +32,7 @@ export const BoldCommand: EditorCommand = {
     label: '太字',
     description: '選択したテキストを太字にします。',
     keywords: ['bold', 'strong', '太字', 'ボールド'],
+    disabled: ({ editor }) => !editor.can().toggleBold(),
     selected: ({ editor }) => editor.isActive('bold'),
     perform: ({ editor }) => editor.chain().focus().toggleBold().run()
 };

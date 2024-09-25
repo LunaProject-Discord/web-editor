@@ -11,6 +11,7 @@ export const CodeCommand: EditorCommand = {
     label: 'インライン コード',
     description: '選択したテキストをインライン コードとして表示します。',
     keywords: ['code', 'inline code', 'コード', 'インライン コード'],
+    disabled: ({ editor }) => !editor.can().toggleCode(),
     selected: ({ editor }) => editor.isActive('code'),
     perform: ({ editor }) => editor.chain().focus().toggleCode().run()
 };

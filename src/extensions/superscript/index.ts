@@ -11,6 +11,7 @@ export const SuperscriptCommand: EditorCommand = {
     label: '上付き文字',
     description: '選択したテキストを上付き文字として表示します。',
     keywords: ['superscript', '上付き文字'],
+    disabled: ({ editor }) => !editor.can().toggleSuperscript(),
     selected: ({ editor }) => editor.isActive('superscript'),
     perform: ({ editor }) => editor.chain().focus().unsetSubscript().toggleSuperscript().run()
 };

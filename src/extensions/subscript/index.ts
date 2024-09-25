@@ -11,6 +11,7 @@ export const SubscriptCommand: EditorCommand = {
     label: '下付き文字',
     description: '選択したテキストを下付き文字として表示します。',
     keywords: ['subscript', '下付き文字'],
+    disabled: ({ editor }) => !editor.can().toggleSubscript(),
     selected: ({ editor }) => editor.isActive('subscript'),
     perform: ({ editor }) => editor.chain().focus().unsetSuperscript().toggleSubscript().run()
 };

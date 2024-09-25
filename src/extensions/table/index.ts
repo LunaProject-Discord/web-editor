@@ -18,6 +18,7 @@ export const TableInsertCommand: EditorCommand = {
     label: '表',
     description: '表を挿入します。',
     keywords: ['table', 'insert', 'add', 'create', 'テーブル', '表', '挿入'],
+    disabled: ({ editor }) => !editor.can().insertTable(),
     perform: ({ editor }) => editor.chain().focus().insertTable().run()
 };
 
@@ -27,6 +28,7 @@ export const TableDeleteCommand: EditorCommand = {
     label: '表を削除',
     description: '選択した表を削除します。',
     keywords: ['table', 'delete', 'remove', 'テーブル', '表', '削除', '消去'],
+    disabled: ({ editor }) => !editor.can().deleteTable(),
     perform: ({ editor }) => editor.chain().focus().deleteTable().run()
 };
 
@@ -36,6 +38,7 @@ export const TableAddRowBeforeCommand: EditorCommand = {
     label: '上に行を追加',
     description: '選択した行の上に行を追加します。',
     keywords: ['table', 'row', 'add', 'insert', 'テーブル', '行', '追加', '挿入'],
+    disabled: ({ editor }) => !editor.can().addRowBefore(),
     perform: ({ editor }) => editor.chain().focus().addRowBefore().run()
 };
 
@@ -45,6 +48,7 @@ export const TableAddRowAfterCommand: EditorCommand = {
     label: '下に行を追加',
     description: '選択した行の下に行を追加します。',
     keywords: ['table', 'row', 'add', 'insert', 'テーブル', '行', '追加', '挿入'],
+    disabled: ({ editor }) => !editor.can().addRowAfter(),
     perform: ({ editor }) => editor.chain().focus().addRowAfter().run()
 };
 
@@ -54,6 +58,7 @@ export const TableDeleteRowCommand: EditorCommand = {
     label: '行を削除',
     description: '選択した行を削除します。',
     keywords: ['table', 'row', 'delete', 'remove', 'テーブル', '行', '削除', '消去'],
+    disabled: ({ editor }) => !editor.can().deleteRow(),
     perform: ({ editor }) => editor.chain().focus().deleteRow().run()
 };
 
@@ -63,6 +68,7 @@ export const TableAddColumnBeforeCommand: EditorCommand = {
     label: '左に列を追加',
     description: '選択した列の左に列を追加します。',
     keywords: ['table', 'column', 'add', 'insert', 'テーブル', '列', '追加', '挿入'],
+    disabled: ({ editor }) => !editor.can().addColumnBefore(),
     perform: ({ editor }) => editor.chain().focus().addColumnBefore().run()
 };
 
@@ -72,6 +78,7 @@ export const TableAddColumnAfterCommand: EditorCommand = {
     label: '右に列を追加',
     description: '選択した列の右に列を追加します。',
     keywords: ['table', 'column', 'add', 'insert', 'テーブル', '列', '追加', '挿入'],
+    disabled: ({ editor }) => !editor.can().addColumnAfter(),
     perform: ({ editor }) => editor.chain().focus().addColumnAfter().run()
 };
 
@@ -81,50 +88,22 @@ export const TableDeleteColumnCommand: EditorCommand = {
     label: '列を削除',
     description: '選択した列を削除します。',
     keywords: ['table', 'column', 'delete', 'remove', 'テーブル', '列', '削除', '消去'],
+    disabled: ({ editor }) => !editor.can().deleteColumn(),
     perform: ({ editor }) => editor.chain().focus().deleteColumn().run()
 };
 
-export const TableInsertRibbonButton = asRibbonButton(
-    TableInsertCommand,
-    {
-        label: undefined,
-        tooltip: {
-            children: '表'
-        }
-    }
-);
+export const TableInsertRibbonButton = asRibbonButton(TableInsertCommand, {});
 
-export const TableDeleteRibbonButton = asRibbonButton(
-    TableDeleteCommand,
-    {
-        tooltip: {
-            children: '表を削除'
-        }
-    }
-);
+export const TableDeleteRibbonButton = asRibbonButton(TableDeleteCommand, {});
 
 export const TableAddRowBeforeRibbonButton = asRibbonButton(TableAddRowBeforeCommand, {});
 
 export const TableAddRowAfterRibbonButton = asRibbonButton(TableAddRowAfterCommand, {});
 
-export const TableDeleteRowRibbonButton = asRibbonButton(
-    TableDeleteRowCommand,
-    {
-        tooltip: {
-            children: '行を削除'
-        }
-    }
-);
+export const TableDeleteRowRibbonButton = asRibbonButton(TableDeleteRowCommand, {});
 
 export const TableAddColumnBeforeRibbonButton = asRibbonButton(TableAddColumnBeforeCommand, {});
 
 export const TableAddColumnAfterRibbonButton = asRibbonButton(TableAddColumnAfterCommand, {});
 
-export const TableDeleteColumnRibbonButton = asRibbonButton(
-    TableDeleteColumnCommand,
-    {
-        tooltip: {
-            children: '列を削除'
-        }
-    }
-);
+export const TableDeleteColumnRibbonButton = asRibbonButton(TableDeleteColumnCommand, {});

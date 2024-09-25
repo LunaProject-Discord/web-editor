@@ -31,6 +31,7 @@ export const UnderlineCommand: EditorCommand = {
     label: '下線',
     description: '選択したテキストに下線をつけます。',
     keywords: ['underline', '下線'],
+    disabled: ({ editor }) => !editor.can().toggleUnderline(),
     selected: ({ editor }) => editor.isActive('underline'),
     perform: ({ editor }) => editor.chain().focus().toggleUnderline().run()
 };

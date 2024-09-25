@@ -11,6 +11,7 @@ export const OrderedListCommand: EditorCommand = {
     label: '番号付きリスト',
     description: '番号付きリストを挿入します。',
     keywords: ['ordered', 'list', 'ordered list', '番号付き', 'リスト', '番号付きリスト'],
+    disabled: ({ editor }) => !editor.can().toggleOrderedList(),
     selected: ({ editor }) => editor.isActive('orderedList'),
     perform: ({ editor }) => editor.chain().focus().toggleOrderedList().run()
 };
