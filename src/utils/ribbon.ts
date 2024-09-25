@@ -11,7 +11,7 @@ export const asRibbonButton = (
         icon: command.icon,
         label: command.label,
         tooltip: command.type === 'ribbonButton' ? command.tooltip : undefined,
-        enabled: command.enabled,
+        disabled: command.disabled,
         selected: command.selected,
         perform: command.perform
     },

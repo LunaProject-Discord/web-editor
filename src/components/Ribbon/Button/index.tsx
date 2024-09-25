@@ -14,6 +14,7 @@ export const ribbonButtonClasses = generateComponentClasses(
     [
         'root',
 
+        'disabled',
         'selected'
     ]
 );
@@ -24,12 +25,21 @@ export interface RibbonButtonRootProps extends ButtonBaseProps {
 
 export const RibbonButtonRoot = styled(
     // eslint-disable-next-line react/display-name
-    forwardRef<HTMLButtonElement, RibbonButtonRootProps>(({ selected, className, ...props }, ref) => (
+    forwardRef<HTMLButtonElement, RibbonButtonRootProps>((
+        {
+            disabled,
+            selected,
+            className,
+            ...props
+        },
+        ref
+    ) => (
         <ButtonBase
             ref={ref}
             className={
                 clsx(
                     ribbonButtonClasses.root,
+                    disabled && ribbonButtonClasses.disabled,
                     selected && ribbonButtonClasses.selected,
                     className
                 )
@@ -69,7 +79,7 @@ export const RibbonButton = (
         icon: Icon,
         label,
         tooltip,
-        enabled,
+        disabled,
         selected,
         perform,
         editor: _editor
@@ -79,7 +89,7 @@ export const RibbonButton = (
     if (!editor)
         return null;
 
-    const isDisabled = !getEditorPredicate(enabled, editor, true);
+    const isDisabled = getEditorPredicate(disabled, editor);
     const isSelected = getEditorPredicate(selected, editor);
 
     const handleButtonClick = () => perform({

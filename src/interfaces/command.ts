@@ -8,7 +8,7 @@ export interface EditorCommand {
     label?: ReactNode;
     description?: ReactNode;
     keywords?: string[];
-    enabled?: EditorPredicate;
+    disabled?: EditorPredicate;
     selected?: EditorPredicate;
     perform: EditorAction;
 }

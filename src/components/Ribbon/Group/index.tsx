@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { EditorRibbonGroup } from '../../../interfaces';
 import { EditorComponentProps, RibbonButton, useCurrentEditor } from '../../index';
+import { RibbonDropdownButton } from '../DropdownButton';
 import { RibbonGroupDivider } from '../GroupDivider';
 
 export const ribbonGroupClasses = generateComponentClasses(
@@ -85,6 +86,10 @@ export const RibbonGroup = ({ label, content, editor: _editor }: RibbonGroupProp
                         case 'divider':
                             return (<RibbonGroupDivider />);
 
+                        case 'ribbonDropdownButton':
+                            return (<RibbonDropdownButton {...item} editor={_editor} />);
+
+                        case 'ribbonButton':
                         default:
                             return (<RibbonButton {...item} editor={_editor} />);
                     }

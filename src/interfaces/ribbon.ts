@@ -26,7 +26,7 @@ export interface EditorRibbonButton extends Omit<EditorCommand, 'type' | 'descri
     tooltip?: EditorRibbonTooltip;
 }
 
-export interface EditorRibbonDropdownButton extends Omit<EditorRibbonButton, 'type'> {
+export interface EditorRibbonDropdownButton extends Omit<EditorRibbonButton, 'type' | 'perform'> {
     type: 'ribbonDropdownButton';
     options: EditorRibbonDropdownButtonItem[];
 }
