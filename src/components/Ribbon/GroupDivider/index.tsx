@@ -7,6 +7,6 @@ export const RibbonGroupDivider = ({ orientation, flexItem, sx }: DividerProps) 
     <Divider
         orientation={orientation ?? 'vertical'}
         flexItem={flexItem ?? true}
-        sx={{ m: 1, ...sx }}
+        sx={{ mx: 1, my: 1.25, ...sx }}
     />
 );
