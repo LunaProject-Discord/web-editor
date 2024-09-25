@@ -120,6 +120,22 @@ export const TableToggleHeaderRowCommand: EditorCommand = {
     description: '選択した行のヘッダー状態を切り替えます。',
     keywords: ['table', 'header', 'row', 'toggle', '表', 'ヘッダー', '行', '切り替え'],
     disabled: ({ editor }) => !editor.can().toggleHeaderRow(),
+    selected: ({ editor, view }) => {
+        // 現在のカーソル位置の要素を取得
+        const currentNodePos = editor.$pos(view.state.selection.from);
+        // currentNodePos に一番近い table を取得
+        const tableNodePos = currentNodePos.closest('table');
+        if (!tableNodePos)
+            return false;
+
+        // tableNodePos の最初にある tableRow を取得
+        const firstTableRowNodePos = tableNodePos.querySelector('tableRow');
+        if (!firstTableRowNodePos)
+            return false;
+
+        // tableRow の children が全て tableHeader であるかどうかを判定
+        return firstTableRowNodePos.children?.every((nodePos) => nodePos.node?.type?.name === 'tableHeader');
+    },
     perform: ({ editor }) => editor.chain().focus().toggleHeaderRow().run()
 };
 
@@ -140,6 +156,7 @@ export const TableToggleHeaderCellCommand: EditorCommand = {
     description: '選択したセルのヘッダー状態を切り替えます。',
     keywords: ['table', 'header', 'cell', 'toggle', '表', 'ヘッダー', 'セル', '切り替え'],
     disabled: ({ editor }) => !editor.can().toggleHeaderCell(),
+    selected: ({ editor }) => editor.isActive('tableHeader'),
     perform: ({ editor }) => editor.chain().focus().toggleHeaderCell().run()
 };
 
