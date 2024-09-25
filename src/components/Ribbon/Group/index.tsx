@@ -5,9 +5,13 @@ import { Box, BoxProps, styled } from '@mui/material';
 import clsx from 'clsx';
 import React from 'react';
 import { EditorRibbonGroup } from '../../../interfaces';
-import { EditorComponentProps, RibbonButton, useCurrentEditor } from '../../index';
-import { RibbonDropdownButton } from '../DropdownButton';
-import { RibbonGroupDivider } from '../GroupDivider';
+import {
+    EditorComponentProps,
+    RibbonButton,
+    RibbonDropdownButton,
+    RibbonGroupDivider,
+    useCurrentEditor
+} from '../../index';
 
 export const ribbonGroupClasses = generateComponentClasses(
     'RibbonGroup',

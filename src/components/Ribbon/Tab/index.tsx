@@ -6,8 +6,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { EditorRibbonTab } from '../../../interfaces';
 import { getEditorPredicate } from '../../../utils';
-import { EditorComponentProps, RibbonGroup, useCurrentEditor } from '../../index';
-import { RibbonGroupDivider } from '../GroupDivider';
+import { EditorComponentProps, RibbonDivider, RibbonGroup, useCurrentEditor } from '../../index';
 
 export const ribbonTabClasses = generateComponentClasses(
     'RibbonTab',
@@ -46,7 +45,7 @@ export const RibbonTab = ({ label, visible, content, editor: _editor }: RibbonTa
             {content.map((item, index) => {
                 switch (item.type) {
                     case 'divider':
-                        return (<RibbonGroupDivider />);
+                        return (<RibbonDivider />);
 
                     case 'ribbonGroup':
                     default:
