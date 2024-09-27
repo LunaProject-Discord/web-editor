@@ -1,5 +1,3 @@
-'use client';
-
 import { Extension, Extensions } from '@tiptap/core';
 import { BoldOptions } from '@tiptap/extension-bold';
 import { BulletListOptions } from '@tiptap/extension-bullet-list';
@@ -87,70 +85,6 @@ export interface StarterKitOptions {
     gapCursor?: false;
     textAlign?: Partial<TextAlignOptions> | false;
 }
-
-export const StarterKitExtension2 = (config: StarterKitOptions = {}): Extensions => {
-    const extensions: Extensions = [];
-
-    if (config.document !== false)
-        extensions.push(DocumentExtension.configure(config?.document));
-    if (config.text !== false)
-        extensions.push(TextExtension.configure(config?.text));
-
-    if (config.heading !== false)
-        extensions.push(HeadingExtension.configure(config?.heading));
-    if (config.paragraph !== false)
-        extensions.push(ParagraphExtension.configure(config?.paragraph));
-    if (config.bulletList !== false)
-        extensions.push(BulletListExtension.configure(config?.bulletList));
-    if (config.orderedList !== false)
-        extensions.push(OrderedListExtension.configure(config?.orderedList));
-    if (config.listItem !== false)
-        extensions.push(ListItemExtension.configure(config?.listItem));
-    if (config.taskList !== false)
-        extensions.push(TaskListExtension.configure(config?.taskList));
-    if (config.taskItem !== false)
-        extensions.push(TaskItemExtension.configure(config?.taskItem));
-    if (config.table !== false)
-        extensions.push(TableExtension.configure(config?.table));
-    if (config.tableRow !== false)
-        extensions.push(TableRowExtension.configure(config?.tableRow));
-    if (config.tableCell !== false)
-        extensions.push(TableCellExtension.configure(config?.tableCell));
-    if (config.tableHeader !== false)
-        extensions.push(TableHeaderExtension.configure(config?.tableHeader));
-    if (config.image !== false)
-        extensions.push(ImageExtension.configure(config?.image));
-
-    if (config.bold !== false)
-        extensions.push(BoldExtension.configure(config?.bold));
-    if (config.italic !== false)
-        extensions.push(ItalicExtension.configure(config?.italic));
-    if (config.underline !== false)
-        extensions.push(UnderlineExtension.configure(config?.underline));
-    if (config.strike !== false)
-        extensions.push(StrikeExtension.configure(config?.strike));
-    if (config.code !== false)
-        extensions.push(CodeExtension.configure(config?.code));
-    if (config.link !== false)
-        extensions.push(LinkExtension.configure(config?.link));
-    if (config.subscript !== false)
-        extensions.push(SubscriptExtension.configure(config?.subscript));
-    if (config.superscript !== false)
-        extensions.push(SuperscriptExtension.configure(config?.superscript));
-
-    if (config.history !== false)
-        extensions.push(HistoryExtension.configure(config?.history));
-    if (config.hardBreak !== false)
-        extensions.push(HardBreakExtension.configure(config?.hardBreak));
-    if (config.dropCursor !== false)
-        extensions.push(DropcursorExtension.configure(config?.dropCursor));
-    if (config.gapCursor !== false)
-        extensions.push(GapcursorExtension.configure(config?.gapCursor));
-    if (config.textAlign !== false)
-        extensions.push(TextAlignExtension.configure(config?.textAlign));
-
-    return extensions;
-};
 
 export const StarterKitExtension = Extension.create<StarterKitOptions>({
     name: 'starterKit',
