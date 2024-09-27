@@ -1,7 +1,7 @@
 import { textblockTypeInputRule } from '@tiptap/core';
 import { Heading, HeadingOptions } from '@tiptap/extension-heading';
 
-export const HeadingExtension = Heading.extend<HeadingOptions>({
+export const HeadingExtension = Heading.extend({
     addOptions(): HeadingOptions {
         return {
             ...this.parent?.(),

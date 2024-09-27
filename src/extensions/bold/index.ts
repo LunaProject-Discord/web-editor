@@ -4,7 +4,7 @@ import { Bold, BoldOptions, starInputRegex, starPasteRegex } from '@tiptap/exten
 import { EditorCommand } from '../../interfaces';
 import { asRibbonButton } from '../../utils';
 
-export const BoldExtension = Bold.extend<BoldOptions>({
+export const BoldExtension = Bold.extend({
     priority: 101,
 
     addInputRules() {
@@ -30,7 +30,7 @@ export const BoldCommand: EditorCommand = {
     name: 'bold',
     icon: FormatBoldOutlined,
     label: '太字',
-    description: '選択したテキストを太字にします。',
+    description: '選択したテキストの太字の状態を切り替えます。',
     keywords: ['bold', 'strong', '太字', 'ボールド'],
     disabled: ({ editor }) => !editor.can().toggleBold(),
     selected: ({ editor }) => editor.isActive('bold'),

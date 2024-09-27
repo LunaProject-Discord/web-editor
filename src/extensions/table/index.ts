@@ -3,7 +3,7 @@ import { Table, TableOptions } from '@tiptap/extension-table';
 import { EditorCommand } from '../../interfaces';
 import { asRibbonButton } from '../../utils';
 
-export const TableExtension = Table.extend<TableOptions>({
+export const TableExtension = Table.extend({
     addOptions(): TableOptions {
         return {
             ...this.parent?.(),

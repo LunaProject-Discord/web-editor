@@ -9,7 +9,7 @@ export const ItalicCommand: EditorCommand = {
     name: 'italic',
     icon: FormatItalicOutlined,
     label: '斜体',
-    description: '選択したテキストを斜体にします。',
+    description: '選択したテキストの斜体の状態を切り替えます。',
     keywords: ['italic', '斜体', 'イタリック'],
     disabled: ({ editor }) => !editor.can().toggleItalic(),
     selected: ({ editor }) => editor.isActive('italic'),

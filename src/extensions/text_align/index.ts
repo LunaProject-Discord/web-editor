@@ -10,7 +10,7 @@ import { asRibbonButton } from '../../utils';
 
 export type Align = 'left' | 'center' | 'right' | 'justify';
 
-export const TextAlignExtension = TextAlign.extend<TextAlignOptions>({
+export const TextAlignExtension = TextAlign.extend({
     addOptions(): TextAlignOptions {
         return {
             ...this.parent?.(),

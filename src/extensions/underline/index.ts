@@ -5,7 +5,7 @@ import { Underline, UnderlineOptions } from '@tiptap/extension-underline';
 import { EditorCommand } from '../../interfaces';
 import { asRibbonButton } from '../../utils';
 
-export const UnderlineExtension = Underline.extend<UnderlineOptions>({
+export const UnderlineExtension = Underline.extend({
     addInputRules() {
         return [
             markInputRule({
@@ -29,7 +29,7 @@ export const UnderlineCommand: EditorCommand = {
     name: 'underline',
     icon: FormatItalicOutlined,
     label: '下線',
-    description: '選択したテキストに下線をつけます。',
+    description: '選択したテキストの下線の状態を切り替えます。',
     keywords: ['underline', '下線'],
     disabled: ({ editor }) => !editor.can().toggleUnderline(),
     selected: ({ editor }) => editor.isActive('underline'),
