@@ -1,3 +1,5 @@
+'use client';
+
 import { Extension, Extensions } from '@tiptap/core';
 import { BoldOptions } from '@tiptap/extension-bold';
 import { BulletListOptions } from '@tiptap/extension-bullet-list';
