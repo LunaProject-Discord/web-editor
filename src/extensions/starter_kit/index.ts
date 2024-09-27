@@ -28,8 +28,8 @@ import {
     BulletListExtension,
     CodeExtension,
     DocumentExtension,
-    Dropcursor,
-    Gapcursor,
+    DropcursorExtension,
+    GapcursorExtension,
     HardBreakExtension,
     HeadingExtension,
     HistoryExtension,
@@ -179,9 +179,9 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
         if (this.options.hardBreak !== false)
             extensions.push(HardBreakExtension.configure(this.options?.hardBreak));
         if (this.options.dropCursor !== false)
-            extensions.push(Dropcursor.configure(this.options?.dropCursor));
+            extensions.push(DropcursorExtension.configure(this.options?.dropCursor));
         if (this.options.gapCursor !== false)
-            extensions.push(Gapcursor.configure(this.options?.gapCursor));
+            extensions.push(GapcursorExtension.configure(this.options?.gapCursor));
         if (this.options.textAlign !== false)
             extensions.push(TextAlignExtension.configure(this.options?.textAlign));
 

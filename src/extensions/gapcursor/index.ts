@@ -1,3 +1,3 @@
-import { Gapcursor as TiptapGapcursor } from '@tiptap/extension-gapcursor';
+import { Gapcursor } from '@tiptap/extension-gapcursor';
 
-export const Gapcursor = TiptapGapcursor;
+export const GapcursorExtension = Gapcursor;
