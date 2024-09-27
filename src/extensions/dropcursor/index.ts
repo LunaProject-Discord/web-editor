@@ -1,3 +1,3 @@
-import { Dropcursor } from '@tiptap/extension-dropcursor';
+import { Dropcursor as TiptapDropcursor } from '@tiptap/extension-dropcursor';
 
-export const DropcursorExtension = Dropcursor;
+export const Dropcursor = TiptapDropcursor;
