@@ -86,7 +86,7 @@ export interface StarterKitOptions {
     textAlign?: Partial<TextAlignOptions> | false;
 }
 
-export const StarterKitExtension2 = (config: StarterKitOptions): Extensions => {
+export const StarterKitExtension2 = (config: StarterKitOptions = {}): Extensions => {
     const extensions: Extensions = [];
 
     if (config.document !== false)
