@@ -116,9 +116,9 @@ export const TableSplitCellCommand: EditorCommand = {
 export const TableToggleHeaderRowCommand: EditorCommand = {
     name: 'tableToggleHeaderRow',
     icon: undefined,
-    label: 'ヘッダー行',
-    description: '選択した行のヘッダー状態を切り替えます。',
-    keywords: ['table', 'header', 'row', 'toggle', '表', 'ヘッダー', '行', '切り替え'],
+    label: '行見出し',
+    description: 'テーブルの先頭行の見出し状態を切り替えます。',
+    keywords: ['table', 'header', 'row', 'toggle', '表', 'テーブル', '見出し', 'ヘッダー', '行', '切り替え'],
     disabled: ({ editor }) => !editor.can().toggleHeaderRow(),
     selected: ({ editor, view }) => {
         // 現在のカーソル位置の要素を取得
@@ -142,9 +142,9 @@ export const TableToggleHeaderRowCommand: EditorCommand = {
 export const TableToggleHeaderColumnCommand: EditorCommand = {
     name: 'tableToggleHeaderColumn',
     icon: undefined,
-    label: 'ヘッダー列',
-    description: '選択した列のヘッダー状態を切り替えます。',
-    keywords: ['table', 'header', 'column', 'toggle', '表', 'ヘッダー', '列', '切り替え'],
+    label: '列見出し',
+    description: 'テーブルの先頭列の見出し状態を切り替えます。',
+    keywords: ['table', 'header', 'column', 'toggle', '表', 'テーブル', '見出し', 'ヘッダー', '列', '切り替え'],
     disabled: ({ editor }) => !editor.can().toggleHeaderColumn(),
     perform: ({ editor }) => editor.chain().focus().toggleHeaderColumn().run()
 };
@@ -152,9 +152,9 @@ export const TableToggleHeaderColumnCommand: EditorCommand = {
 export const TableToggleHeaderCellCommand: EditorCommand = {
     name: 'tableToggleHeaderCell',
     icon: undefined,
-    label: 'ヘッダー',
-    description: '選択したセルのヘッダー状態を切り替えます。',
-    keywords: ['table', 'header', 'cell', 'toggle', '表', 'ヘッダー', 'セル', '切り替え'],
+    label: 'セル見出し',
+    description: '選択したセルの見出し状態を切り替えます。',
+    keywords: ['table', 'header', 'cell', 'toggle', '表', 'テーブル', '見出し', 'ヘッダー', 'セル', '切り替え'],
     disabled: ({ editor }) => !editor.can().toggleHeaderCell(),
     selected: ({ editor }) => editor.isActive('tableHeader'),
     perform: ({ editor }) => editor.chain().focus().toggleHeaderCell().run()
