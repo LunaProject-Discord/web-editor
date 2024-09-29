@@ -6,7 +6,7 @@ import { Divider, ListItemIcon, ListItemText, MenuItem, Tooltip } from '@mui/mat
 import React, { Fragment, useState } from 'react';
 import { EditorRibbonDropdownButton } from '../../../interfaces';
 import { getEditorPredicate } from '../../../utils';
-import { EditorComponentProps, RibbonButtonRoot, useCurrentEditor } from '../../index';
+import { EditorComponentProps, RibbonButtonRoot, RibbonKeyTip, useCurrentEditor } from '../../index';
 
 export const ribbonDropdownButtonClasses = generateComponentClasses(
     'RibbonDropdownButton',
@@ -17,12 +17,16 @@ export const ribbonDropdownButtonClasses = generateComponentClasses(
 );
 
 
-export type RibbonDropdownButtonProps = EditorComponentProps & Omit<EditorRibbonDropdownButton, 'type' | 'name'>;
+export interface RibbonDropdownButtonProps extends EditorComponentProps, Omit<EditorRibbonDropdownButton, 'type' | 'name'> {
+    groupName: string;
+}
 
 export const RibbonDropdownButton = (
     {
+        groupName,
         icon: Icon,
         label,
+        keytip,
         tooltip,
         disabled,
         selected,
@@ -40,15 +44,17 @@ export const RibbonDropdownButton = (
     const isSelected = getEditorPredicate(selected, editor);
 
     const buttonChildren = (
-        <RibbonButtonRoot
-            onClick={(e) => setAnchorEl(e.currentTarget)}
-            disabled={isDisabled}
-            selected={isSelected}
-            className={ribbonDropdownButtonClasses.root}
-        >
-            {Icon && <Icon />}
-            {label}
-        </RibbonButtonRoot>
+        <RibbonKeyTip keytip={keytip} target="group" name={groupName}>
+            <RibbonButtonRoot
+                onClick={(e) => setAnchorEl(e.currentTarget)}
+                disabled={isDisabled}
+                selected={isSelected}
+                className={ribbonDropdownButtonClasses.root}
+            >
+                {Icon && <Icon />}
+                {label}
+            </RibbonButtonRoot>
+        </RibbonKeyTip>
     );
 
     const children = tooltip ? (
@@ -64,6 +70,7 @@ export const RibbonDropdownButton = (
                 open={Boolean(anchorEl)}
                 anchorEl={anchorEl}
                 onClose={() => setAnchorEl(undefined)}
+                disablePortal
                 className={ribbonDropdownButtonClasses.dropdown}
             >
                 {options.map((option, index) => {

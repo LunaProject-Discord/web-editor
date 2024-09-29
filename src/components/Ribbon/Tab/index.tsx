@@ -29,9 +29,9 @@ export const RibbonTabRoot = styled(
     gap: theme.spacing(2)
 }));
 
-export type RibbonTabProps = EditorComponentProps & Pick<EditorRibbonTab, 'label' | 'visible' | 'content'>;
+export type RibbonTabProps = EditorComponentProps & Omit<EditorRibbonTab, 'type' | 'keytip'>;
 
-export const RibbonTab = ({ label, visible, content, editor: _editor }: RibbonTabProps) => {
+export const RibbonTab = ({ name, label, visible, content, editor: _editor }: RibbonTabProps) => {
     const editor = useCurrentEditor(_editor);
     if (!editor)
         return null;
@@ -49,7 +49,7 @@ export const RibbonTab = ({ label, visible, content, editor: _editor }: RibbonTa
 
                     case 'ribbonGroup':
                     default:
-                        return (<RibbonGroup {...item} editor={_editor} />);
+                        return (<RibbonGroup tabName={name} {...item} editor={_editor} />);
                 }
             })}
         </RibbonTabRoot>

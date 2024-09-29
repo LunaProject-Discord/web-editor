@@ -10,6 +10,7 @@ import {
     RibbonButton,
     RibbonDropdownButton,
     RibbonGroupDivider,
+    RibbonKeyTip,
     useCurrentEditor
 } from '../../index';
 
@@ -74,31 +75,35 @@ export const RibbonGroupLabel = styled(
     ...borderAndBoxShadow(theme)
 }));
 
-export type RibbonGroupProps = EditorComponentProps & Pick<EditorRibbonGroup, 'label' | 'content'>;
+export interface RibbonGroupProps extends EditorComponentProps, Omit<EditorRibbonGroup, 'type'> {
+    tabName: string;
+}
 
-export const RibbonGroup = ({ label, content, editor: _editor }: RibbonGroupProps) => {
+export const RibbonGroup = ({ tabName, name, label, keytip, content, editor: _editor }: RibbonGroupProps) => {
     const editor = useCurrentEditor(_editor);
     if (!editor)
         return null;
 
     return (
-        <RibbonGroupRoot>
-            {label && <RibbonGroupLabel>{label}</RibbonGroupLabel>}
-            <RibbonGroupContent>
-                {content.map((item, index) => {
-                    switch (item.type) {
-                        case 'divider':
-                            return (<RibbonGroupDivider />);
+        <RibbonKeyTip keytip={keytip} target="tab" name={tabName}>
+            <RibbonGroupRoot>
+                {label && <RibbonGroupLabel>{label}</RibbonGroupLabel>}
+                <RibbonGroupContent>
+                    {content.map((item, index) => {
+                        switch (item.type) {
+                            case 'divider':
+                                return (<RibbonGroupDivider />);
 
-                        case 'ribbonDropdownButton':
-                            return (<RibbonDropdownButton {...item} editor={_editor} />);
+                            case 'ribbonDropdownButton':
+                                return (<RibbonDropdownButton groupName={name} {...item} editor={_editor} />);
 
-                        case 'ribbonButton':
-                        default:
-                            return (<RibbonButton {...item} editor={_editor} />);
-                    }
-                })}
-            </RibbonGroupContent>
-        </RibbonGroupRoot>
+                            case 'ribbonButton':
+                            default:
+                                return (<RibbonButton groupName={name} {...item} editor={_editor} />);
+                        }
+                    })}
+                </RibbonGroupContent>
+            </RibbonGroupRoot>
+        </RibbonKeyTip>
     );
 };

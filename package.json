@@ -51,7 +51,8 @@
         "@tiptap/extension-text-style": "^2.7.2",
         "@tiptap/extension-underline": "^2.7.2",
         "@tiptap/pm": "^2.7.2",
-        "@tiptap/react": "^2.7.2"
+        "@tiptap/react": "^2.7.2",
+        "mousetrap": "^1.6.5"
     },
     "devDependencies": {
         "@emotion/react": "^11.13.3",
@@ -60,9 +61,12 @@
         "@mui/icons-material": "^6.0.2",
         "@mui/lab": "^6.0.0-beta.8",
         "@mui/material": "^6.0.2",
+        "@types/mousetrap": "^1.6.15",
         "@types/node": "~20.11.30",
-        "@types/react": "18.3.3",
-        "@types/react-dom": "18.3.0",
+        "@types/react": "^18.3.10",
+        "@types/react-dom": "^18.3.0",
+        "eslint": "8.57.1",
+        "eslint-config-next": "14.2.7",
         "next": "^14.2.7",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",

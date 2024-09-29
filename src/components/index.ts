@@ -8,11 +8,8 @@ export interface EditorComponentProps {
 }
 
 export const useCurrentEditor = (editor: Editor | undefined) => {
-    if (editor)
-        return editor;
-
     const { editor: currentEditor } = useTiptapCurrentEditor();
-    return currentEditor;
+    return editor ?? currentEditor ?? undefined;
 };
 
 export * from './Ribbon';
