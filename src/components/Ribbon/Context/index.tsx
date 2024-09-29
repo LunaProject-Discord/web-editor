@@ -41,7 +41,7 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                         return;
 
                     if (target.type === 'ribbon') {
-                        const tab = tabs.find((tab) => tab.keytip === e.key);
+                        const tab = tabs.find((tab) => tab.keytip?.toLowerCase() === e.key.toLowerCase());
                         if (!tab) {
                             setTarget(undefined);
                             return;
@@ -51,7 +51,7 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                         return;
                     } else if (target.type === 'tab') {
                         const tab = tabs.find((tab) => tab.name === target.tabName);
-                        const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => tabItem.type === 'ribbonGroup' && tabItem.keytip === e.key);
+                        const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => tabItem.type === 'ribbonGroup' && tabItem.keytip?.toLowerCase() === e.key.toLowerCase());
                         if (!tab || !group) {
                             setTarget(undefined);
                             return;
@@ -62,7 +62,7 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                     } else if (target.type === 'group') {
                         const tab = tabs.find((tab) => tab.name === target.tabName);
                         const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => tabItem.type === 'ribbonGroup' && tabItem.name === target.groupName);
-                        const item = group?.content.find((groupItem) => 'keytip' in groupItem && groupItem.keytip === e.key);
+                        const item = group?.content.find((groupItem) => 'keytip' in groupItem && groupItem.keytip?.toLowerCase() === e.key.toLowerCase());
 
                         setTarget(undefined);
                         if (!tab || !group || !item)
