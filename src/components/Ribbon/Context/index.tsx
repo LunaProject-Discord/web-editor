@@ -57,12 +57,7 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                         return;
                     } else if (target.type === 'tab') {
                         const tab = tabs.find((tab) => tab.name === target.tabName);
-                        const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => {
-                            if (tabItem.type !== 'ribbonGroup')
-                                return false;
-
-                            return tabItem.keytip?.toLowerCase() === keyLowerCased;
-                        });
+                        const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => (!tabItem.type || tabItem.type === 'ribbonGroup') && tabItem.keytip?.toLowerCase() === keyLowerCased);
 
                         console.log(target, tab, group);
 
@@ -75,12 +70,7 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                         return;
                     } else if (target.type === 'group') {
                         const tab = tabs.find((tab) => tab.name === target.tabName);
-                        const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => {
-                            if (tabItem.type !== 'ribbonGroup')
-                                return false;
-
-                            return tabItem.name === target.groupName;
-                        });
+                        const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => (!tabItem.type || tabItem.type === 'ribbonGroup') && tabItem.name === target.groupName);
                         const item = group?.content.find((groupItem): groupItem is Exclude<EditorRibbonGroupItem, EditorDivider> => {
                             if (groupItem.type === 'divider')
                                 return false;
