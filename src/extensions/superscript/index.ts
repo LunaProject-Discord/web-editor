@@ -20,6 +20,7 @@ export const SuperscriptRibbonButton = asRibbonButton(
     SuperscriptCommand,
     {
         label: undefined,
+        accessKey: 'VT',
         tooltip: {
             children: '上付き文字'
         }

@@ -20,6 +20,7 @@ export const ItalicRibbonButton = asRibbonButton(
     ItalicCommand,
     {
         label: undefined,
+        accessKey: 'I',
         tooltip: {
             children: '斜体'
         }

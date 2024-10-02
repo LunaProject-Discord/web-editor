@@ -41,6 +41,7 @@ export const BoldRibbonButton = asRibbonButton(
     BoldCommand,
     {
         label: undefined,
+        accessKey: 'B',
         tooltip: {
             children: '太字'
         }

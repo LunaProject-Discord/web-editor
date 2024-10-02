@@ -20,6 +20,7 @@ export const OrderedListRibbonButton = asRibbonButton(
     OrderedListCommand,
     {
         label: undefined,
+        accessKey: 'O',
         tooltip: {
             children: '番号付きリスト'
         }

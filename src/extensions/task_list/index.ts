@@ -18,6 +18,7 @@ export const TaskListRibbonButton = asRibbonButton(
     TaskListCommand,
     {
         label: undefined,
+        accessKey: 'C',
         tooltip: {
             children: 'チェックリスト'
         }

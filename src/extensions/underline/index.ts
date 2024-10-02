@@ -40,6 +40,7 @@ export const UnderlineRibbonButton = asRibbonButton(
     UnderlineCommand,
     {
         label: undefined,
+        accessKey: 'U',
         tooltip: {
             children: '下線'
         }

@@ -20,6 +20,7 @@ export const CodeRibbonButton = asRibbonButton(
     CodeCommand,
     {
         label: undefined,
+        accessKey: 'C',
         tooltip: {
             children: 'インライン コード'
         }

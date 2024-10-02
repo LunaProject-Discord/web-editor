@@ -75,6 +75,7 @@ export const TextAlignLeftRibbonButton = asRibbonButton(
     TextAlignLeftCommand,
     {
         label: undefined,
+        accessKey: 'AL',
         tooltip: {
             children: '左揃え'
         }
@@ -85,6 +86,7 @@ export const TextAlignCenterRibbonButton = asRibbonButton(
     TextAlignCenterCommand,
     {
         label: undefined,
+        accessKey: 'AC',
         tooltip: {
             children: '中央揃え'
         }
@@ -95,6 +97,7 @@ export const TextAlignRightRibbonButton = asRibbonButton(
     TextAlignRightCommand,
     {
         label: undefined,
+        accessKey: 'AR',
         tooltip: {
             children: '右揃え'
         }
@@ -105,6 +108,7 @@ export const TextAlignJustifyRibbonButton = asRibbonButton(
     TextAlignJustifyCommand,
     {
         label: undefined,
+        accessKey: 'AJ',
         tooltip: {
             children: '両端揃え'
         }

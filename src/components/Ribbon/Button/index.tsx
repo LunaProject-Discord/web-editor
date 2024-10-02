@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import React, { forwardRef } from 'react';
 import { EditorRibbonButton } from '../../../interfaces';
 import { getEditorPredicate } from '../../../utils';
-import { EditorComponentProps, RibbonKeyTip, useCurrentEditor } from '../../index';
+import { EditorComponentProps, RibbonAccessKeyTip, useCurrentEditor } from '../../index';
 
 export const ribbonButtonClasses = generateComponentClasses(
     'RibbonButton',
@@ -81,7 +81,7 @@ export const RibbonButton = (
         groupName,
         icon: Icon,
         label,
-        keytip,
+        accessKey,
         tooltip,
         disabled,
         selected,
@@ -103,12 +103,12 @@ export const RibbonButton = (
     });
 
     const children = (
-        <RibbonKeyTip keytip={keytip} target="group" name={groupName}>
+        <RibbonAccessKeyTip key={accessKey} target="group" name={groupName}>
             <RibbonButtonRoot onClick={handleButtonClick} disabled={isDisabled} selected={isSelected}>
                 {Icon && <Icon />}
                 {label}
             </RibbonButtonRoot>
-        </RibbonKeyTip>
+        </RibbonAccessKeyTip>
     );
 
     if (!tooltip)

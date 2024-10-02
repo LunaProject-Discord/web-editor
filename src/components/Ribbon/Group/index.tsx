@@ -10,7 +10,7 @@ import {
     RibbonButton,
     RibbonDropdownButton,
     RibbonGroupDivider,
-    RibbonKeyTip,
+    RibbonAccessKeyTip,
     useCurrentEditor
 } from '../../index';
 
@@ -79,13 +79,13 @@ export interface RibbonGroupProps extends EditorComponentProps, Omit<EditorRibbo
     tabName: string;
 }
 
-export const RibbonGroup = ({ tabName, name, label, keytip, content, editor: _editor }: RibbonGroupProps) => {
+export const RibbonGroup = ({ tabName, name, label, accessKey, content, editor: _editor }: RibbonGroupProps) => {
     const editor = useCurrentEditor(_editor);
     if (!editor)
         return null;
 
     return (
-        <RibbonKeyTip keytip={keytip} target="tab" name={tabName}>
+        <RibbonAccessKeyTip key={accessKey} target="tab" name={tabName}>
             <RibbonGroupRoot>
                 {label && <RibbonGroupLabel>{label}</RibbonGroupLabel>}
                 <RibbonGroupContent>
@@ -104,6 +104,6 @@ export const RibbonGroup = ({ tabName, name, label, keytip, content, editor: _ed
                     })}
                 </RibbonGroupContent>
             </RibbonGroupRoot>
-        </RibbonKeyTip>
+        </RibbonAccessKeyTip>
     );
 };

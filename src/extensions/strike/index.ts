@@ -20,6 +20,7 @@ export const StrikeRibbonButton = asRibbonButton(
     StrikeCommand,
     {
         label: undefined,
+        accessKey: 'S',
         tooltip: {
             children: '取り消し線'
         }

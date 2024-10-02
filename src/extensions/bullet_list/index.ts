@@ -20,6 +20,7 @@ export const BulletListRibbonButton = asRibbonButton(
     BulletListCommand,
     {
         label: undefined,
+        accessKey: 'U',
         tooltip: {
             children: '箇条書きリスト'
         }

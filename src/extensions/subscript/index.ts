@@ -20,6 +20,7 @@ export const SubscriptRibbonButton = asRibbonButton(
     SubscriptCommand,
     {
         label: undefined,
+        accessKey: 'VB',
         tooltip: {
             children: '下付き文字'
         }

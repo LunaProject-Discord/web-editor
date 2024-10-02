@@ -6,7 +6,7 @@ import { Box, Divider, ListItemIcon, ListItemText, MenuItem, Tooltip } from '@mu
 import React, { Fragment, useState } from 'react';
 import { EditorRibbonDropdownButton } from '../../../interfaces';
 import { getEditorPredicate } from '../../../utils';
-import { EditorComponentProps, RibbonButtonRoot, RibbonKeyTip, useCurrentEditor } from '../../index';
+import { EditorComponentProps, RibbonButtonRoot, RibbonAccessKeyTip, useCurrentEditor } from '../../index';
 
 export const ribbonDropdownButtonClasses = generateComponentClasses(
     'RibbonDropdownButton',
@@ -26,7 +26,7 @@ export const RibbonDropdownButton = (
         groupName,
         icon: Icon,
         label,
-        keytip,
+        accessKey,
         tooltip,
         disabled,
         selected,
@@ -44,7 +44,7 @@ export const RibbonDropdownButton = (
     const isSelected = getEditorPredicate(selected, editor);
 
     const buttonChildren = (
-        <RibbonKeyTip keytip={keytip} target="group" name={groupName}>
+        <RibbonAccessKeyTip key={accessKey} target="group" name={groupName}>
             <RibbonButtonRoot
                 onClick={(e) => setAnchorEl(e.currentTarget)}
                 disabled={isDisabled}
@@ -54,7 +54,7 @@ export const RibbonDropdownButton = (
                 {Icon && <Icon />}
                 {label}
             </RibbonButtonRoot>
-        </RibbonKeyTip>
+        </RibbonAccessKeyTip>
     );
 
     const children = tooltip ? (
