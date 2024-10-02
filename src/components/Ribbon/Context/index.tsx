@@ -50,6 +50,9 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                     } else if (target.type === 'tab') {
                         const tab = tabs.find((tab) => tab.name === target.tabName);
                         const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => tabItem.type === 'ribbonGroup' && tabItem.keytip?.toLowerCase() === e.key.toLowerCase());
+
+                        console.log(target, tab, group);
+
                         if (!tab || !group) {
                             setTarget(undefined);
                             return;
@@ -99,6 +102,7 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
 
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('keyup', handleKeyUp);
+
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
