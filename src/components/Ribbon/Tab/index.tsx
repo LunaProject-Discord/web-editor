@@ -4,9 +4,14 @@ import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { Tab } from '@mui/material';
 import clsx from 'clsx';
 import React, { useCallback, useContext } from 'react';
-import { EditorRibbonTab } from '../../../interfaces';
-import { getEditorPredicate } from '../../../utils';
-import { EditorComponentProps, RibbonAccessKeyTip, RibbonTabContext, useCurrentEditor } from '../../index';
+import {
+    EditorComponentProps,
+    EditorRibbonTab,
+    getEditorPredicate,
+    RibbonAccessKeyTip,
+    RibbonTabContext,
+    useCurrentEditor
+} from '../../../';
 
 export const ribbonTabClasses = generateComponentClasses(
     'RibbonTab',

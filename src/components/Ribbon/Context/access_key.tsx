@@ -1,9 +1,14 @@
 'use client';
 
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { EditorDivider, EditorRibbonGroup, EditorRibbonGroupItem, EditorRibbonTab } from '../../../interfaces';
-import { EditorComponentProps, useCurrentEditor } from '../../index';
-import { useRibbonTabContext } from './tab';
+import {
+    EditorComponentProps,
+    EditorDivider,
+    EditorRibbonGroup,
+    EditorRibbonGroupItem,
+    useCurrentEditor,
+    useRibbonTabContext
+} from '../../../';
 
 export type RibbonAccessKeyTargetType = 'ribbon' | 'tab' | 'group';
 
@@ -32,16 +37,15 @@ export const RibbonAccessKeyContext = createContext<RibbonAccessKeyTarget | unde
 export const useRibbonAccessKeyContext = () => useContext(RibbonAccessKeyContext);
 
 export interface RibbonAccessKeyProviderProps extends EditorComponentProps {
-    tabs: EditorRibbonTab[];
     children: ReactNode;
 }
 
-export const RibbonAccessKeyProvider = ({ editor: _editor, tabs, children }: RibbonAccessKeyProviderProps) => {
+export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAccessKeyProviderProps) => {
     const editor = useCurrentEditor(_editor);
 
     const [value, setValue] = useState<RibbonAccessKeyTarget | undefined>(undefined);
 
-    const { setOpen, setName } = useRibbonTabContext();
+    const { setOpen, setName, tabs } = useRibbonTabContext();
 
     useEffect(() => {
         const getKey = (key: string) => {

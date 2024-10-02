@@ -4,9 +4,14 @@ import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { Box, BoxProps, styled } from '@mui/material';
 import clsx from 'clsx';
 import React from 'react';
-import { EditorRibbonTab } from '../../../interfaces';
-import { getEditorPredicate } from '../../../utils';
-import { EditorComponentProps, RibbonDivider, RibbonGroup, useCurrentEditor } from '../../index';
+import {
+    EditorComponentProps,
+    EditorRibbonTab,
+    getEditorPredicate,
+    RibbonDivider,
+    RibbonGroup,
+    useCurrentEditor
+} from '../../../';
 
 export const ribbonTabContentClasses = generateComponentClasses(
     'RibbonTabContent',

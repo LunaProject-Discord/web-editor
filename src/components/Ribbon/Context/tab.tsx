@@ -10,9 +10,7 @@ import React, {
     useEffect,
     useState
 } from 'react';
-import { EditorRibbonTab } from '../../../interfaces';
-import { getEditorPredicate } from '../../../utils';
-import { EditorComponentProps, useCurrentEditor } from '../../index';
+import { EditorComponentProps, EditorRibbonTab, getEditorPredicate, useCurrentEditor } from '../../../';
 
 export interface RibbonTabContextProps {
     open: boolean;
@@ -20,6 +18,7 @@ export interface RibbonTabContextProps {
     name: string;
     setName: Dispatch<SetStateAction<string>>;
 
+    tabs: EditorRibbonTab[];
     tab: EditorRibbonTab | undefined;
     updateTab: (name: string | undefined) => void;
 }
@@ -30,6 +29,7 @@ export const RibbonTabContext = createContext<RibbonTabContextProps>({
     name: '',
     setName: () => undefined,
 
+    tabs: [],
     tab: undefined,
     updateTab: () => undefined
 });
@@ -66,7 +66,7 @@ export const RibbonTabProvider = ({ editor: _editor, tabs, children }: RibbonTab
     }, [activeTab, editor, editor?.state?.selection?.$from, tabs]);
 
     return (
-        <RibbonTabContext.Provider value={{ open, setOpen, name, setName, tab: activeTab, updateTab }}>
+        <RibbonTabContext.Provider value={{ open, setOpen, name, setName, tabs, tab: activeTab, updateTab }}>
             {children}
         </RibbonTabContext.Provider>
     );
