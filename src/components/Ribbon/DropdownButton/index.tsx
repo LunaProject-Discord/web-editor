@@ -2,7 +2,7 @@
 
 import { Menu } from '@lunaproject/web-core/dist/components/Menu';
 import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
-import { Divider, ListItemIcon, ListItemText, MenuItem, Tooltip } from '@mui/material';
+import { Box, Divider, ListItemIcon, ListItemText, MenuItem, Tooltip } from '@mui/material';
 import React, { Fragment, useState } from 'react';
 import { EditorRibbonDropdownButton } from '../../../interfaces';
 import { getEditorPredicate } from '../../../utils';
@@ -59,7 +59,9 @@ export const RibbonDropdownButton = (
 
     const children = tooltip ? (
         <Tooltip title={tooltip.children} placement={tooltip.placement}>
-            {buttonChildren}
+            <Box>
+                {buttonChildren}
+            </Box>
         </Tooltip>
     ) : buttonChildren;
 

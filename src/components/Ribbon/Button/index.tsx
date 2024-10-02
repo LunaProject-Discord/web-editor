@@ -2,7 +2,7 @@
 
 import { ButtonBase } from '@lunaproject/web-core/dist/components/ButtonBase';
 import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
-import { alpha, ButtonBaseProps, styled, Tooltip } from '@mui/material';
+import { alpha, Box, ButtonBaseProps, styled, Tooltip } from '@mui/material';
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
 import { EditorRibbonButton } from '../../../interfaces';
@@ -116,7 +116,9 @@ export const RibbonButton = (
 
     return (
         <Tooltip title={tooltip.children} placement={tooltip.placement}>
-            {children}
+            <Box>
+                {children}
+            </Box>
         </Tooltip>
     );
 };

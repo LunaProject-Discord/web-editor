@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Tooltip, TooltipProps } from '@mui/material';
+import { Tooltip, TooltipProps } from '@mui/material';
 import React, { useContext } from 'react';
 import { EditorRibbonKeyTipTargetType } from '../../../interfaces';
 import { RibbonKeyTipTargetContext } from '../Context';
@@ -24,9 +24,7 @@ export const RibbonKeyTip = ({ keytip, target, name, children, ...props }: Ribbo
             placement="bottom"
             {...props}
         >
-            <Box>
-                {children}
-            </Box>
+            {children}
         </Tooltip>
     );
 };
