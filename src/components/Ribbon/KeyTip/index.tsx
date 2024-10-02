@@ -14,13 +14,13 @@ export interface RibbonKeyTipProps extends Omit<TooltipProps, 'title' | 'open' |
 export const RibbonKeyTip = ({ keytip, target, name, children, ...props }: RibbonKeyTipProps) => {
     const targetState = useContext(RibbonKeyTipTargetContext);
 
-    if (!keytip)
+    if (!keytip || !targetState || targetState.type !== target)
         return children;
 
     return (
         <Tooltip
             title={keytip.toUpperCase()}
-            open={targetState && targetState.type === target && (targetState.tabName === name || targetState.groupName === name)}
+            open={targetState.tabName === name || targetState.groupName === name}
             placement="bottom"
             {...props}
         >

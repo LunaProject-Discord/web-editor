@@ -26,6 +26,7 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                     if (!target)
                         return;
 
+                    e.preventDefault();
                     setTarget(undefined);
                     return;
 
@@ -33,6 +34,7 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                     if (target)
                         return;
 
+                    e.preventDefault();
                     setTarget({ type: 'ribbon' });
                     return;
 
@@ -40,6 +42,7 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                     if (!target)
                         return;
 
+                    e.preventDefault();
                     if (target.type === 'ribbon') {
                         const tab = tabs.find((tab) => tab.keytip?.toLowerCase() === e.key.toLowerCase());
                         if (!tab) {
