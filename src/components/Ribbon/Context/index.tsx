@@ -1,7 +1,14 @@
 'use client';
 
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
-import { EditorRibbonButton, EditorRibbonGroup, EditorRibbonKeyTipTarget, EditorRibbonTab } from '../../../interfaces';
+import {
+    EditorDivider,
+    EditorRibbonButton,
+    EditorRibbonGroup,
+    EditorRibbonGroupItem,
+    EditorRibbonKeyTipTarget,
+    EditorRibbonTab
+} from '../../../interfaces';
 import { EditorComponentProps, useCurrentEditor } from '../../index';
 
 export const RibbonKeyTipTargetContext = createContext<EditorRibbonKeyTipTarget | undefined>(undefined);
@@ -21,6 +28,7 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
             if (!editor || e.isComposing)
                 return;
 
+            const keyLowerCased = e.key.toLowerCase();
             switch (e.key) {
                 case 'Escape':
                     return;
@@ -39,7 +47,7 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
 
                     e.preventDefault();
                     if (target.type === 'ribbon') {
-                        const tab = tabs.find((tab) => tab.keytip?.toLowerCase() === e.key.toLowerCase());
+                        const tab = tabs.find((tab) => tab.keytip?.toLowerCase() === keyLowerCased);
                         if (!tab) {
                             setTarget(undefined);
                             return;
@@ -49,7 +57,12 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                         return;
                     } else if (target.type === 'tab') {
                         const tab = tabs.find((tab) => tab.name === target.tabName);
-                        const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => tabItem.type === 'ribbonGroup' && tabItem.keytip?.toLowerCase() === e.key.toLowerCase());
+                        const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => {
+                            if (tabItem.type !== 'ribbonGroup')
+                                return false;
+
+                            return tabItem.keytip?.toLowerCase() === keyLowerCased;
+                        });
 
                         console.log(target, tab, group);
 
@@ -62,8 +75,18 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                         return;
                     } else if (target.type === 'group') {
                         const tab = tabs.find((tab) => tab.name === target.tabName);
-                        const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => tabItem.type === 'ribbonGroup' && tabItem.name === target.groupName);
-                        const item = group?.content.find((groupItem) => 'keytip' in groupItem && groupItem.keytip?.toLowerCase() === e.key.toLowerCase());
+                        const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => {
+                            if (tabItem.type !== 'ribbonGroup')
+                                return false;
+
+                            return tabItem.name === target.groupName;
+                        });
+                        const item = group?.content.find((groupItem): groupItem is Exclude<EditorRibbonGroupItem, EditorDivider> => {
+                            if (groupItem.type === 'divider')
+                                return false;
+
+                            return groupItem.keytip?.toLowerCase() === keyLowerCased;
+                        });
 
                         console.log(target, tab, group, item);
 
