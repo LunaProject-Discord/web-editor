@@ -1,6 +1,6 @@
 'use client';
 
-import { Tooltip, TooltipProps } from '@mui/material';
+import { Box, Tooltip, TooltipProps } from '@mui/material';
 import React, { useContext } from 'react';
 import { EditorRibbonKeyTipTargetType } from '../../../interfaces';
 import { RibbonKeyTipTargetContext } from '../Context';
@@ -21,9 +21,12 @@ export const RibbonKeyTip = ({ keytip, target, name, children, ...props }: Ribbo
         <Tooltip
             title={keytip.toUpperCase()}
             open={targetState && targetState.type === target && (targetState.tabName === name || targetState.groupName === name)}
+            placement="bottom"
             {...props}
         >
-            {children}
+            <Box>
+                {children}
+            </Box>
         </Tooltip>
     );
 };
