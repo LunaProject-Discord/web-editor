@@ -29,9 +29,9 @@ export const RibbonTabContentRoot = styled(
     gap: theme.spacing(2)
 }));
 
-export type RibbonTabContentProps = EditorComponentProps & Omit<EditorRibbonTab, 'type' | 'accessKey'>;
+export type RibbonTabContentProps = EditorComponentProps & Pick<EditorRibbonTab, 'name' | 'visible' | 'content'>;
 
-export const RibbonTabContent = ({ name, label, visible, content, editor: _editor }: RibbonTabContentProps) => {
+export const RibbonTabContent = ({ editor: _editor, name, visible, content }: RibbonTabContentProps) => {
     const editor = useCurrentEditor(_editor);
     if (!editor)
         return null;

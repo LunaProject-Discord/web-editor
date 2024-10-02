@@ -19,6 +19,8 @@ export interface RibbonTabContextProps {
     setOpen: Dispatch<SetStateAction<boolean>>;
     name: string;
     setName: Dispatch<SetStateAction<string>>;
+
+    tab: EditorRibbonTab | undefined;
     updateTab: (name: string | undefined) => void;
 }
 
@@ -27,6 +29,8 @@ export const RibbonTabContext = createContext<RibbonTabContextProps>({
     setOpen: () => undefined,
     name: '',
     setName: () => undefined,
+
+    tab: undefined,
     updateTab: () => undefined
 });
 
@@ -62,7 +66,7 @@ export const RibbonTabProvider = ({ editor: _editor, tabs, children }: RibbonTab
     }, [activeTab, editor, editor?.state?.selection?.$from, tabs]);
 
     return (
-        <RibbonTabContext.Provider value={{ open, setOpen, name, setName, updateTab }}>
+        <RibbonTabContext.Provider value={{ open, setOpen, name, setName, tab: activeTab, updateTab }}>
             {children}
         </RibbonTabContext.Provider>
     );

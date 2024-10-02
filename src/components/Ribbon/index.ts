@@ -7,3 +7,4 @@ export * from './Group';
 export * from './GroupDivider';
 export * from './Tab';
 export * from './TabContent';
+export * from './TabPanel';
