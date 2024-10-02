@@ -14,6 +14,8 @@ export interface RibbonKeyTipProps extends Omit<TooltipProps, 'title' | 'open' |
 export const RibbonKeyTip = ({ keytip, target, name, children, ...props }: RibbonKeyTipProps) => {
     const targetState = useContext(RibbonKeyTipTargetContext);
 
+    console.log(keytip, target, name, targetState);
+
     if (!keytip || !targetState || targetState.type !== target)
         return children;
 
