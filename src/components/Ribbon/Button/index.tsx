@@ -116,9 +116,7 @@ export const RibbonButton = (
 
     return (
         <Tooltip title={tooltip.children} placement={tooltip.placement}>
-            <Box>
-                {children}
-            </Box>
+            {children}
         </Tooltip>
     );
 };

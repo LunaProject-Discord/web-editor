@@ -59,9 +59,7 @@ export const RibbonDropdownButton = (
 
     const children = tooltip ? (
         <Tooltip title={tooltip.children} placement={tooltip.placement}>
-            <Box>
-                {buttonChildren}
-            </Box>
+            {buttonChildren}
         </Tooltip>
     ) : buttonChildren;
 

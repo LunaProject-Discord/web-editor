@@ -1,9 +1,54 @@
 'use client';
 
-import { Tooltip, TooltipProps } from '@mui/material';
+import { borderAndBoxShadow, generateComponentClasses } from '@lunaproject/web-core/dist/utils';
+import { Box, BoxProps, styled, TooltipProps } from '@mui/material';
+import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { EditorRibbonKeyTipTargetType } from '../../../interfaces';
 import { RibbonKeyTipTargetContext } from '../Context';
+
+export const ribbonKeyTipClasses = generateComponentClasses(
+    'RibbonKeyTip',
+    [
+        'root',
+        'label'
+    ]
+);
+
+export const RibbonKeyTipRoot = styled(
+    ({ className, ...props }: BoxProps) => (
+        <Box
+            className={clsx(ribbonKeyTipClasses.root, className)}
+            {...props}
+        />
+    )
+)(({ theme }) => ({
+    position: 'relative'
+}));
+
+export const RibbonKeyTipLabel = styled(
+    ({ className, ...props }: BoxProps) => (
+        <Box
+            className={clsx(ribbonKeyTipClasses.label, className)}
+            {...props}
+        />
+    )
+)(({ theme }) => ({
+    padding: theme.spacing(0, .5),
+    position: 'absolute',
+    bottom: theme.spacing(-2),
+    left: '50%',
+    fontSize: theme.typography.body2.fontSize,
+    lineHeight: 'normal',
+    whiteSpace: 'nowrap',
+    userSelect: 'none',
+    zIndex: 1,
+    transform: 'translateX(-50%)',
+    color: (theme.vars || theme).palette.text.secondary,
+    backgroundColor: (theme.vars || theme).palette.background.paper,
+    borderRadius: theme.spacing(.5),
+    ...borderAndBoxShadow(theme)
+}));
 
 export interface RibbonKeyTipProps extends Omit<TooltipProps, 'title' | 'open' | 'target' | 'name'> {
     keytip: string | undefined;
@@ -14,19 +59,15 @@ export interface RibbonKeyTipProps extends Omit<TooltipProps, 'title' | 'open' |
 export const RibbonKeyTip = ({ keytip, target, name, children, ...props }: RibbonKeyTipProps) => {
     const targetState = useContext(RibbonKeyTipTargetContext);
 
-    if (!keytip || !targetState || targetState.type !== target)
+    if (!keytip || !targetState || targetState.type !== target || (targetState.tabName !== name && targetState.groupName !== name))
         return children;
 
-    console.log('!!', keytip, target, name, targetState);
-
     return (
-        <Tooltip
-            title={keytip.toUpperCase()}
-            open={targetState.tabName === name || targetState.groupName === name}
-            placement="bottom"
-            {...props}
-        >
+        <RibbonKeyTipRoot>
             {children}
-        </Tooltip>
+            <RibbonKeyTipLabel>
+                {keytip.toUpperCase()}
+            </RibbonKeyTipLabel>
+        </RibbonKeyTipRoot>
     );
 };
