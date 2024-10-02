@@ -21,6 +21,8 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
             if (!editor)
                 return;
 
+            console.log(e.key, editor, tabs, target);
+
             switch (e.key) {
                 case 'Escape':
                     if (!target)
