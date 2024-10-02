@@ -18,18 +18,11 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (!editor)
+            if (!editor || e.isComposing)
                 return;
-
-            console.log(e.key, editor, tabs, target);
 
             switch (e.key) {
                 case 'Escape':
-                    if (!target)
-                        return;
-
-                    e.preventDefault();
-                    setTarget(undefined);
                     return;
 
                 case 'Alt':
@@ -69,6 +62,8 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
                         const group = tab?.content.find((tabItem): tabItem is EditorRibbonGroup => tabItem.type === 'ribbonGroup' && tabItem.name === target.groupName);
                         const item = group?.content.find((groupItem) => 'keytip' in groupItem && groupItem.keytip?.toLowerCase() === e.key.toLowerCase());
 
+                        console.log(target, tab, group, item);
+
                         setTarget(undefined);
                         if (!tab || !group || !item)
                             return;
@@ -93,8 +88,21 @@ export const RibbonProvider = ({ editor: _editor, tabs, children }: RibbonProvid
             }
         };
 
+        const handleKeyUp = (e: KeyboardEvent) => {
+            if (!editor || e.isComposing || e.key !== 'Escape' || !target)
+                return;
+
+            e.preventDefault();
+            setTarget(undefined);
+            return;
+        };
+
         window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
+        };
     }, [editor, tabs, target]);
 
     return (
