@@ -73,7 +73,7 @@ export interface RibbonAccessKeyTipProps {
 export const RibbonAccessKeyTip = ({ accessKey, target, name, children }: RibbonAccessKeyTipProps) => {
     const value = useRibbonAccessKeyContext();
 
-    if (!accessKey || !value || value.type !== target || (value.tabName !== name && value.groupName !== name) || (!value.input || !accessKey.toLowerCase().startsWith(value.input)))
+    if (!accessKey || !value || value.type !== target || (value.tabName !== name && value.groupName !== name) || value.input && !accessKey.toLowerCase().startsWith(value.input))
         return children;
 
     return (
