@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import React, { forwardRef } from 'react';
 import { EditorRibbonButton } from '../../../interfaces';
 import { getEditorPredicate } from '../../../utils';
-import { EditorComponentProps, RibbonAccessKeyTip, useCurrentEditor } from '../../index';
+import { EditorComponentProps, RibbonAccessKeyTip, RibbonAccessKeyTipProps, useCurrentEditor } from '../../index';
 
 export const ribbonButtonClasses = generateComponentClasses(
     'RibbonButton',
@@ -93,6 +93,12 @@ export const RibbonButton = (
     if (!editor)
         return null;
 
+    const keyTipProps: RibbonAccessKeyTipProps = {
+        accessKey,
+        target: 'group',
+        name: groupName
+    };
+
     const isDisabled = getEditorPredicate(disabled, editor);
     const isSelected = getEditorPredicate(selected, editor);
 
@@ -103,20 +109,25 @@ export const RibbonButton = (
     });
 
     const children = (
-        <RibbonAccessKeyTip accessKey={accessKey} target="group" name={groupName}>
-            <RibbonButtonRoot onClick={handleButtonClick} disabled={isDisabled} selected={isSelected}>
-                {Icon && <Icon />}
-                {label}
-            </RibbonButtonRoot>
-        </RibbonAccessKeyTip>
+        <RibbonButtonRoot onClick={handleButtonClick} disabled={isDisabled} selected={isSelected}>
+            {Icon && <Icon />}
+            {label}
+        </RibbonButtonRoot>
     );
 
-    if (!tooltip)
-        return children;
+    if (!tooltip) {
+        return (
+            <RibbonAccessKeyTip {...keyTipProps}>
+                {children}
+            </RibbonAccessKeyTip>
+        );
+    }
 
     return (
-        <Tooltip title={tooltip.children} placement={tooltip.placement}>
-            {children}
-        </Tooltip>
+        <RibbonAccessKeyTip {...keyTipProps}>
+            <Tooltip title={tooltip.children} placement={tooltip.placement}>
+                {children}
+            </Tooltip>
+        </RibbonAccessKeyTip>
     );
 };

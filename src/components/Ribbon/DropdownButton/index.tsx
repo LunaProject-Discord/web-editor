@@ -43,29 +43,25 @@ export const RibbonDropdownButton = (
     const isDisabled = getEditorPredicate(disabled, editor);
     const isSelected = getEditorPredicate(selected, editor);
 
-    const buttonChildren = (
-        <RibbonAccessKeyTip accessKey={accessKey} target="group" name={groupName}>
-            <RibbonButtonRoot
-                onClick={(e) => setAnchorEl(e.currentTarget)}
-                disabled={isDisabled}
-                selected={isSelected}
-                className={ribbonDropdownButtonClasses.root}
-            >
-                {Icon && <Icon />}
-                {label}
-            </RibbonButtonRoot>
-        </RibbonAccessKeyTip>
+    const children = (
+        <RibbonButtonRoot
+            onClick={(e) => setAnchorEl(e.currentTarget)}
+            disabled={isDisabled}
+            selected={isSelected}
+            className={ribbonDropdownButtonClasses.root}
+        >
+            {Icon && <Icon />}
+            {label}
+        </RibbonButtonRoot>
     );
-
-    const children = tooltip ? (
-        <Tooltip title={tooltip.children} placement={tooltip.placement}>
-            {buttonChildren}
-        </Tooltip>
-    ) : buttonChildren;
 
     return (
         <Fragment>
-            {children}
+            <RibbonAccessKeyTip accessKey={accessKey} target="group" name={groupName}>
+                {tooltip ? <Tooltip title={tooltip.children} placement={tooltip.placement}>
+                    {children}
+                </Tooltip> : children}
+            </RibbonAccessKeyTip>
             <Menu
                 open={Boolean(anchorEl)}
                 anchorEl={anchorEl}

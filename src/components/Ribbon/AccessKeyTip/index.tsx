@@ -3,7 +3,7 @@
 import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { alpha, Box, BoxProps, styled } from '@mui/material';
 import clsx from 'clsx';
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { EditorRibbonAccessKey } from '../../../interfaces';
 import { RibbonAccessKeyTargetType, useRibbonAccessKeyContext } from '../Context';
 
@@ -17,39 +17,23 @@ export const ribbonAccessKeyTipClasses = generateComponentClasses(
 );
 
 export const RibbonAccessKeyTipRoot = styled(
-    // eslint-disable-next-line react/display-name
-    forwardRef<HTMLDivElement, BoxProps>((
-        {
-            className,
-            ...props
-        },
-        ref
-    ) => (
+    ({ className, ...props }: BoxProps) => (
         <Box
-            ref={ref}
             className={clsx(ribbonAccessKeyTipClasses.root, className)}
             {...props}
         />
-    ))
+    )
 )(({
     position: 'relative'
 }));
 
 export const RibbonAccessKeyTipContent = styled(
-    // eslint-disable-next-line react/display-name
-    forwardRef<HTMLDivElement, BoxProps>((
-        {
-            className,
-            ...props
-        },
-        ref
-    ) => (
+    ({ className, ...props }: BoxProps) => (
         <Box
-            ref={ref}
             className={clsx(ribbonAccessKeyTipClasses.content, className)}
             {...props}
         />
-    ))
+    )
 )(({
     display: 'flex',
     placeItems: 'center',
@@ -57,20 +41,12 @@ export const RibbonAccessKeyTipContent = styled(
 }));
 
 export const RibbonAccessKeyTipLabel = styled(
-    // eslint-disable-next-line react/display-name
-    forwardRef<HTMLDivElement, BoxProps>((
-        {
-            className,
-            ...props
-        },
-        ref
-    ) => (
+    ({ className, ...props }: BoxProps) => (
         <Box
-            ref={ref}
             className={clsx(ribbonAccessKeyTipClasses.label, className)}
             {...props}
         />
-    ))
+    )
 )(({ theme }) => ({
     padding: theme.spacing(0, .5),
     position: 'absolute',
@@ -91,33 +67,19 @@ export interface RibbonAccessKeyTipProps {
     accessKey: EditorRibbonAccessKey | undefined;
     target: RibbonAccessKeyTargetType;
     name?: string;
-    children: ReactNode;
+    children?: ReactNode;
 }
 
-export const RibbonAccessKeyTip = forwardRef<HTMLDivElement, RibbonAccessKeyTipProps>((
-    {
-        accessKey,
-        target,
-        name,
-        children
-    },
-    ref
-) => {
+export const RibbonAccessKeyTip = ({ accessKey, target, name, children }: RibbonAccessKeyTipProps) => {
     const value = useRibbonAccessKeyContext();
 
-    if (!accessKey || !value || value.type !== target || (value.tabName !== name && value.groupName !== name) || value.input && !accessKey.toLowerCase().startsWith(value.input)) {
-        return (
-            <RibbonAccessKeyTipContent ref={ref}>
-                {children}
-            </RibbonAccessKeyTipContent>
-        );
-    }
+    if (!accessKey || !value || value.type !== target || (value.tabName !== name && value.groupName !== name) || value.input && !accessKey.toLowerCase().startsWith(value.input))
+        return children;
 
     return (
-        <RibbonAccessKeyTipRoot ref={ref}>
+        <RibbonAccessKeyTipRoot>
             <RibbonAccessKeyTipContent>{children}</RibbonAccessKeyTipContent>
             <RibbonAccessKeyTipLabel>{accessKey}</RibbonAccessKeyTipLabel>
         </RibbonAccessKeyTipRoot>
     );
-});
-RibbonAccessKeyTip.displayName = 'RibbonAccessKeyTip';
+};

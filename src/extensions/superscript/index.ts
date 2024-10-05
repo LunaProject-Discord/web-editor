@@ -3,7 +3,9 @@ import { Superscript } from '@tiptap/extension-superscript';
 import { EditorCommand } from '../../interfaces';
 import { asRibbonButton } from '../../utils';
 
-export const SuperscriptExtension = Superscript;
+export const SuperscriptExtension = Superscript.extend({
+    excludes: 'subscript'
+});
 
 export const SuperscriptCommand: EditorCommand = {
     name: 'superscript',
