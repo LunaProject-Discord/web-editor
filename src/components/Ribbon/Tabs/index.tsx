@@ -7,7 +7,7 @@ import { EditorComponentProps, RibbonTab, useCurrentEditor, useRibbonTabContext 
 export type RibbonTabsProps = EditorComponentProps;
 
 export const RibbonTabs = ({ editor: _editor }: RibbonTabsProps) => {
-    const { open, name, tabs } = useRibbonTabContext();
+    const { open, name, tabs, updateTab } = useRibbonTabContext();
 
     const handleRef = useCallback((actions: TabsActions | null) => {
         if (!actions || !open)
@@ -24,7 +24,8 @@ export const RibbonTabs = ({ editor: _editor }: RibbonTabsProps) => {
 
     return (
         <Tabs
-            value={open ? name : undefined}
+            value={open ? name : false}
+            onChange={(_, value: string) => updateTab(value)}
             action={handleRef}
             variant="scrollable"
             scrollButtons="auto"

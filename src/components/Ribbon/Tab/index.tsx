@@ -43,7 +43,7 @@ export const RibbonTab = ({ editor: _editor, name, label, visible, accessKey }: 
     return (
         <Tab
             value={name}
-            onClick={handleTabClick}
+            // onClick={handleTabClick}
             label={
                 <RibbonAccessKeyTip accessKey={accessKey} target="ribbon">
                     {label}
