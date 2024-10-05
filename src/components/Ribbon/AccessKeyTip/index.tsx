@@ -3,7 +3,7 @@
 import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { alpha, Box, BoxProps, styled } from '@mui/material';
 import clsx from 'clsx';
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { EditorRibbonAccessKey } from '../../../interfaces';
 import { RibbonAccessKeyTargetType, useRibbonAccessKeyContext } from '../Context';
 
@@ -70,16 +70,30 @@ export interface RibbonAccessKeyTipProps {
     children: ReactNode;
 }
 
-export const RibbonAccessKeyTip = ({ accessKey, target, name, children }: RibbonAccessKeyTipProps) => {
+export const RibbonAccessKeyTip = forwardRef<HTMLDivElement, RibbonAccessKeyTipProps>((
+    {
+        accessKey,
+        target,
+        name,
+        children
+    },
+    ref
+) => {
     const value = useRibbonAccessKeyContext();
 
-    if (!accessKey || !value || value.type !== target || (value.tabName !== name && value.groupName !== name) || value.input && !accessKey.toLowerCase().startsWith(value.input))
-        return children;
+    if (!accessKey || !value || value.type !== target || (value.tabName !== name && value.groupName !== name) || value.input && !accessKey.toLowerCase().startsWith(value.input)) {
+        return (
+            <Box ref={ref}>
+                {children}
+            </Box>
+        );
+    }
 
     return (
-        <RibbonAccessKeyTipRoot>
+        <RibbonAccessKeyTipRoot ref={ref}>
             <RibbonAccessKeyTipContent>{children}</RibbonAccessKeyTipContent>
             <RibbonAccessKeyTipLabel>{accessKey}</RibbonAccessKeyTipLabel>
         </RibbonAccessKeyTipRoot>
     );
-};
+});
+RibbonAccessKeyTip.displayName = 'RibbonAccessKeyTip';
