@@ -17,23 +17,39 @@ export const ribbonAccessKeyTipClasses = generateComponentClasses(
 );
 
 export const RibbonAccessKeyTipRoot = styled(
-    ({ className, ...props }: BoxProps) => (
+    // eslint-disable-next-line react/display-name
+    forwardRef<HTMLDivElement, BoxProps>((
+        {
+            className,
+            ...props
+        },
+        ref
+    ) => (
         <Box
+            ref={ref}
             className={clsx(ribbonAccessKeyTipClasses.root, className)}
             {...props}
         />
-    )
+    ))
 )(({
     position: 'relative'
 }));
 
 export const RibbonAccessKeyTipContent = styled(
-    ({ className, ...props }: BoxProps) => (
+    // eslint-disable-next-line react/display-name
+    forwardRef<HTMLDivElement, BoxProps>((
+        {
+            className,
+            ...props
+        },
+        ref
+    ) => (
         <Box
+            ref={ref}
             className={clsx(ribbonAccessKeyTipClasses.content, className)}
             {...props}
         />
-    )
+    ))
 )(({
     display: 'flex',
     placeItems: 'center',
@@ -41,12 +57,20 @@ export const RibbonAccessKeyTipContent = styled(
 }));
 
 export const RibbonAccessKeyTipLabel = styled(
-    ({ className, ...props }: BoxProps) => (
+    // eslint-disable-next-line react/display-name
+    forwardRef<HTMLDivElement, BoxProps>((
+        {
+            className,
+            ...props
+        },
+        ref
+    ) => (
         <Box
+            ref={ref}
             className={clsx(ribbonAccessKeyTipClasses.label, className)}
             {...props}
         />
-    )
+    ))
 )(({ theme }) => ({
     padding: theme.spacing(0, .5),
     position: 'absolute',
@@ -83,9 +107,9 @@ export const RibbonAccessKeyTip = forwardRef<HTMLDivElement, RibbonAccessKeyTipP
 
     if (!accessKey || !value || value.type !== target || (value.tabName !== name && value.groupName !== name) || value.input && !accessKey.toLowerCase().startsWith(value.input)) {
         return (
-            <Box ref={ref}>
+            <RibbonAccessKeyTipContent ref={ref}>
                 {children}
-            </Box>
+            </RibbonAccessKeyTipContent>
         );
     }
 

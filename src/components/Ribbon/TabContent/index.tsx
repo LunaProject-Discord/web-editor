@@ -47,14 +47,14 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
 
     return (
         <RibbonTabContentRoot>
-            {content.map((item, index) => {
+            {content.map((item, i) => {
                 switch (item.type) {
                     case 'divider':
-                        return (<RibbonDivider />);
+                        return (<RibbonDivider key={`divider-${i}`} />);
 
                     case 'ribbonGroup':
                     default:
-                        return (<RibbonGroup tabName={name} {...item} editor={_editor} />);
+                        return (<RibbonGroup key={item.name} tabName={name} {...item} editor={_editor} />);
                 }
             })}
         </RibbonTabContentRoot>

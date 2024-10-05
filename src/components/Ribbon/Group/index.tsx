@@ -89,17 +89,17 @@ export const RibbonGroup = ({ tabName, name, label, accessKey, content, editor: 
             <RibbonGroupRoot>
                 {label && <RibbonGroupLabel>{label}</RibbonGroupLabel>}
                 <RibbonGroupContent>
-                    {content.map((item, index) => {
+                    {content.map((item, i) => {
                         switch (item.type) {
                             case 'divider':
-                                return (<RibbonGroupDivider />);
+                                return (<RibbonGroupDivider key={`divider-${i}`} />);
 
                             case 'ribbonDropdownButton':
-                                return (<RibbonDropdownButton groupName={name} {...item} editor={_editor} />);
+                                return (<RibbonDropdownButton key={item.name} groupName={name} {...item} editor={_editor} />);
 
                             case 'ribbonButton':
                             default:
-                                return (<RibbonButton groupName={name} {...item} editor={_editor} />);
+                                return (<RibbonButton key={item.name} groupName={name} {...item} editor={_editor} />);
                         }
                     })}
                 </RibbonGroupContent>
