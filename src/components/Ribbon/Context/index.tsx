@@ -1,8 +1,7 @@
 'use client';
 
 import React, { ReactNode } from 'react';
-import { EditorComponentProps, EditorRibbonTab, RibbonAccessKeyProvider } from '../../../';
-import { RibbonTabProvider } from './tab';
+import { EditorComponentProps, EditorRibbonTab, RibbonAccessKeyProvider, RibbonTabProvider } from '../../../';
 
 export interface RibbonProviderProps extends EditorComponentProps {
     tabs: EditorRibbonTab[];

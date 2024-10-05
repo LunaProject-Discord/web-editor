@@ -8,6 +8,7 @@ import React, {
     useCallback,
     useContext,
     useEffect,
+    useMemo,
     useState
 } from 'react';
 import { EditorComponentProps, EditorRibbonTab, getEditorPredicate, useCurrentEditor } from '../../../';
@@ -20,7 +21,7 @@ export interface RibbonTabContextProps {
 
     tabs: EditorRibbonTab[];
     tab: EditorRibbonTab | undefined;
-    updateTab: (name: string | undefined) => void;
+    updateTab: (name: string) => void;
 }
 
 export const RibbonTabContext = createContext<RibbonTabContextProps>({
@@ -41,18 +42,20 @@ export interface RibbonTabProviderProps extends EditorComponentProps {
     children: ReactNode;
 }
 
-export const RibbonTabProvider = ({ editor: _editor, tabs, children }: RibbonTabProviderProps) => {
+export const RibbonTabProvider = ({ editor: _editor, tabs: _tabs, children }: RibbonTabProviderProps) => {
     const editor = useCurrentEditor(_editor);
+
+    const tabs = useMemo(() => _tabs, [_tabs]);
 
     const [open, setOpen] = useState(true);
     const [name, setName] = useState(tabs[0].name);
     const activeTab = tabs.find((tab) => tab.name === name);
 
-    const updateTab = useCallback((tabName: string | undefined) => setOpen((prevState) => {
+    const updateTab = useCallback((tabName: string) => setOpen((prevState) => {
         if (prevState && name === tabName)
             return false;
 
-        setName(name);
+        setName(tabName);
         return true;
     }), [name]);
 

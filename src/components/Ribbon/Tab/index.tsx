@@ -10,7 +10,7 @@ import {
     getEditorPredicate,
     RibbonAccessKeyTip,
     RibbonTabContext,
-    useCurrentEditor
+    useCurrentEditor, useRibbonTabContext
 } from '../../../';
 
 export const ribbonTabClasses = generateComponentClasses(
@@ -26,7 +26,7 @@ export const ribbonTabClasses = generateComponentClasses(
 export type RibbonTabProps = EditorComponentProps & Omit<EditorRibbonTab, 'type' | 'content'>;
 
 export const RibbonTab = ({ editor: _editor, name, label, visible, accessKey }: RibbonTabProps) => {
-    const { open, name: tabName, updateTab } = useContext(RibbonTabContext);
+    const { open, name: tabName, updateTab } = useRibbonTabContext();
 
     const handleTabClick = useCallback(() => updateTab(name), [name, updateTab]);
 
