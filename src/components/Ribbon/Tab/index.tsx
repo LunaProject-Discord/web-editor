@@ -28,6 +28,8 @@ export type RibbonTabProps = EditorComponentProps & Omit<EditorRibbonTab, 'type'
 export const RibbonTab = ({ editor: _editor, name, label, visible, accessKey }: RibbonTabProps) => {
     const { open, name: tabName, updateTab } = useRibbonTabContext();
 
+    console.log('[Tab]', name);
+
     const handleTabClick = useCallback(() => updateTab(name), [name, updateTab]);
 
     const editor = useCurrentEditor(_editor);

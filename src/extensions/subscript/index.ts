@@ -4,7 +4,11 @@ import { EditorCommand } from '../../interfaces';
 import { asRibbonButton } from '../../utils';
 
 export const SubscriptExtension = Subscript.extend({
-    excludes: 'superscript'
+    addKeyboardShortcuts() {
+        return {
+            'Mod-,': () => this.editor.chain().unsetSuperscript().toggleSubscript().run()
+        };
+    }
 });
 
 export const SubscriptCommand: EditorCommand = {

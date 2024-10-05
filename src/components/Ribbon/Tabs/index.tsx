@@ -9,6 +9,8 @@ export type RibbonTabsProps = EditorComponentProps;
 export const RibbonTabs = ({ editor }: RibbonTabsProps) => {
     const { open, name, tabs } = useRibbonTabContext();
 
+    console.log('[Tabs]', open, name, tabs);
+
     return (
         <Tabs value={open ? name : undefined} variant="scrollable" scrollButtons="auto" sx={{ border: 'none' }}>
             {tabs.map((tab) => (

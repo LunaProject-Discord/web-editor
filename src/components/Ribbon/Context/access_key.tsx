@@ -181,8 +181,6 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
             if (!editor || e.isComposing)
                 return;
 
-            console.log(e.key, value);
-
             switch (e.key) {
                 case 'Escape':
                     return;
@@ -238,10 +236,6 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
             window.removeEventListener('keyup', handleKeyUp);
         };
     }, [editor, handleGroupKeyDown, handleRibbonKeyDown, handleTabKeyDown, setName, setOpen, tabs, value]);
-
-    useEffect(() => {
-        console.log('[Value]', value);
-    }, [value]);
 
     return (
         <RibbonAccessKeyContext.Provider value={value}>
