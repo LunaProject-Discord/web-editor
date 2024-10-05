@@ -1,11 +1,13 @@
 'use client';
 
+import { SomeRequired } from '@lunaproject/web-core/dist/utils';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import {
     EditorComponentProps,
     EditorDivider,
     EditorRibbonGroup,
     EditorRibbonGroupItem,
+    EditorRibbonTab,
     useCurrentEditor,
     useRibbonTabContext
 } from '../../../';
@@ -51,7 +53,7 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
         const getKey = (key: string) => {
             key = key.toLowerCase();
             if (!value)
-                return key;
+                return undefined;
 
             const input = (value.input ?? '') + key;
 
@@ -64,10 +66,14 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
         };
 
         const handleRibbonKeyDown = (e: KeyboardEvent): boolean => {
-            if (!editor || e.isComposing)
+            if (!editor || e.isComposing || !value || value.type !== 'ribbon')
                 return false;
 
-            const ribbonTabs = tabs.filter((tab) => tab.accessKey?.toLowerCase().startsWith(getKey(e.key)));
+            const key = getKey(e.key);
+            if (!key)
+                return false;
+
+            const ribbonTabs = tabs.filter((tab): tab is SomeRequired<EditorRibbonTab, 'accessKey'> => tab.accessKey !== undefined && tab.accessKey.toLowerCase().startsWith(key));
             if (ribbonTabs.length < 1)
                 return false;
 
@@ -75,7 +81,7 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
                 return true;
 
             const ribbonTab = ribbonTabs[0];
-            if (ribbonTab.accessKey?.toLowerCase() !== getKey(e.key))
+            if (ribbonTab.accessKey.toLowerCase() !== key)
                 return false;
 
             setOpen(true);
@@ -85,18 +91,22 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
         };
 
         const handleTabKeyDown = (e: KeyboardEvent): boolean => {
-            if (!editor || e.isComposing)
+            if (!editor || e.isComposing || !value || value.type !== 'tab' || !value.tabName)
                 return false;
 
-            const ribbonTab = tabs.find((tab) => tab.name === value?.tabName);
+            const key = getKey(e.key);
+            if (!key)
+                return false;
+
+            const ribbonTab = tabs.find((tab) => tab.name === value.tabName);
             if (!ribbonTab)
                 return false;
 
-            const ribbonGroups = ribbonTab.content.filter((tabItem): tabItem is EditorRibbonGroup => {
+            const ribbonGroups = ribbonTab.content.filter((tabItem): tabItem is SomeRequired<EditorRibbonGroup, 'accessKey'> => {
                 if (tabItem.type && tabItem.type !== 'ribbonGroup')
                     return false;
 
-                return tabItem.accessKey !== undefined && tabItem.accessKey.toLowerCase().startsWith(getKey(e.key));
+                return tabItem.accessKey !== undefined && tabItem.accessKey.toLowerCase().startsWith(key);
             });
             if (ribbonGroups.length < 1)
                 return false;
@@ -105,7 +115,7 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
                 return true;
 
             const ribbonGroup = ribbonGroups[0];
-            if (ribbonGroup.accessKey?.toLowerCase() !== getKey(e.key))
+            if (ribbonGroup.accessKey.toLowerCase() !== key)
                 return false;
 
             setValue({ type: 'group', tabName: ribbonTab.name, groupName: ribbonGroup.name });
@@ -113,10 +123,14 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
         };
 
         const handleGroupKeyDown = (e: KeyboardEvent): boolean => {
-            if (!editor || e.isComposing)
+            if (!editor || e.isComposing || !value || value.type !== 'group' || !value.tabName || !value.groupName)
                 return false;
 
-            const ribbonTab = tabs.find((tab) => tab.name === value?.tabName);
+            const key = getKey(e.key);
+            if (!key)
+                return false;
+
+            const ribbonTab = tabs.find((tab) => tab.name === value.tabName);
             if (!ribbonTab)
                 return false;
 
@@ -124,7 +138,7 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
                 if (tabItem.type && tabItem.type !== 'ribbonGroup')
                     return false;
 
-                return tabItem.name === value?.groupName;
+                return tabItem.name === value.groupName;
             });
             if (!ribbonGroup)
                 return false;
@@ -133,7 +147,7 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
                 if (groupItem.type === 'divider')
                     return false;
 
-                return groupItem.accessKey !== undefined && groupItem.accessKey.toLowerCase().startsWith(getKey(e.key));
+                return groupItem.accessKey !== undefined && groupItem.accessKey.toLowerCase().startsWith(key);
             });
             if (ribbonItems.length < 1)
                 return false;
@@ -142,7 +156,7 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
                 return true;
 
             const ribbonItem = ribbonItems[0];
-            if (ribbonItem.accessKey?.toLowerCase() !== getKey(e.key))
+            if (!ribbonItem.accessKey || ribbonItem.accessKey.toLowerCase() !== key)
                 return false;
 
             setValue(undefined);
