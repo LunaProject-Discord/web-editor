@@ -166,7 +166,8 @@ export const RibbonAccessKeyProvider = ({ editor: _editor, children }: RibbonAcc
             if (!editor || e.isComposing)
                 return;
 
-            const keyLowerCased = e.key.toLowerCase();
+            console.log(e.key, value);
+
             switch (e.key) {
                 case 'Escape':
                     return;

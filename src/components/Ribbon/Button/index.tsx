@@ -2,7 +2,7 @@
 
 import { ButtonBase } from '@lunaproject/web-core/dist/components/ButtonBase';
 import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
-import { alpha, Box, ButtonBaseProps, styled, Tooltip } from '@mui/material';
+import { alpha, ButtonBaseProps, styled, Tooltip } from '@mui/material';
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
 import { EditorRibbonButton } from '../../../interfaces';

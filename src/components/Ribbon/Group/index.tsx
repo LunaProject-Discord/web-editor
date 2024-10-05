@@ -7,10 +7,10 @@ import React from 'react';
 import { EditorRibbonGroup } from '../../../interfaces';
 import {
     EditorComponentProps,
+    RibbonAccessKeyTip,
     RibbonButton,
     RibbonDropdownButton,
     RibbonGroupDivider,
-    RibbonAccessKeyTip,
     useCurrentEditor
 } from '../../index';
 

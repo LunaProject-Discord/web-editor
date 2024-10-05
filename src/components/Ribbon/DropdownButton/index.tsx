@@ -2,11 +2,11 @@
 
 import { Menu } from '@lunaproject/web-core/dist/components/Menu';
 import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
-import { Box, Divider, ListItemIcon, ListItemText, MenuItem, Tooltip } from '@mui/material';
+import { Divider, ListItemIcon, ListItemText, MenuItem, Tooltip } from '@mui/material';
 import React, { Fragment, useState } from 'react';
 import { EditorRibbonDropdownButton } from '../../../interfaces';
 import { getEditorPredicate } from '../../../utils';
-import { EditorComponentProps, RibbonButtonRoot, RibbonAccessKeyTip, useCurrentEditor } from '../../index';
+import { EditorComponentProps, RibbonAccessKeyTip, RibbonButtonRoot, useCurrentEditor } from '../../index';
 
 export const ribbonDropdownButtonClasses = generateComponentClasses(
     'RibbonDropdownButton',
