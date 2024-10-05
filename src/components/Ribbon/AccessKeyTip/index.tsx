@@ -64,22 +64,22 @@ export const RibbonAccessKeyTipLabel = styled(
 }));
 
 export interface RibbonAccessKeyTipProps {
-    key: EditorRibbonAccessKey | undefined;
+    accessKey: EditorRibbonAccessKey | undefined;
     target: RibbonAccessKeyTargetType;
     name?: string;
     children: ReactNode;
 }
 
-export const RibbonAccessKeyTip = ({ key, target, name, children }: RibbonAccessKeyTipProps) => {
+export const RibbonAccessKeyTip = ({ accessKey, target, name, children }: RibbonAccessKeyTipProps) => {
     const value = useRibbonAccessKeyContext();
 
-    if (!key || !value || value.type !== target || (value.tabName !== name && value.groupName !== name) || (!value.input || !key.startsWith(value.input)))
+    if (!accessKey || !value || value.type !== target || (value.tabName !== name && value.groupName !== name) || (!value.input || !accessKey.toLowerCase().startsWith(value.input)))
         return children;
 
     return (
         <RibbonAccessKeyTipRoot>
             <RibbonAccessKeyTipContent>{children}</RibbonAccessKeyTipContent>
-            <RibbonAccessKeyTipLabel>{key.toUpperCase()}</RibbonAccessKeyTipLabel>
+            <RibbonAccessKeyTipLabel>{accessKey}</RibbonAccessKeyTipLabel>
         </RibbonAccessKeyTipRoot>
     );
 };

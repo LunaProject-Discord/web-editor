@@ -44,7 +44,7 @@ export const RibbonDropdownButton = (
     const isSelected = getEditorPredicate(selected, editor);
 
     const buttonChildren = (
-        <RibbonAccessKeyTip key={accessKey} target="group" name={groupName}>
+        <RibbonAccessKeyTip accessKey={accessKey} target="group" name={groupName}>
             <RibbonButtonRoot
                 onClick={(e) => setAnchorEl(e.currentTarget)}
                 disabled={isDisabled}

@@ -85,7 +85,7 @@ export const RibbonGroup = ({ tabName, name, label, accessKey, content, editor: 
         return null;
 
     return (
-        <RibbonAccessKeyTip key={accessKey} target="tab" name={tabName}>
+        <RibbonAccessKeyTip accessKey={accessKey} target="tab" name={tabName}>
             <RibbonGroupRoot>
                 {label && <RibbonGroupLabel>{label}</RibbonGroupLabel>}
                 <RibbonGroupContent>

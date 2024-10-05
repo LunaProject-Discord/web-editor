@@ -103,7 +103,7 @@ export const RibbonButton = (
     });
 
     const children = (
-        <RibbonAccessKeyTip key={accessKey} target="group" name={groupName}>
+        <RibbonAccessKeyTip accessKey={accessKey} target="group" name={groupName}>
             <RibbonButtonRoot onClick={handleButtonClick} disabled={isDisabled} selected={isSelected}>
                 {Icon && <Icon />}
                 {label}
