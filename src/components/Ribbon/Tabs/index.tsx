@@ -1,42 +1,59 @@
 'use client';
 
-import { Tab, Tabs, TabsActions } from '@mui/material';
+import { Tab, Tabs } from '@mui/material';
+import clsx from 'clsx';
 import React, { useCallback } from 'react';
-import { EditorComponentProps, RibbonTab, useCurrentEditor, useRibbonTabContext } from '../../../';
+import {
+    EditorComponentProps,
+    getEditorPredicate,
+    RibbonAccessKeyTip,
+    ribbonTabClasses,
+    useCurrentEditor,
+    useRibbonTabContext
+} from '../../../';
 
 export type RibbonTabsProps = EditorComponentProps;
 
 export const RibbonTabs = ({ editor: _editor }: RibbonTabsProps) => {
-    const { open, name, tabs } = useRibbonTabContext();
+    const { open, name, tabs, updateTab } = useRibbonTabContext();
 
-    const handleRef = useCallback((actions: TabsActions | null) => {
-        if (!actions || !open)
-            return;
-
-        actions.updateIndicator();
-    }, [open, name]);
+    const handleTabClick = useCallback((name: string) => () => updateTab(name), [updateTab]);
 
     const editor = useCurrentEditor(_editor);
     if (!editor)
         return null;
 
-    console.log('[Tabs]', open, name, tabs);
-
     return (
         <Tabs
             value={open ? name : false}
-            action={handleRef}
             variant="scrollable"
             scrollButtons="auto"
             sx={{ border: 'none' }}
         >
-            {tabs.map((tab) => (
-                <Tab
-                    key={tab.name}
-                    value={tab.name}
-                    label={tab.label}
-                />
-            ))}
+            {tabs.map((tab) => {
+                const isVisible = getEditorPredicate(tab.visible, editor, true);
+                if (!isVisible)
+                    return null;
+
+                return (
+                    <Tab
+                        key={tab.name}
+                        value={tab.name}
+                        onClick={handleTabClick(tab.name)}
+                        label={
+                            <RibbonAccessKeyTip accessKey={tab.accessKey} target="ribbon">
+                                {tab.label}
+                            </RibbonAccessKeyTip>
+                        }
+                        className={
+                            clsx(
+                                ribbonTabClasses.root,
+                                open && name === tab.name && ribbonTabClasses.active
+                            )
+                        }
+                    />
+                );
+            })}
         </Tabs>
     );
 };
