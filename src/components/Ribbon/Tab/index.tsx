@@ -49,7 +49,12 @@ export const RibbonTab = ({ editor: _editor, name, label, visible, accessKey }: 
                     {label}
                 </RibbonAccessKeyTip>
             }
-            className={clsx(ribbonTabClasses.root, open && tabName === name && ribbonTabClasses.active)}
+            className={
+                clsx(
+                    ribbonTabClasses.root,
+                    open && tabName === name && ribbonTabClasses.active
+                )
+            }
         />
     );
 };

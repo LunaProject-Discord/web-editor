@@ -1,6 +1,6 @@
 'use client';
 
-import { Tabs, TabsActions } from '@mui/material';
+import { Tab, Tabs, TabsActions } from '@mui/material';
 import React, { useCallback } from 'react';
 import { EditorComponentProps, RibbonTab, useCurrentEditor, useRibbonTabContext } from '../../../';
 
@@ -31,13 +31,10 @@ export const RibbonTabs = ({ editor: _editor }: RibbonTabsProps) => {
             sx={{ border: 'none' }}
         >
             {tabs.map((tab) => (
-                <RibbonTab
+                <Tab
                     key={tab.name}
-                    editor={_editor}
-                    name={tab.name}
+                    value={tab.name}
                     label={tab.label}
-                    accessKey={tab.accessKey}
-                    visible={tab.visible}
                 />
             ))}
         </Tabs>
