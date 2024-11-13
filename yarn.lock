@@ -484,6 +484,7 @@ __metadata:
     "@mui/lab": "npm:^6.0.0-beta.8"
     "@mui/material": "npm:^6.0.2"
     "@tiptap/core": "npm:^2.7.2"
+    "@tiptap/extension-blockquote": "npm:2.9.1"
     "@tiptap/extension-bold": "npm:^2.7.2"
     "@tiptap/extension-bubble-menu": "npm:^2.7.2"
     "@tiptap/extension-bullet-list": "npm:^2.7.2"
@@ -960,6 +961,15 @@ __metadata:
   peerDependencies:
     "@tiptap/pm": ^2.7.0
   checksum: 10c0/400dba50b7dda98d10eb0ca1b5a45981cee28752bbe1d0b989075b2fb7699d74f41e2a910965bb607d3fc17d49aa3745e558a784cdac18b7abc4a92a1ae5debe
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-blockquote@npm:2.9.1":
+  version: 2.9.1
+  resolution: "@tiptap/extension-blockquote@npm:2.9.1"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+  checksum: 10c0/d672f67ba5ba12fec2cf60d0aecfc2120f129564aa2f5f7b86daacb041219ac8419b19883976f6b2252e148d0d0c83caed3b5a35d593b808a6c4cb33ac6fc929
   languageName: node
   linkType: hard
 

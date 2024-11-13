@@ -10,7 +10,7 @@ export const StrikeCommand: EditorCommand = {
     icon: FormatStrikethroughOutlined,
     label: '取り消し線',
     description: '選択したテキストの取り消し線の状態を切り替えます。',
-    keywords: ['strike', 'strikethrough', '取り消し線'],
+    keywords: ['strike', 'through', 'strikethrough', '取り消し線'],
     disabled: ({ editor }) => !editor.can().toggleStrike(),
     selected: ({ editor }) => editor.isActive('strike'),
     perform: ({ editor }) => editor.chain().focus().toggleStrike().run()

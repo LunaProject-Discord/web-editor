@@ -1,4 +1,5 @@
 import { Extension, Extensions } from '@tiptap/core';
+import { BlockquoteOptions } from '@tiptap/extension-blockquote';
 import { BoldOptions } from '@tiptap/extension-bold';
 import { BulletListOptions } from '@tiptap/extension-bullet-list';
 import { CodeOptions } from '@tiptap/extension-code';
@@ -24,6 +25,7 @@ import { TaskListOptions } from '@tiptap/extension-task-list';
 import { TextAlignOptions } from '@tiptap/extension-text-align';
 import { UnderlineOptions } from '@tiptap/extension-underline';
 import {
+    BlockquoteExtension,
     BoldExtension,
     BulletListExtension,
     CodeExtension,
@@ -68,6 +70,7 @@ export interface StarterKitOptions {
     tableRow?: Partial<TableRowOptions> | false;
     tableCell?: Partial<TableCellOptions> | false;
     tableHeader?: Partial<TableHeaderOptions> | false;
+    blockquote?: Partial<BlockquoteOptions> | false;
     image?: Partial<ImageOptions> | false;
 
     bold?: Partial<BoldOptions> | false;
@@ -105,6 +108,7 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
             tableRow: undefined,
             tableCell: undefined,
             tableHeader: undefined,
+            blockquote: undefined,
             image: undefined,
 
             bold: undefined,
@@ -154,6 +158,8 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
             extensions.push(TableCellExtension.configure(this.options?.tableCell));
         if (this.options.tableHeader !== false)
             extensions.push(TableHeaderExtension.configure(this.options?.tableHeader));
+        if (this.options.blockquote !== false)
+            extensions.push(BlockquoteExtension.configure(this.options?.blockquote));
         if (this.options.image !== false)
             extensions.push(ImageExtension.configure(this.options?.image));
 
