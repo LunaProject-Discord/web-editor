@@ -7,7 +7,6 @@ import { DropcursorOptions } from '@tiptap/extension-dropcursor';
 import { HardBreakOptions } from '@tiptap/extension-hard-break';
 import { HeadingOptions } from '@tiptap/extension-heading';
 import { HistoryOptions } from '@tiptap/extension-history';
-import { ImageOptions } from '@tiptap/extension-image';
 import { ItalicOptions } from '@tiptap/extension-italic';
 import { LinkOptions } from '@tiptap/extension-link';
 import { ListItemOptions } from '@tiptap/extension-list-item';
@@ -25,9 +24,11 @@ import { TaskListOptions } from '@tiptap/extension-task-list';
 import { TextAlignOptions } from '@tiptap/extension-text-align';
 import { UnderlineOptions } from '@tiptap/extension-underline';
 import {
+    AudioExtension,
+    AudioOptions,
     BlockquoteExtension,
     BoldExtension,
-    BulletListExtension,
+    BulletListExtension, CodeBlockExtension, CodeBlockOptions,
     CodeExtension,
     DocumentExtension,
     DropcursorExtension,
@@ -36,6 +37,7 @@ import {
     HeadingExtension,
     HistoryExtension,
     ImageExtension,
+    ImageOptions,
     ItalicExtension,
     LinkExtension,
     ListItemExtension,
@@ -52,15 +54,16 @@ import {
     TaskListExtension,
     TextAlignExtension,
     TextExtension,
-    UnderlineExtension
+    UnderlineExtension, VideoExtension,
+    VideoOptions
 } from '..';
 
 export interface StarterKitOptions {
     document?: false;
     text?: false;
 
-    heading?: Partial<HeadingOptions> | false;
     paragraph?: Partial<ParagraphOptions> | false;
+    heading?: Partial<HeadingOptions> | false;
     bulletList?: Partial<BulletListOptions> | false;
     orderedList?: Partial<OrderedListOptions> | false;
     listItem?: Partial<ListItemOptions> | false;
@@ -72,6 +75,9 @@ export interface StarterKitOptions {
     tableHeader?: Partial<TableHeaderOptions> | false;
     blockquote?: Partial<BlockquoteOptions> | false;
     image?: Partial<ImageOptions> | false;
+    video?: Partial<VideoOptions> | false;
+    audio?: Partial<AudioOptions> | false;
+    codeBlock?: Partial<CodeBlockOptions> | false;
 
     bold?: Partial<BoldOptions> | false;
     italic?: Partial<ItalicOptions> | false;
@@ -97,8 +103,8 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
             document: undefined,
             text: undefined,
 
-            heading: undefined,
             paragraph: undefined,
+            heading: undefined,
             bulletList: undefined,
             orderedList: undefined,
             listItem: undefined,
@@ -110,6 +116,9 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
             tableHeader: undefined,
             blockquote: undefined,
             image: undefined,
+            video: undefined,
+            audio: undefined,
+            codeBlock: undefined,
 
             bold: undefined,
             italic: undefined,
@@ -136,10 +145,10 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
         if (this.options.text !== false)
             extensions.push(TextExtension.configure(this.options?.text));
 
-        if (this.options.heading !== false)
-            extensions.push(HeadingExtension.configure(this.options?.heading));
         if (this.options.paragraph !== false)
             extensions.push(ParagraphExtension.configure(this.options?.paragraph));
+        if (this.options.heading !== false)
+            extensions.push(HeadingExtension.configure(this.options?.heading));
         if (this.options.bulletList !== false)
             extensions.push(BulletListExtension.configure(this.options?.bulletList));
         if (this.options.orderedList !== false)
@@ -162,6 +171,12 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
             extensions.push(BlockquoteExtension.configure(this.options?.blockquote));
         if (this.options.image !== false)
             extensions.push(ImageExtension.configure(this.options?.image));
+        if (this.options.video !== false)
+            extensions.push(VideoExtension.configure(this.options?.video));
+        if (this.options.audio !== false)
+            extensions.push(AudioExtension.configure(this.options?.audio));
+        if (this.options.codeBlock !== false)
+            extensions.push(CodeBlockExtension.configure(this.options?.codeBlock));
 
         if (this.options.bold !== false)
             extensions.push(BoldExtension.configure(this.options?.bold));

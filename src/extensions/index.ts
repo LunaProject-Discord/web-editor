@@ -1,7 +1,9 @@
+export * from './audio';
 export * from './blockquote';
 export * from './bold';
 export * from './bullet_list';
 export * from './code';
+export * from './code_block';
 export * from './document';
 export * from './dropcursor';
 export * from './gapcursor';
@@ -27,3 +29,4 @@ export * from './task_list';
 export * from './text';
 export * from './text_align';
 export * from './underline';
+export * from './video';

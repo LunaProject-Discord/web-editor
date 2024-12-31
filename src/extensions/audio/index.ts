@@ -1,21 +1,27 @@
 import { mergeAttributes, Node } from '@tiptap/core';
 
-export const ImageElementType = 'img';
+export const AudioElementType = 'audio';
 
-export interface ImageOptions {
+export interface AudioOptions {
     HTMLAttributes: Record<string, any>;
 }
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        image: {
-            setImage: (options: { src: string, alt?: string, caption?: string }) => ReturnType;
+        audio: {
+            setAudio: (options: {
+                src: string,
+                controls?: boolean,
+                loop?: boolean,
+                muted?: boolean,
+                caption?: string
+            }) => ReturnType;
         };
     }
 }
 
-export const ImageExtension = Node.create<ImageOptions>({
-    name: 'image',
+export const AudioExtension = Node.create<AudioOptions>({
+    name: 'audio',
 
     group: 'block',
 
@@ -37,7 +43,7 @@ export const ImageExtension = Node.create<ImageOptions>({
 
     addCommands() {
         return {
-            setImage: ({ caption, ...options }) => ({ commands }) => {
+            setAudio: ({ caption, ...options }) => ({ commands }) => {
                 return commands.insertContent({
                     type: this.name,
                     attrs: options,
@@ -52,8 +58,14 @@ export const ImageExtension = Node.create<ImageOptions>({
             src: {
                 default: null
             },
-            alt: {
-                default: null
+            controls: {
+                default: true
+            },
+            loop: {
+                default: false
+            },
+            muted: {
+                default: false
             }
         };
     },
@@ -61,13 +73,13 @@ export const ImageExtension = Node.create<ImageOptions>({
     parseHTML() {
         return [
             {
-                tag: `${ImageElementType}[src]`
+                tag: `${AudioElementType}[src]`
             },
             {
                 tag: 'figure',
                 getAttrs: (element) => {
                     const firstElementChild = element.firstElementChild;
-                    if (!firstElementChild || firstElementChild.tagName !== ImageElementType.toUpperCase() || !firstElementChild.hasAttribute('src'))
+                    if (!firstElementChild || firstElementChild.tagName !== AudioElementType.toUpperCase() || !firstElementChild.hasAttribute('src'))
                         return false;
 
                     const lastElementChild = element.lastElementChild;
@@ -76,7 +88,9 @@ export const ImageExtension = Node.create<ImageOptions>({
 
                     return {
                         src: firstElementChild.getAttribute('src'),
-                        alt: firstElementChild.getAttribute('alt')
+                        controls: firstElementChild.hasAttribute('controls') && Boolean(firstElementChild.getAttribute('controls')),
+                        loop: firstElementChild.hasAttribute('loop') && Boolean(firstElementChild.getAttribute('loop')),
+                        muted: firstElementChild.hasAttribute('muted') && Boolean(firstElementChild.getAttribute('muted'))
                     };
                 }
             }
@@ -84,7 +98,15 @@ export const ImageExtension = Node.create<ImageOptions>({
     },
 
     renderHTML({ node, HTMLAttributes }) {
-        const attrs = mergeAttributes(this.options.HTMLAttributes, HTMLAttributes);
+        const { src, controls, loop, muted } = mergeAttributes(this.options.HTMLAttributes, HTMLAttributes);
+
+        const attrs: Record<string, any> = { src };
+        if (controls)
+            attrs.controls = true;
+        if (loop)
+            attrs.loop = true;
+        if (muted)
+            attrs.muted = true;
 
         if (this.editor && !this.editor.isEditable) {
             if (node.textContent.length > 0) {
@@ -92,7 +114,7 @@ export const ImageExtension = Node.create<ImageOptions>({
                     'figure',
                     {},
                     [
-                        ImageElementType,
+                        AudioElementType,
                         attrs
                     ],
                     [
@@ -103,7 +125,7 @@ export const ImageExtension = Node.create<ImageOptions>({
                 ];
             } else {
                 return [
-                    ImageElementType,
+                    AudioElementType,
                     attrs
                 ];
             }
@@ -113,7 +135,7 @@ export const ImageExtension = Node.create<ImageOptions>({
             'figure',
             {},
             [
-                ImageElementType,
+                AudioElementType,
                 attrs
             ],
             [
@@ -133,7 +155,6 @@ export const ImageExtension = Node.create<ImageOptions>({
                     return false;
 
                 if (currentNodePos.to - currentNodePos.pos === 1) {
-                    // 要素の終端にカーソルがある場合、新しい段落を挿入する
                     return editor
                         .chain()
                         .insertContentAt(
@@ -260,9 +281,6 @@ export const ImageExtension = Node.create<ImageOptions>({
 
                             const pos = view.posAtDOM(target, 0);
                             const resolvedPos = view.state.doc.resolve(pos);
-
-                            console.log({ target, pos, resolvedPos });
-
                             if (resolvedPos.parent.type !== this.type)
                                 return;
 
