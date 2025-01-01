@@ -423,9 +423,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lunaproject/web-core@npm:^2.0.0-beta.13":
-  version: 2.0.0-beta.13
-  resolution: "@lunaproject/web-core@npm:2.0.0-beta.13"
+"@lunaproject/web-core@npm:^2.0.0-beta.15":
+  version: 2.0.0-beta.15
+  resolution: "@lunaproject/web-core@npm:2.0.0-beta.15"
   dependencies:
     "@types/color": "npm:^3.0.6"
     "@types/deep-equal": "npm:^1.0.4"
@@ -433,7 +433,7 @@ __metadata:
     date-fns: "npm:^3.6.0"
     deep-equal: "npm:^2.2.3"
     deepmerge: "npm:^4.3.1"
-    jotai: "npm:^2.9.3"
+    jotai: "npm:^2.11.0"
     nookies: "npm:^2.5.2"
     polished: "npm:^4.3.1"
     react-spring-bottom-sheet: "npm:^3.4.1"
@@ -458,7 +458,7 @@ __metadata:
       optional: true
     "@types/react-dom":
       optional: true
-  checksum: 10c0/67bedeb5e43608b9d2335cb22150ce9982d35576a05ee351a037ecf326350b5208073efdeecbe724c0731ee14a8eaad68d13e2399d7dd103c587d2c66ec39aa6
+  checksum: 10c0/1f1a7ab2c14d049f68643005f363556a51cb4baf711832ae1e75e6b32e9364d906f0ce7bf92db5002d12de79e46f283295badbb5978b774deec5e7c2118558a4
   languageName: node
   linkType: hard
 
@@ -468,7 +468,7 @@ __metadata:
   dependencies:
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
-    "@lunaproject/web-core": "npm:^2.0.0-beta.13"
+    "@lunaproject/web-core": "npm:^2.0.0-beta.15"
     "@mui/icons-material": "npm:^6.0.2"
     "@mui/lab": "npm:^6.0.0-beta.8"
     "@mui/material": "npm:^6.0.2"
@@ -511,21 +511,21 @@ __metadata:
     "@tiptap/react": "npm:^2.11.0"
     "@types/mousetrap": "npm:^1.6.15"
     "@types/node": "npm:~20.11.30"
-    "@types/react": "npm:^18.3.10"
-    "@types/react-dom": "npm:^18.3.0"
-    eslint: "npm:8.57.1"
-    eslint-config-next: "npm:14.2.22"
+    "@types/react": "npm:^18.3.18"
+    "@types/react-dom": "npm:^18.3.5"
+    eslint: "npm:^8.57.1"
+    eslint-config-next: "npm:^14.2.22"
     mousetrap: "npm:^1.6.5"
     next: "npm:^14.2.22"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     shiki: "npm:^1.24.4"
     tiptap-extension-code-block-shiki: "npm:^0.4.0"
-    typescript: "npm:^5.5.3"
+    typescript: "npm:^5.7.2"
   peerDependencies:
     "@emotion/react": ^11.13.0
     "@emotion/styled": ^11.13.0
-    "@lunaproject/web-core": ^2.0.0-beta.13
+    "@lunaproject/web-core": ^2.0.0-beta.15
     "@mui/icons-material": ^6.0.0
     "@mui/lab": ^6.0.0-beta.8
     "@mui/material": ^6.0.0
@@ -1496,7 +1496,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.3.0":
+"@types/react-dom@npm:^18.3.5":
   version: 18.3.5
   resolution: "@types/react-dom@npm:18.3.5"
   peerDependencies:
@@ -1514,7 +1514,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.3.10":
+"@types/react@npm:^18.3.18":
   version: 18.3.18
   resolution: "@types/react@npm:18.3.18"
   dependencies:
@@ -2524,7 +2524,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:14.2.22":
+"eslint-config-next@npm:^14.2.22":
   version: 14.2.22
   resolution: "eslint-config-next@npm:14.2.22"
   dependencies:
@@ -2711,7 +2711,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.57.1":
+"eslint@npm:^8.57.1":
   version: 8.57.1
   resolution: "eslint@npm:8.57.1"
   dependencies:
@@ -3545,7 +3545,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai@npm:^2.9.3":
+"jotai@npm:^2.11.0":
   version: 2.11.0
   resolution: "jotai@npm:2.11.0"
   peerDependencies:
@@ -5287,7 +5287,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.5.3":
+"typescript@npm:^5.7.2":
   version: 5.7.2
   resolution: "typescript@npm:5.7.2"
   bin:
@@ -5297,7 +5297,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.5.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.7.2#optional!builtin<compat/typescript>":
   version: 5.7.2
   resolution: "typescript@patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"
   bin:
