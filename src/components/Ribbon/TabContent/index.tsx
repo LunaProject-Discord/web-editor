@@ -33,28 +33,37 @@ export const RibbonTabContentRoot = styled(
     ))
 )(({ theme }) => ({
     minHeight: theme.spacing(6),
-    position: 'relative',
+    // position: 'relative',
     display: 'flex',
     alignItems: 'center',
     gap: theme.spacing(2),
+    whiteSpace: 'nowrap',
     overflowX: 'auto',
     overflowY: 'hidden',
     scrollbarWidth: 'none',
     '&::-webkit-scrollbar': {
         display: 'none'
     },
+    [`&:has(.${ribbonTabContentClasses.scrollButtonLeft})`]: {
+        marginLeft: theme.spacing(-(5 + 2))
+    },
+    [`&:has(.${ribbonTabContentClasses.scrollButtonRight})`]: {
+        marginRight: theme.spacing(-(5 + 2))
+    },
     [`& .${ribbonTabContentClasses.scrollButtonLeft}`]: {
-        left: 0,
+        // ボタン幅: 40px + マージン: 16px
+        left: theme.spacing(5 + 2),
         display: 'flex'
     },
     [`& .${ribbonTabContentClasses.scrollButtonRight}`]: {
-        right: 0,
+        // ボタン幅: 40px + マージン: 16px
+        right: theme.spacing(5 + 2),
         display: 'flex'
     }
 }));
 
 export const RibbonTabContentScrollButtonRoot = styled(Box)({
-    position: 'absolute',
+    position: 'sticky',
     top: 0,
     bottom: 0,
     display: 'none',
