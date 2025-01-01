@@ -1,9 +1,9 @@
 'use client';
 
-import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
-import { Box, BoxProps, styled } from '@mui/material';
+import { ConfigContext, generateComponentClasses } from '@lunaproject/web-core/dist/utils';
+import { Box, BoxProps, IconButton, styled } from '@mui/material';
 import clsx from 'clsx';
-import React from 'react';
+import React, { forwardRef, useCallback, useContext, useMemo, useRef } from 'react';
 import {
     EditorComponentProps,
     EditorRibbonTab,
@@ -16,27 +16,87 @@ import {
 export const ribbonTabContentClasses = generateComponentClasses(
     'RibbonTabContent',
     [
-        'root'
+        'root',
+        'scrollButtonLeft',
+        'scrollButtonRight'
     ]
 );
 
 export const RibbonTabContentRoot = styled(
-    ({ className, ...props }: BoxProps) => (
+    // eslint-disable-next-line react/display-name
+    forwardRef<HTMLDivElement, BoxProps>(({ className, ...props }, ref) => (
         <Box
+            ref={ref}
             className={clsx(ribbonTabContentClasses.root, className)}
             {...props}
         />
-    )
+    ))
 )(({ theme }) => ({
     minHeight: theme.spacing(6),
+    position: 'relative',
     display: 'flex',
     alignItems: 'center',
-    gap: theme.spacing(2)
+    gap: theme.spacing(2),
+    overflowX: 'auto',
+    overflowY: 'hidden',
+    scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+        display: 'none'
+    },
+    [`& .${ribbonTabContentClasses.scrollButtonLeft}`]: {
+        left: 0,
+        display: 'flex'
+    },
+    [`& .${ribbonTabContentClasses.scrollButtonRight}`]: {
+        right: 0,
+        display: 'flex'
+    }
 }));
+
+export const RibbonTabContentScrollButtonRoot = styled(Box)({
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    display: 'none',
+    placeItems: 'center',
+    placeContent: 'center'
+});
 
 export type RibbonTabContentProps = EditorComponentProps & Pick<EditorRibbonTab, 'name' | 'visible' | 'content'>;
 
 export const RibbonTabContent = ({ editor: _editor, name, visible, content }: RibbonTabContentProps) => {
+    const { icons: { KeyboardArrowLeft, KeyboardArrowRight } } = useContext(ConfigContext);
+
+    const ref = useRef<HTMLDivElement | null>(null);
+    const element = ref.current;
+
+    const hasScrollLeft = useMemo(() => {
+        if (!element)
+            return false;
+
+        return element.scrollWidth > element.clientWidth && element.scrollLeft > 0;
+    }, [element]);
+    const hasScrollRight = useMemo(() => {
+        if (!element)
+            return false;
+
+        return element.scrollWidth > element.clientWidth && element.scrollLeft < (element.scrollWidth - element.clientWidth);
+    }, [element]);
+
+    const handleScrollLeftButtonClick = useCallback(() => {
+        if (!element)
+            return;
+
+        element.scrollLeft -= 100;
+    }, [element]);
+
+    const handleScrollRightButtonClick = useCallback(() => {
+        if (!element)
+            return;
+
+        element.scrollLeft += 100;
+    }, [element]);
+
     const editor = useCurrentEditor(_editor);
     if (!editor)
         return null;
@@ -46,7 +106,12 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
         return null;
 
     return (
-        <RibbonTabContentRoot>
+        <RibbonTabContentRoot ref={ref}>
+            {hasScrollLeft && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonLeft}>
+                <IconButton onClick={handleScrollLeftButtonClick}>
+                    <KeyboardArrowLeft />
+                </IconButton>
+            </RibbonTabContentScrollButtonRoot>}
             {content.map((item, i) => {
                 switch (item.type) {
                     case 'divider':
@@ -57,6 +122,11 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
                         return (<RibbonGroup key={item.name} tabName={name} {...item} editor={_editor} />);
                 }
             })}
+            {hasScrollRight && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonRight}>
+                <IconButton onClick={handleScrollRightButtonClick}>
+                    <KeyboardArrowRight />
+                </IconButton>
+            </RibbonTabContentScrollButtonRoot>}
         </RibbonTabContentRoot>
     );
 };

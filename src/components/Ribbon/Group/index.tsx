@@ -60,7 +60,7 @@ export const RibbonGroupLabel = styled(
 )(({ theme }) => ({
     padding: theme.spacing(0, .5),
     position: 'absolute',
-    bottom: theme.spacing(-2),
+    bottom: 0,
     left: '50%',
     display: 'none',
     fontSize: theme.typography.body2.fontSize,

@@ -5,6 +5,7 @@ export * from './Divider';
 export * from './DropdownButton';
 export * from './Group';
 export * from './GroupDivider';
+export * from './Header';
 export * from './Tab';
 export * from './TabContent';
 export * from './TabPanel';
