@@ -38,11 +38,5 @@
     "include": [
         "next-env.d.ts",
         "src/**/*"
-    ],
-    "ts-node": {
-        "compilerOptions": {
-            "module": "commonjs",
-            "target": "es5"
-        }
-    }
+    ]
 }
