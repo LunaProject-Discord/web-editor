@@ -3,7 +3,7 @@
 import { ConfigContext, generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { Box, BoxProps, IconButton, styled } from '@mui/material';
 import clsx from 'clsx';
-import React, { forwardRef, useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import React, { forwardRef, useCallback, useContext, useRef } from 'react';
 import {
     EditorComponentProps,
     EditorRibbonTab,
@@ -78,28 +78,19 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
 
     const ref = useRef<HTMLDivElement | null>(null);
     const element = ref.current;
+    const elementClientWidth = element?.clientWidth ?? 0;
+    const elementScrollWidth = element?.scrollWidth ?? 0;
+    const elementScrollLeft = element?.scrollLeft ?? 0;
 
-    useEffect(() => {
-        console.log({
-            element,
-            scrollWidth: element?.scrollWidth,
-            clientWidth: element?.clientWidth,
-            scrollLeft: element?.scrollLeft
-        });
-    }, [content, element, element?.scrollWidth, element?.clientWidth, element?.scrollLeft]);
+    console.log({
+        element,
+        elementClientWidth,
+        elementScrollWidth,
+        elementScrollLeft
+    });
 
-    const hasScrollLeft = useMemo(() => {
-        if (!element)
-            return false;
-
-        return element.scrollWidth > element.clientWidth && element.scrollLeft > 0;
-    }, [content, element, element?.scrollWidth, element?.clientWidth, element?.scrollLeft]);
-    const hasScrollRight = useMemo(() => {
-        if (!element)
-            return false;
-
-        return element.scrollWidth > element.clientWidth && element.scrollLeft < (element.scrollWidth - element.clientWidth);
-    }, [content, element, element?.scrollWidth, element?.clientWidth, element?.scrollLeft]);
+    const hasScrollLeft = elementScrollWidth > elementClientWidth && elementScrollLeft > 0;
+    const hasScrollRight = elementScrollWidth > elementClientWidth && elementScrollLeft < (elementScrollWidth - elementClientWidth);
 
     const handleScrollLeftButtonClick = useCallback(() => {
         if (!element)
