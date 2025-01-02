@@ -3,7 +3,7 @@
 import { ConfigContext, generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { Box, BoxProps, IconButton, styled } from '@mui/material';
 import clsx from 'clsx';
-import React, { forwardRef, useCallback, useContext, useEffect, useRef } from 'react';
+import React, { forwardRef, useCallback, useContext, useEffect, useMemo, useRef } from 'react';
 import {
     EditorComponentProps,
     EditorRibbonTab,
@@ -78,20 +78,20 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
 
     const ref = useRef<HTMLDivElement | null>(null);
 
-    const hasScrollLeft = () => {
-        const element = document.querySelector(`.${ribbonTabContentClasses.root}`);
+    const hasScrollLeft = useMemo(() => {
+        const element = ref.current;
         if (!element)
             return false;
 
         return element.scrollWidth > element.clientWidth && element.scrollLeft > 0;
-    };
-    const hasScrollRight = () => {
+    }, [name, visible, content, ref]);
+    const hasScrollRight = useMemo(() => {
         const element = ref.current;
         if (!element)
             return false;
 
         return element.scrollWidth > element.clientWidth && element.scrollLeft < (element.scrollWidth - element.clientWidth);
-    };
+    }, [name, visible, content, ref]);
 
     const handleScrollLeftButtonClick = useCallback(() => {
         const element = ref.current;
@@ -109,12 +109,8 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
         element.scrollLeft += 100;
     }, []);
 
-    useEffect(() => {
-        console.log({
-            hasScrollLeft: hasScrollLeft(),
-            hasScrollRight: hasScrollRight()
-        });
-    }, [name, visible, content, ref]);
+    useEffect(() => console.log('hasScrollLeft', hasScrollLeft), [hasScrollLeft]);
+    useEffect(() => console.log('hasScrollRight', hasScrollRight), [hasScrollRight]);
 
     const editor = useCurrentEditor(_editor);
     if (!editor)
@@ -126,7 +122,7 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
 
     return (
         <RibbonTabContentRoot ref={ref}>
-            {hasScrollLeft() && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonLeft}>
+            {hasScrollLeft && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonLeft}>
                 <IconButton onClick={handleScrollLeftButtonClick}>
                     <KeyboardArrowLeft />
                 </IconButton>
@@ -141,7 +137,7 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
                         return (<RibbonGroup key={item.name} tabName={name} {...item} editor={_editor} />);
                 }
             })}
-            {hasScrollRight() && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonRight}>
+            {hasScrollRight && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonRight}>
                 <IconButton onClick={handleScrollRightButtonClick}>
                     <KeyboardArrowRight />
                 </IconButton>
