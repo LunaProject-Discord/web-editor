@@ -45,24 +45,24 @@ export const RibbonTabContentRoot = styled(
         display: 'none'
     },
     [`&:has(.${ribbonTabContentClasses.scrollButtonLeft})`]: {
-        marginLeft: theme.spacing(-(5 + 2))
+        marginLeft: theme.spacing(-9)
     },
     [`&:has(.${ribbonTabContentClasses.scrollButtonRight})`]: {
-        marginRight: theme.spacing(-(5 + 2))
+        marginRight: theme.spacing(-9)
     },
     [`& .${ribbonTabContentClasses.scrollButtonLeft}`]: {
-        // ボタン幅: 40px + パディング: 16px + マージン: 16px
-        paddingLeft: theme.spacing(2),
-        left: theme.spacing(5 + 2 + 2),
+        paddingLeft: theme.spacing(.5),
+        paddingRight: theme.spacing(2),
+        left: theme.spacing(8.5),
         display: 'flex',
-        background: `linear-gradient(to right, ${theme.palette.background.paper} 50%, transparent)`
+        background: `linear-gradient(to right, ${theme.palette.background.paper} ${theme.spacing(5.5)}, transparent)`
     },
     [`& .${ribbonTabContentClasses.scrollButtonRight}`]: {
-        // ボタン幅: 40px + パディング: 16px + マージン: 16px
         paddingLeft: theme.spacing(2),
-        right: theme.spacing(5 + 2 + 2),
+        paddingRight: theme.spacing(.5),
+        right: theme.spacing(8.5),
         display: 'flex',
-        background: `linear-gradient(to left, ${theme.palette.background.paper} 50%, transparent)`
+        background: `linear-gradient(to left, ${theme.palette.background.paper} ${theme.spacing(5.5)}, transparent)`
     }
 }));
 
@@ -100,7 +100,10 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
         if (!element)
             return;
 
-        element.scrollLeft -= 100;
+        element.scrollBy({
+            left: -100,
+            behavior: 'smooth'
+        });
     }, []);
 
     const handleScrollRightButtonClick = useCallback(() => {
@@ -108,7 +111,10 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
         if (!element)
             return;
 
-        element.scrollLeft += 100;
+        element.scrollBy({
+            left: 100,
+            behavior: 'smooth'
+        });
     }, []);
 
     useEffect(() => {
