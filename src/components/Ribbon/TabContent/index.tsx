@@ -119,10 +119,9 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
 
     useEffect(() => {
         updateScrollStatus();
-        console.log({
-            allowScrollLeft,
-            allowScrollRight
-        });
+
+        window.addEventListener('resize', updateScrollStatus);
+        return () => window.removeEventListener('resize', updateScrollStatus);
     }, [name, visible, content, updateScrollStatus]);
 
     const editor = useCurrentEditor(_editor);
