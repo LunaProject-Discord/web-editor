@@ -3,7 +3,7 @@
 import { ConfigContext, generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { Box, BoxProps, IconButton, styled } from '@mui/material';
 import clsx from 'clsx';
-import React, { forwardRef, useCallback, useContext, useMemo, useRef } from 'react';
+import React, { forwardRef, useCallback, useContext, useRef } from 'react';
 import {
     EditorComponentProps,
     EditorRibbonTab,
@@ -78,6 +78,13 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
 
     const ref = useRef<HTMLDivElement | null>(null);
     const element = ref.current;
+
+    console.log({
+        element,
+        scrollWidth: element?.scrollWidth,
+        clientWidth: element?.clientWidth,
+        scrollLeft: element?.scrollLeft
+    });
 
     const hasScrollLeft = element !== null && element.scrollWidth > element.clientWidth && element.scrollLeft > 0;
     const hasScrollRight = element !== null && element.scrollWidth > element.clientWidth && element.scrollLeft < (element.scrollWidth - element.clientWidth);

@@ -60,18 +60,20 @@ export const RibbonGroupLabel = styled(
 )(({ theme }) => ({
     padding: theme.spacing(0, .5),
     position: 'absolute',
-    bottom: 0,
+    bottom: theme.spacing(-.75),
     left: '50%',
     display: 'none',
-    fontSize: theme.typography.body2.fontSize,
-    lineHeight: 'normal',
+    fontSize: theme.typography.caption.fontSize,
+    lineHeight: theme.typography.caption.lineHeight,
     whiteSpace: 'nowrap',
     userSelect: 'none',
     zIndex: 1,
     transform: 'translateX(-50%)',
     color: (theme.vars || theme).palette.text.secondary,
     backgroundColor: (theme.vars || theme).palette.background.paper,
-    borderRadius: theme.spacing(.5),
+    borderTopLeftRadius: theme.shape.borderRadius,
+    borderTopRightRadius: theme.shape.borderRadius,
+    borderBottom: 'none',
     ...borderAndBoxShadow(theme)
 }));
 
