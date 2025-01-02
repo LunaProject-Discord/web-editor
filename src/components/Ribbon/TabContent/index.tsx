@@ -79,18 +79,8 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
     const ref = useRef<HTMLDivElement | null>(null);
     const element = ref.current;
 
-    const hasScrollLeft = useMemo(() => {
-        if (!element)
-            return false;
-
-        return element.scrollWidth > element.clientWidth && element.scrollLeft > 0;
-    }, [element]);
-    const hasScrollRight = useMemo(() => {
-        if (!element)
-            return false;
-
-        return element.scrollWidth > element.clientWidth && element.scrollLeft < (element.scrollWidth - element.clientWidth);
-    }, [element]);
+    const hasScrollLeft = element !== null && element.scrollWidth > element.clientWidth && element.scrollLeft > 0;
+    const hasScrollRight = element !== null && element.scrollWidth > element.clientWidth && element.scrollLeft < (element.scrollWidth - element.clientWidth);
 
     const handleScrollLeftButtonClick = useCallback(() => {
         if (!element)
