@@ -3,7 +3,7 @@
 import { ConfigContext, generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { Box, BoxProps, IconButton, styled } from '@mui/material';
 import clsx from 'clsx';
-import React, { forwardRef, useCallback, useContext, useRef } from 'react';
+import React, { forwardRef, useCallback, useContext, useEffect, useRef } from 'react';
 import {
     EditorComponentProps,
     EditorRibbonTab,
@@ -77,34 +77,44 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
     const { icons: { KeyboardArrowLeft, KeyboardArrowRight } } = useContext(ConfigContext);
 
     const ref = useRef<HTMLDivElement | null>(null);
-    const element = ref.current;
-    const elementClientWidth = element?.clientWidth ?? 0;
-    const elementScrollWidth = element?.scrollWidth ?? 0;
-    const elementScrollLeft = element?.scrollLeft ?? 0;
 
-    console.log({
-        element,
-        elementClientWidth,
-        elementScrollWidth,
-        elementScrollLeft
-    });
+    const hasScrollLeft = () => {
+        const element = document.querySelector(`.${ribbonTabContentClasses.root}`);
+        if (!element)
+            return false;
 
-    const hasScrollLeft = elementScrollWidth > elementClientWidth && elementScrollLeft > 0;
-    const hasScrollRight = elementScrollWidth > elementClientWidth && elementScrollLeft < (elementScrollWidth - elementClientWidth);
+        return element.scrollWidth > element.clientWidth && element.scrollLeft > 0;
+    };
+    const hasScrollRight = () => {
+        const element = ref.current;
+        if (!element)
+            return false;
+
+        return element.scrollWidth > element.clientWidth && element.scrollLeft < (element.scrollWidth - element.clientWidth);
+    };
 
     const handleScrollLeftButtonClick = useCallback(() => {
+        const element = ref.current;
         if (!element)
             return;
 
         element.scrollLeft -= 100;
-    }, [element]);
+    }, []);
 
     const handleScrollRightButtonClick = useCallback(() => {
+        const element = ref.current;
         if (!element)
             return;
 
         element.scrollLeft += 100;
-    }, [element]);
+    }, []);
+
+    useEffect(() => {
+        console.log({
+            hasScrollLeft: hasScrollLeft(),
+            hasScrollRight: hasScrollRight()
+        });
+    }, [name, visible, content, ref]);
 
     const editor = useCurrentEditor(_editor);
     if (!editor)
@@ -116,7 +126,7 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
 
     return (
         <RibbonTabContentRoot ref={ref}>
-            {hasScrollLeft && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonLeft}>
+            {hasScrollLeft() && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonLeft}>
                 <IconButton onClick={handleScrollLeftButtonClick}>
                     <KeyboardArrowLeft />
                 </IconButton>
@@ -131,7 +141,7 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
                         return (<RibbonGroup key={item.name} tabName={name} {...item} editor={_editor} />);
                 }
             })}
-            {hasScrollRight && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonRight}>
+            {hasScrollRight() && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonRight}>
                 <IconButton onClick={handleScrollRightButtonClick}>
                     <KeyboardArrowRight />
                 </IconButton>
