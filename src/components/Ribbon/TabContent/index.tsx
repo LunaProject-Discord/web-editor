@@ -51,14 +51,18 @@ export const RibbonTabContentRoot = styled(
         marginRight: theme.spacing(-(5 + 2))
     },
     [`& .${ribbonTabContentClasses.scrollButtonLeft}`]: {
-        // ボタン幅: 40px + マージン: 16px
-        left: theme.spacing(5 + 2),
-        display: 'flex'
+        // ボタン幅: 40px + パディング: 16px + マージン: 16px
+        paddingLeft: theme.spacing(2),
+        left: theme.spacing(5 + 2 + 2),
+        display: 'flex',
+        background: `linear-gradient(to right, ${theme.palette.background.paper} 50%, transparent)`
     },
     [`& .${ribbonTabContentClasses.scrollButtonRight}`]: {
-        // ボタン幅: 40px + マージン: 16px
-        right: theme.spacing(5 + 2),
-        display: 'flex'
+        // ボタン幅: 40px + パディング: 16px + マージン: 16px
+        paddingLeft: theme.spacing(2),
+        right: theme.spacing(5 + 2 + 2),
+        display: 'flex',
+        background: `linear-gradient(to left, ${theme.palette.background.paper} 50%, transparent)`
     }
 }));
 
@@ -68,7 +72,8 @@ export const RibbonTabContentScrollButtonRoot = styled(Box)({
     bottom: 0,
     display: 'none',
     placeItems: 'center',
-    placeContent: 'center'
+    placeContent: 'center',
+    zIndex: 1
 });
 
 export type RibbonTabContentProps = EditorComponentProps & Pick<EditorRibbonTab, 'name' | 'visible' | 'content'>;
@@ -96,8 +101,7 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
             return;
 
         element.scrollLeft -= 100;
-        updateScrollStatus();
-    }, [updateScrollStatus]);
+    }, []);
 
     const handleScrollRightButtonClick = useCallback(() => {
         const element = ref.current;
@@ -105,8 +109,7 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
             return;
 
         element.scrollLeft += 100;
-        updateScrollStatus();
-    }, [updateScrollStatus]);
+    }, []);
 
     useEffect(() => {
         updateScrollStatus();
@@ -125,7 +128,7 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
         return null;
 
     return (
-        <RibbonTabContentRoot ref={ref}>
+        <RibbonTabContentRoot ref={ref} onScroll={updateScrollStatus}>
             {allowScrollLeft && <RibbonTabContentScrollButtonRoot
                 className={ribbonTabContentClasses.scrollButtonLeft}
             >
