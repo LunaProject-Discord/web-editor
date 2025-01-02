@@ -3,7 +3,7 @@
 import { ConfigContext, generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { Box, BoxProps, IconButton, styled } from '@mui/material';
 import clsx from 'clsx';
-import React, { forwardRef, useCallback, useContext, useMemo, useRef } from 'react';
+import React, { forwardRef, useCallback, useContext, useEffect, useMemo, useRef } from 'react';
 import {
     EditorComponentProps,
     EditorRibbonTab,
@@ -79,12 +79,14 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
     const ref = useRef<HTMLDivElement | null>(null);
     const element = ref.current;
 
-    console.log({
-        element,
-        scrollWidth: element?.scrollWidth,
-        clientWidth: element?.clientWidth,
-        scrollLeft: element?.scrollLeft
-    });
+    useEffect(() => {
+        console.log({
+            element,
+            scrollWidth: element?.scrollWidth,
+            clientWidth: element?.clientWidth,
+            scrollLeft: element?.scrollLeft
+        });
+    }, [element, element?.scrollWidth, element?.clientWidth, element?.scrollLeft]);
 
     const hasScrollLeft = useMemo(() => {
         if (!element)
