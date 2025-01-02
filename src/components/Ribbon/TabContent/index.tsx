@@ -3,7 +3,7 @@
 import { ConfigContext, generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import { Box, BoxProps, IconButton, styled } from '@mui/material';
 import clsx from 'clsx';
-import React, { forwardRef, useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import React, { forwardRef, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import {
     EditorComponentProps,
     EditorRibbonTab,
@@ -78,20 +78,17 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
 
     const ref = useRef<HTMLDivElement | null>(null);
 
-    const hasScrollLeft = useMemo(() => {
+    const [allowScrollLeft, setAllowScrollLeft] = useState(false);
+    const [allowScrollRight, setAllowScrollRight] = useState(false);
+
+    const updateScrollStatus = useCallback(() => {
         const element = ref.current;
         if (!element)
-            return false;
+            return;
 
-        return element.scrollWidth > element.clientWidth && element.scrollLeft > 0;
-    }, [name, visible, content, ref]);
-    const hasScrollRight = useMemo(() => {
-        const element = ref.current;
-        if (!element)
-            return false;
-
-        return element.scrollWidth > element.clientWidth && element.scrollLeft < (element.scrollWidth - element.clientWidth);
-    }, [name, visible, content, ref]);
+        setAllowScrollLeft(element.scrollWidth > element.clientWidth && element.scrollLeft > 0);
+        setAllowScrollRight(element.scrollWidth > element.clientWidth && element.scrollLeft < (element.scrollWidth - element.clientWidth));
+    }, []);
 
     const handleScrollLeftButtonClick = useCallback(() => {
         const element = ref.current;
@@ -99,7 +96,8 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
             return;
 
         element.scrollLeft -= 100;
-    }, []);
+        updateScrollStatus();
+    }, [updateScrollStatus]);
 
     const handleScrollRightButtonClick = useCallback(() => {
         const element = ref.current;
@@ -107,10 +105,16 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
             return;
 
         element.scrollLeft += 100;
-    }, []);
+        updateScrollStatus();
+    }, [updateScrollStatus]);
 
-    useEffect(() => console.log('hasScrollLeft', hasScrollLeft), [hasScrollLeft]);
-    useEffect(() => console.log('hasScrollRight', hasScrollRight), [hasScrollRight]);
+    useEffect(() => {
+        updateScrollStatus();
+        console.log({
+            allowScrollLeft,
+            allowScrollRight
+        });
+    }, [name, visible, content, updateScrollStatus]);
 
     const editor = useCurrentEditor(_editor);
     if (!editor)
@@ -122,7 +126,9 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
 
     return (
         <RibbonTabContentRoot ref={ref}>
-            {hasScrollLeft && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonLeft}>
+            {allowScrollLeft && <RibbonTabContentScrollButtonRoot
+                className={ribbonTabContentClasses.scrollButtonLeft}
+            >
                 <IconButton onClick={handleScrollLeftButtonClick}>
                     <KeyboardArrowLeft />
                 </IconButton>
@@ -137,7 +143,9 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
                         return (<RibbonGroup key={item.name} tabName={name} {...item} editor={_editor} />);
                 }
             })}
-            {hasScrollRight && <RibbonTabContentScrollButtonRoot className={ribbonTabContentClasses.scrollButtonRight}>
+            {allowScrollRight && <RibbonTabContentScrollButtonRoot
+                className={ribbonTabContentClasses.scrollButtonRight}
+            >
                 <IconButton onClick={handleScrollRightButtonClick}>
                     <KeyboardArrowRight />
                 </IconButton>
