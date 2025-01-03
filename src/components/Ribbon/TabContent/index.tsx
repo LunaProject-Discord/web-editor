@@ -101,7 +101,7 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
             return;
 
         element.scrollBy({
-            left: -100,
+            left: -200,
             behavior: 'smooth'
         });
     }, []);
@@ -112,7 +112,7 @@ export const RibbonTabContent = ({ editor: _editor, name, visible, content }: Ri
             return;
 
         element.scrollBy({
-            left: 100,
+            left: 200,
             behavior: 'smooth'
         });
     }, []);
