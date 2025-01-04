@@ -124,11 +124,24 @@ export const VideoExtension = Node.create<VideoOptions>({
         if (resultYouTube) {
             const id = resultYouTube.groups!.id;
 
-            attrs.src = `https://www.youtube.com/embed/${id}${!controls ? '?controls=0' : ''}`;
+            let src = `https://www.youtube.com/embed/${id}`;
+
+            const params = new URLSearchParams();
+            if (!controls)
+                params.set('controls', '0');
+            if (loop)
+                params.set('loop', '1');
+            if (muted)
+                params.set('mute', '1');
+
+            if (params.size > 0)
+                src += `?${params.toString()}`;
+
+            attrs.src = src;
             attrs.frameborder = 0;
             attrs.allowfullscreen = true;
-            // attrs.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-            // attrs.referrerpolicy = 'no-referrer';
+            attrs.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            attrs.referrerpolicy = 'no-referrer';
 
             element[0] = 'iframe';
             element[1] = attrs;
@@ -141,7 +154,7 @@ export const VideoExtension = Node.create<VideoOptions>({
             attrs.src = `https://embed.nicovideo.jp/watch/${id}`;
             attrs.frameborder = 0;
             attrs.allowfullscreen = true;
-            // attrs.allow = 'autoplay; encrypted-media; picture-in-picture';
+            attrs.allow = 'autoplay; encrypted-media; picture-in-picture';
 
             element[0] = 'iframe';
             element[1] = attrs;
