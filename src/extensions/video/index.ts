@@ -1,7 +1,7 @@
 import { mergeAttributes, Node } from '@tiptap/core';
 
 export const REGEX_YOUTUBE = /^https?:\/\/(?:www\.|m\.|music\.)?youtu(?:be\.com\/(?:watch\?v=|shorts\/|live\/)|.be\/)(?<id>[a-zA-Z0-9_-]{11})$/;
-export const REGEX_NICOVIDEO = /^https?:\/\/(?:(?:www\.)?nicovideo.jp\/watch|nico.ms)\/(?<id>(?:sm|nm|so)\d{1,10})$/;
+export const REGEX_NICONICO = /^https?:\/\/(?:(?:www\.)?nicovideo.jp\/watch|nico.ms)\/(?<id>(?:sm|nm|so)\d{1,10})$/;
 
 export const VideoElementType = 'video';
 
@@ -127,10 +127,17 @@ export const VideoExtension = Node.create<VideoOptions>({
             let src = `https://www.youtube.com/embed/${id}`;
 
             const params = new URLSearchParams();
-            if (!controls)
+            if (!controls) {
                 params.set('controls', '0');
-            if (loop)
+                params.set('disablekb', '1');
+                params.set('modestbranding', '1');
+            }
+
+            if (loop) {
                 params.set('loop', '1');
+                params.set('playlist', id);
+            }
+
             if (muted)
                 params.set('mute', '1');
 
@@ -147,7 +154,7 @@ export const VideoExtension = Node.create<VideoOptions>({
             element[1] = attrs;
         }
 
-        const resultNicoVideo = REGEX_NICOVIDEO.exec(src);
+        const resultNicoVideo = REGEX_NICONICO.exec(src);
         if (resultNicoVideo) {
             const id = resultNicoVideo.groups!.id;
 
