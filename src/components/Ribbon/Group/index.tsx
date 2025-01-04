@@ -7,7 +7,6 @@ import React from 'react';
 import { EditorRibbonGroup } from '../../../interfaces';
 import {
     EditorComponentProps,
-    RibbonAccessKeyTip,
     RibbonButton,
     RibbonDropdownButton,
     RibbonGroupDivider,
@@ -81,31 +80,30 @@ export interface RibbonGroupProps extends EditorComponentProps, Omit<EditorRibbo
     tabName: string;
 }
 
-export const RibbonGroup = ({ tabName, name, label, accessKey, content, editor: _editor }: RibbonGroupProps) => {
+export const RibbonGroup = ({ tabName, label, content, editor: _editor }: RibbonGroupProps) => {
     const editor = useCurrentEditor(_editor);
     if (!editor)
         return null;
 
     return (
-        <RibbonAccessKeyTip accessKey={accessKey} target="tab" name={tabName}>
-            <RibbonGroupRoot>
-                {label && <RibbonGroupLabel>{label}</RibbonGroupLabel>}
-                <RibbonGroupContent>
-                    {content.map((item, i) => {
-                        switch (item.type) {
-                            case 'divider':
-                                return (<RibbonGroupDivider key={`divider-${i}`} />);
+        <RibbonGroupRoot>
+            {label && <RibbonGroupLabel>{label}</RibbonGroupLabel>}
+            <RibbonGroupContent>
+                {content.map((item, i) => {
+                    switch (item.type) {
+                        case 'divider':
+                            return (<RibbonGroupDivider key={`divider-${i}`} />);
 
-                            case 'ribbonDropdownButton':
-                                return (<RibbonDropdownButton key={item.name} groupName={name} {...item} editor={_editor} />);
+                        case 'ribbonDropdownButton':
+                            return (
+                                <RibbonDropdownButton key={item.name} tabName={tabName} {...item} editor={_editor} />);
 
-                            case 'ribbonButton':
-                            default:
-                                return (<RibbonButton key={item.name} groupName={name} {...item} editor={_editor} />);
-                        }
-                    })}
-                </RibbonGroupContent>
-            </RibbonGroupRoot>
-        </RibbonAccessKeyTip>
+                        case 'ribbonButton':
+                        default:
+                            return (<RibbonButton key={item.name} tabName={tabName} {...item} editor={_editor} />);
+                    }
+                })}
+            </RibbonGroupContent>
+        </RibbonGroupRoot>
     );
 };

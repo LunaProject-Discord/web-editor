@@ -20,7 +20,7 @@ export interface EditorRibbonTab extends EditorRibbonAccessKeyRoot {
 
 export type EditorRibbonTabItem = EditorRibbonGroup | EditorDivider;
 
-export interface EditorRibbonGroup extends EditorRibbonAccessKeyRoot {
+export interface EditorRibbonGroup {
     type?: 'ribbonGroup';
     name: string;
     label?: ReactNode;

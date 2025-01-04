@@ -18,12 +18,12 @@ export const ribbonDropdownButtonClasses = generateComponentClasses(
 
 
 export interface RibbonDropdownButtonProps extends EditorComponentProps, Omit<EditorRibbonDropdownButton, 'type' | 'name'> {
-    groupName: string;
+    tabName: string;
 }
 
 export const RibbonDropdownButton = (
     {
-        groupName,
+        tabName,
         icon: Icon,
         label,
         accessKey,
@@ -57,7 +57,7 @@ export const RibbonDropdownButton = (
 
     return (
         <Fragment>
-            <RibbonAccessKeyTip accessKey={accessKey} target="group" name={groupName}>
+            <RibbonAccessKeyTip accessKey={accessKey} name={tabName}>
                 {tooltip ? <Tooltip title={tooltip.children} placement={tooltip.placement}>
                     {children}
                 </Tooltip> : children}

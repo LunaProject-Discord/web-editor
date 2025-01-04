@@ -5,7 +5,7 @@ import { alpha, Box, BoxProps, styled } from '@mui/material';
 import clsx from 'clsx';
 import React, { ReactNode } from 'react';
 import { EditorRibbonAccessKey } from '../../../interfaces';
-import { RibbonAccessKeyTargetType, useRibbonAccessKeyContext } from '../Context';
+import { useRibbonAccessKeyContext } from '../Context';
 
 export const ribbonAccessKeyTipClasses = generateComponentClasses(
     'RibbonAccessKeyTip',
@@ -48,9 +48,12 @@ export const RibbonAccessKeyTipLabel = styled(
         />
     )
 )(({ theme }) => ({
+    height: theme.spacing(2.5),
+    margin: 'auto 0',
     padding: theme.spacing(0, .5),
     position: 'absolute',
-    bottom: theme.spacing(-2),
+    top: 0,
+    bottom: 0,
     left: '50%',
     fontSize: theme.typography.body2.fontSize,
     lineHeight: 'normal',
@@ -65,15 +68,14 @@ export const RibbonAccessKeyTipLabel = styled(
 
 export interface RibbonAccessKeyTipProps {
     accessKey: EditorRibbonAccessKey | undefined;
-    target: RibbonAccessKeyTargetType;
     name?: string;
     children?: ReactNode;
 }
 
-export const RibbonAccessKeyTip = ({ accessKey, target, name, children }: RibbonAccessKeyTipProps) => {
+export const RibbonAccessKeyTip = ({ accessKey, name, children }: RibbonAccessKeyTipProps) => {
     const value = useRibbonAccessKeyContext();
 
-    if (!accessKey || !value || value.type !== target || (value.tabName !== name && value.groupName !== name) || value.input && !accessKey.toLowerCase().startsWith(value.input))
+    if (!accessKey || !value || ((name && value.tabName !== name) || (!name && value.tabName)) || value.input && !accessKey.toLowerCase().startsWith(value.input))
         return children;
 
     return (

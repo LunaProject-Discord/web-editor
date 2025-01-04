@@ -73,12 +73,12 @@ export const RibbonButtonRoot = styled(
 
 
 export interface RibbonButtonProps extends EditorComponentProps, Omit<EditorRibbonButton, 'type' | 'name'> {
-    groupName: string;
+    tabName: string;
 }
 
 export const RibbonButton = (
     {
-        groupName,
+        tabName,
         icon: Icon,
         label,
         accessKey,
@@ -95,8 +95,7 @@ export const RibbonButton = (
 
     const keyTipProps: RibbonAccessKeyTipProps = {
         accessKey,
-        target: 'group',
-        name: groupName
+        name: tabName
     };
 
     const isDisabled = getEditorPredicate(disabled, editor);
