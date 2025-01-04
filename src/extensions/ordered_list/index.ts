@@ -9,8 +9,8 @@ export const OrderedListCommand: EditorCommand = {
     name: 'orderedList',
     icon: FormatListBulletedOutlined,
     label: '番号付きリスト',
-    description: '番号付きリストを挿入します。',
-    keywords: ['ordered', 'list', 'ordered list', '番号付き', 'リスト', '番号付きリスト'],
+    description: '選択したブロックのスタイルを段落と番号付きリストの間で切り替えます。',
+    keywords: ['ordered', 'list', 'orderedList', 'toggle', 'change', 'update', '番号付きリスト', 'リスト', '番号付きリスト', '切り替え', '切替', 'トグル', '変更', '更新'],
     disabled: ({ editor }) => !editor.can().toggleOrderedList(),
     selected: ({ editor }) => editor.isActive('orderedList'),
     perform: ({ editor }) => editor.chain().focus().toggleOrderedList().run()

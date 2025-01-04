@@ -18,7 +18,7 @@ export const TableInsertCommand: EditorCommand = {
     icon: GridOnOutlined,
     label: '表',
     description: '表を挿入します。',
-    keywords: ['table', 'insert', 'add', 'create', '表', 'テーブル', '挿入'],
+    keywords: ['table', 'add', 'insert', '表', 'テーブル', '追加', '挿入'],
     disabled: ({ editor }) => !editor.can().insertTable(),
     perform: ({ editor }) => editor.chain().focus().insertTable().run()
 };
@@ -37,7 +37,7 @@ export const TableAddRowBeforeCommand: EditorCommand = {
     name: 'tableAddRowBefore',
     icon: AddOutlined,
     label: '上に行を追加',
-    description: '選択した行の上に行を追加します。',
+    description: '選択した行の上に新しい行を追加します。',
     keywords: ['table', 'row', 'add', 'insert', '表', 'テーブル', '行', '追加', '挿入'],
     disabled: ({ editor }) => !editor.can().addRowBefore(),
     perform: ({ editor }) => editor.chain().focus().addRowBefore().run()
@@ -47,7 +47,7 @@ export const TableAddRowAfterCommand: EditorCommand = {
     name: 'tableAddRowAfter',
     icon: AddOutlined,
     label: '下に行を追加',
-    description: '選択した行の下に行を追加します。',
+    description: '選択した行の下に新しい行を追加します。',
     keywords: ['table', 'row', 'add', 'insert', '表', 'テーブル', '行', '追加', '挿入'],
     disabled: ({ editor }) => !editor.can().addRowAfter(),
     perform: ({ editor }) => editor.chain().focus().addRowAfter().run()
@@ -67,7 +67,7 @@ export const TableAddColumnBeforeCommand: EditorCommand = {
     name: 'tableAddColumnBefore',
     icon: AddOutlined,
     label: '左に列を追加',
-    description: '選択した列の左に列を追加します。',
+    description: '選択した列の左に新しい列を追加します。',
     keywords: ['table', 'column', 'add', 'insert', '表', 'テーブル', '列', '追加', '挿入'],
     disabled: ({ editor }) => !editor.can().addColumnBefore(),
     perform: ({ editor }) => editor.chain().focus().addColumnBefore().run()
@@ -77,7 +77,7 @@ export const TableAddColumnAfterCommand: EditorCommand = {
     name: 'tableAddColumnAfter',
     icon: AddOutlined,
     label: '右に列を追加',
-    description: '選択した列の右に列を追加します。',
+    description: '選択した列の右に新しい列を追加します。',
     keywords: ['table', 'column', 'add', 'insert', '表', 'テーブル', '列', '追加', '挿入'],
     disabled: ({ editor }) => !editor.can().addColumnAfter(),
     perform: ({ editor }) => editor.chain().focus().addColumnAfter().run()
@@ -98,7 +98,7 @@ export const TableMergeCellsCommand: EditorCommand = {
     icon: CallMergeOutlined,
     label: 'セルを結合',
     description: '選択したセルを結合します。',
-    keywords: ['table', 'cell', 'merge', '表', 'テーブル', 'セル', '結合'],
+    keywords: ['table', 'cells', 'cell', 'merge', '表', 'テーブル', 'セル', '結合', 'マージ'],
     disabled: ({ editor }) => !editor.can().mergeCells(),
     perform: ({ editor }) => editor.chain().focus().mergeCells().run()
 };
@@ -108,7 +108,7 @@ export const TableSplitCellCommand: EditorCommand = {
     icon: CallSplitOutlined,
     label: 'セルを分割',
     description: '選択したセルを分割します。',
-    keywords: ['table', 'cell', 'split', '表', 'テーブル', 'セル', '分割'],
+    keywords: ['table', 'cell', 'split', '表', 'テーブル', 'セル', '分割', 'スプリット'],
     disabled: ({ editor }) => !editor.can().splitCell(),
     perform: ({ editor }) => editor.chain().focus().splitCell().run()
 };
@@ -117,23 +117,23 @@ export const TableToggleHeaderRowCommand: EditorCommand = {
     name: 'tableToggleHeaderRow',
     icon: undefined,
     label: '行見出し',
-    description: 'テーブルの先頭行の見出し状態を切り替えます。',
-    keywords: ['table', 'header', 'row', 'toggle', '表', 'テーブル', '見出し', 'ヘッダー', '行', '切り替え'],
+    description: '選択した表の最初の行の見出し状態を切り替えます。',
+    keywords: ['table', 'header', 'row', 'toggle', '表', 'テーブル', '見出し', 'ヘッダー', '行', '切り替え', '切替', 'トグル'],
     disabled: ({ editor }) => !editor.can().toggleHeaderRow(),
     selected: ({ editor, view }) => {
         // 現在のカーソル位置の要素を取得
         const currentNodePos = editor.$pos(view.state.selection.from);
-        // currentNodePos に一番近い table を取得
+        // 現在のカーソル位置に一番近い表を取得
         const tableNodePos = currentNodePos.closest('table');
         if (!tableNodePos)
             return false;
 
-        // tableNodePos の最初にある tableRow を取得
+        // 表の最初にある行を取得
         const firstTableRowNodePos = tableNodePos.querySelector('tableRow');
         if (!firstTableRowNodePos)
             return false;
 
-        // tableRow の children が全て tableHeader であるかどうかを判定
+        // 表の最初の行の子要素がすべて見出し状態であるかどうかを判定
         return firstTableRowNodePos.children?.every((nodePos) => nodePos.node?.type?.name === 'tableHeader');
     },
     perform: ({ editor }) => editor.chain().focus().toggleHeaderRow().run()
@@ -143,9 +143,25 @@ export const TableToggleHeaderColumnCommand: EditorCommand = {
     name: 'tableToggleHeaderColumn',
     icon: undefined,
     label: '列見出し',
-    description: 'テーブルの先頭列の見出し状態を切り替えます。',
-    keywords: ['table', 'header', 'column', 'toggle', '表', 'テーブル', '見出し', 'ヘッダー', '列', '切り替え'],
+    description: '選択した表の最初の列の見出し状態を切り替えます。',
+    keywords: ['table', 'header', 'column', 'toggle', '表', 'テーブル', '見出し', 'ヘッダー', '列', '切り替え', '切替', 'トグル'],
     disabled: ({ editor }) => !editor.can().toggleHeaderColumn(),
+    selected: ({ editor, view }) => {
+        // 現在のカーソル位置の要素を取得
+        const currentNodePos = editor.$pos(view.state.selection.from);
+        // 現在のカーソル位置に一番近い表を取得
+        const tableNodePos = currentNodePos.closest('table');
+        if (!tableNodePos)
+            return false;
+
+        // 表にあるすべての行を取得
+        const tableRowNodePoses = tableNodePos.querySelectorAll('tableRow');
+        if (tableRowNodePoses.length < 1)
+            return false;
+
+        // 各行の最初の列がすべて見出し状態であるかどうかを判定
+        return tableRowNodePoses.every((nodePos) => nodePos.firstChild?.node?.type?.name === 'tableHeader');
+    },
     perform: ({ editor }) => editor.chain().focus().toggleHeaderColumn().run()
 };
 
@@ -154,7 +170,7 @@ export const TableToggleHeaderCellCommand: EditorCommand = {
     icon: undefined,
     label: 'セル見出し',
     description: '選択したセルの見出し状態を切り替えます。',
-    keywords: ['table', 'header', 'cell', 'toggle', '表', 'テーブル', '見出し', 'ヘッダー', 'セル', '切り替え'],
+    keywords: ['table', 'header', 'cell', 'toggle', '表', 'テーブル', '見出し', 'ヘッダー', 'セル', '切り替え', '切替', 'トグル'],
     disabled: ({ editor }) => !editor.can().toggleHeaderCell(),
     selected: ({ editor }) => editor.isActive('tableHeader'),
     perform: ({ editor }) => editor.chain().focus().toggleHeaderCell().run()

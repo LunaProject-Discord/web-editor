@@ -36,32 +36,21 @@ export const HeadingExtension = Heading.extend({
             (items, level) => ({
                 ...items,
                 ...{
-                    [`Mod-Alt-${level}`]: () => this.editor.commands.toggleHeading({ level })
+                    [`Mod-Alt-${level - 1}`]: () => this.editor.commands.toggleHeading({ level })
                 }
             }),
-            {
-                'Mod-Alt-1': () => this.editor.commands.toggleHeading({ level: this.options.levels[0] })
-            }
+            {}
         );
     },
 
     addInputRules() {
-        return [
-            textblockTypeInputRule({
-                find: new RegExp(`^(#)\s$`),
-                type: this.type,
-                getAttributes: {
-                    level: this.options.levels[0]
-                }
-            }),
-            ...this.options.levels.map((level) => textblockTypeInputRule({
-                find: new RegExp(`^(#{1,${level}})\\s$`),
-                type: this.type,
-                getAttributes: {
-                    level
-                }
-            }))
-        ];
+        return this.options.levels.map((level) => textblockTypeInputRule({
+            find: new RegExp(`^(#{1,${level - 1}})\\s$`),
+            type: this.type,
+            getAttributes: {
+                level
+            }
+        }));
     }
 });
 

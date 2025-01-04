@@ -9,8 +9,8 @@ export const BlockquoteCommand: EditorCommand = {
     name: 'blockquote',
     icon: FormatQuoteOutlined,
     label: '引用',
-    description: '引用ブロックを挿入します。',
-    keywords: ['block', 'quote', 'blockquote', '箇条書き', 'リスト', '箇条書きリスト'],
+    description: '選択したブロックのスタイルを段落と引用ブロックの間で切り替えます。',
+    keywords: ['block', 'quote', 'blockQuote', 'toggle', 'change', 'update', '引用', '引用ブロック', 'クオート', 'クオートブロック', '切り替え', '切替', 'トグル', '変更', '更新'],
     disabled: ({ editor }) => !editor.can().toggleBlockquote(),
     selected: ({ editor }) => editor.isActive('blockquote'),
     perform: ({ editor }) => editor.chain().focus().toggleBlockquote().run()
