@@ -10,6 +10,7 @@ export * from './gapcursor';
 export * from './hard_break';
 export * from './heading';
 export * from './history';
+export * from './horizontal_rule';
 export * from './image';
 export * from './italic';
 export * from './link';

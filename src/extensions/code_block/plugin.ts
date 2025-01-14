@@ -48,18 +48,28 @@ const getDecorations = (
         );
 
         for (const line of tokens) {
+            decorations.push(
+                Decoration.inline(
+                    from,
+                    line.reduce((acc, token) => acc + token.content.length, from),
+                    {
+                        class: 'line'
+                    }
+                )
+            );
+
             for (const token of line) {
                 const to = from + token.content.length;
 
-                const decoration = Decoration.inline(
-                    from,
-                    to,
-                    {
-                        style: `color: ${token.color}`
-                    }
+                decorations.push(
+                    Decoration.inline(
+                        from,
+                        to,
+                        {
+                            style: `color: ${token.color}`
+                        }
+                    )
                 );
-
-                decorations.push(decoration);
 
                 from = to;
             }
