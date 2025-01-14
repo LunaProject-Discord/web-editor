@@ -7,6 +7,7 @@ import { DropcursorOptions } from '@tiptap/extension-dropcursor';
 import { HardBreakOptions } from '@tiptap/extension-hard-break';
 import { HeadingOptions } from '@tiptap/extension-heading';
 import { HistoryOptions } from '@tiptap/extension-history';
+import { HorizontalRuleOptions } from '@tiptap/extension-horizontal-rule';
 import { ItalicOptions } from '@tiptap/extension-italic';
 import { LinkOptions } from '@tiptap/extension-link';
 import { ListItemOptions } from '@tiptap/extension-list-item';
@@ -35,7 +36,7 @@ import {
     GapcursorExtension,
     HardBreakExtension,
     HeadingExtension,
-    HistoryExtension,
+    HistoryExtension, HorizontalRuleExtension,
     ImageExtension,
     ImageOptions,
     ItalicExtension,
@@ -74,6 +75,7 @@ export interface StarterKitOptions {
     tableCell?: Partial<TableCellOptions> | false;
     tableHeader?: Partial<TableHeaderOptions> | false;
     blockquote?: Partial<BlockquoteOptions> | false;
+    horizontalRule?: Partial<HorizontalRuleOptions> | false;
     image?: Partial<ImageOptions> | false;
     video?: Partial<VideoOptions> | false;
     audio?: Partial<AudioOptions> | false;
@@ -115,6 +117,7 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
             tableCell: undefined,
             tableHeader: undefined,
             blockquote: undefined,
+            horizontalRule: undefined,
             image: undefined,
             video: undefined,
             audio: undefined,
@@ -169,6 +172,8 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
             extensions.push(TableHeaderExtension.configure(this.options?.tableHeader));
         if (this.options.blockquote !== false)
             extensions.push(BlockquoteExtension.configure(this.options?.blockquote));
+        if (this.options.horizontalRule !== false)
+            extensions.push(HorizontalRuleExtension.configure(this.options?.horizontalRule));
         if (this.options.image !== false)
             extensions.push(ImageExtension.configure(this.options?.image));
         if (this.options.video !== false)

@@ -49,10 +49,11 @@ const getDecorations = (
 
         for (const line of tokens) {
             decorations.push(
-                Decoration.inline(
+                Decoration.node(
                     from,
                     line.reduce((acc, token) => acc + token.content.length, from),
                     {
+                        nodeName: 'span',
                         class: 'line'
                     }
                 )
