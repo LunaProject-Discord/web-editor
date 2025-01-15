@@ -76,10 +76,10 @@ export interface StarterKitOptions {
     tableHeader?: Partial<TableHeaderOptions> | false;
     blockquote?: Partial<BlockquoteOptions> | false;
     horizontalRule?: Partial<HorizontalRuleOptions> | false;
+    codeBlock?: Partial<CodeBlockOptions> | false;
     image?: Partial<ImageOptions> | false;
     video?: Partial<VideoOptions> | false;
     audio?: Partial<AudioOptions> | false;
-    codeBlock?: Partial<CodeBlockOptions> | false;
 
     bold?: Partial<BoldOptions> | false;
     italic?: Partial<ItalicOptions> | false;
@@ -118,10 +118,10 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
             tableHeader: undefined,
             blockquote: undefined,
             horizontalRule: undefined,
+            codeBlock: undefined,
             image: undefined,
             video: undefined,
             audio: undefined,
-            codeBlock: undefined,
 
             bold: undefined,
             italic: undefined,
@@ -174,14 +174,14 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
             extensions.push(BlockquoteExtension.configure(this.options?.blockquote));
         if (this.options.horizontalRule !== false)
             extensions.push(HorizontalRuleExtension.configure(this.options?.horizontalRule));
+        if (this.options.codeBlock !== false)
+            extensions.push(CodeBlockExtension.configure(this.options?.codeBlock));
         if (this.options.image !== false)
             extensions.push(ImageExtension.configure(this.options?.image));
         if (this.options.video !== false)
             extensions.push(VideoExtension.configure(this.options?.video));
         if (this.options.audio !== false)
             extensions.push(AudioExtension.configure(this.options?.audio));
-        if (this.options.codeBlock !== false)
-            extensions.push(CodeBlockExtension.configure(this.options?.codeBlock));
 
         if (this.options.bold !== false)
             extensions.push(BoldExtension.configure(this.options?.bold));
