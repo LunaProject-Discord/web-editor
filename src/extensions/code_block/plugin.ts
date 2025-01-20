@@ -47,6 +47,19 @@ const getDecorations = (
             }
         );
 
+        console.log(block);
+
+        decorations.push(
+            Decoration.node(
+                from,
+                block.node.nodeSize - 1,
+                {
+                    nodeName: 'span',
+                    class: 'line'
+                }
+            )
+        );
+
         for (const line of tokens) {
             decorations.push(
                 Decoration.node(
