@@ -54,11 +54,12 @@ const getDecorations = (
             if (differenceLineNumbers > 1) {
                 for (let j = 0; j < differenceLineNumbers - 1; j++) {
                     decorations.push(
-                        Decoration.node(
+                        Decoration.inline(
                             from,
                             from + 1,
                             {
-                                class: 'line'
+                                class: 'line',
+                                style: `--line-number: ${lineNumber + j + 1};`
                             }
                         )
                     );
