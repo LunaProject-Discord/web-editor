@@ -47,24 +47,8 @@ const getDecorations = (
             }
         );
 
-        console.log(block);
-
         tokens.forEach((line, i) => {
-            console.log(line);
-
-            decorations.push(
-                Decoration.inline(
-                    from,
-                    line.reduce((acc, token) => acc + token.content.length, from),
-                    {
-                        nodeName: 'span',
-                        class: 'line',
-                        style: `--line-number: ${i + 1}`
-                    }
-                )
-            );
-
-            line.forEach((token) => {
+            line.forEach((token, v) => {
                 const to = from + token.content.length;
 
                 decorations.push(
@@ -72,7 +56,8 @@ const getDecorations = (
                         from,
                         to,
                         {
-                            style: `color: ${token.color}`
+                            class: v === 0 ? 'line' : undefined,
+                            style: `color: ${token.color}; --line-number: ${i + 1};`
                         }
                     )
                 );
