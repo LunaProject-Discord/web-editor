@@ -25,25 +25,25 @@ const getDecorations = (
 
     codeBlocks.forEach((block) => {
         let from = block.pos + 1;
-        let language = block.node.attrs.language || defaultLanguage;
-        let theme = block.node.attrs.theme || defaultTheme;
 
         const highlighter = getShiki();
         if (!highlighter)
             return;
 
+        let language = block.node.attrs.language || defaultLanguage;
         if (!highlighter.getLoadedLanguages().includes(language))
             language = 'plaintext';
 
-        const themeToApply = highlighter.getLoadedThemes().includes(theme)
-            ? theme
-            : highlighter.getLoadedThemes()[0];
+        let theme = block.node.attrs.theme || defaultTheme;
+        const loadedThemes = highlighter.getLoadedThemes();
+        if (!loadedThemes.includes(theme))
+            theme = loadedThemes[0];
 
         const tokens = highlighter.codeToTokensBase(
             block.node.textContent,
             {
                 lang: language,
-                theme: themeToApply
+                theme
             }
         );
 
@@ -51,13 +51,37 @@ const getDecorations = (
             line.forEach((token, v) => {
                 const to = from + token.content.length;
 
+                let fontStyle: string | undefined = undefined;
+                let fontWeight: string | undefined = undefined;
+                let textDecoration: string | undefined = undefined;
+                switch (token.fontStyle) {
+                    case 1:
+                        fontStyle = 'italic';
+                        break;
+                    case 2:
+                        fontWeight = 'bold';
+                        break;
+                    case 4:
+                        textDecoration = 'underline';
+                        break;
+                    default:
+                        break;
+                }
+
                 decorations.push(
                     Decoration.inline(
                         from,
                         to,
                         {
                             class: v === 0 ? 'line' : undefined,
-                            style: `color: ${token.color}; --line-number: ${i + 1};`
+                            style: [
+                                fontStyle && `font-style: ${fontStyle};`,
+                                fontWeight && `font-weight: ${fontWeight};`,
+                                textDecoration && `text-decoration: ${textDecoration};`,
+                                token.color && `color: ${token.color};`,
+                                token.bgColor && `background-color: ${token.bgColor};`,
+                                v === 0 && `--line-number: ${i + 1};`
+                            ].filter(Boolean).join(' ')
                         }
                     )
                 );
