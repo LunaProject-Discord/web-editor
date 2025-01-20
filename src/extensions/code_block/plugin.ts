@@ -49,22 +49,13 @@ const getDecorations = (
 
         console.log(block);
 
-        decorations.push(
-            Decoration.node(
-                from,
-                block.node.nodeSize - 1,
-                {
-                    nodeName: 'span',
-                    class: 'line'
-                }
-            )
-        );
-
         for (const line of tokens) {
+            console.log(line);
+
             decorations.push(
                 Decoration.node(
-                    from,
-                    line.reduce((acc, token) => acc + token.content.length, from),
+                    from + 2,
+                    line.reduce((acc, token) => acc + token.content.length, from) - 2,
                     {
                         nodeName: 'span',
                         class: 'line'
