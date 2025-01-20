@@ -47,26 +47,7 @@ const getDecorations = (
             }
         );
 
-        let lineNumber = 0;
-
-        tokens.forEach((line, i) => {
-            const differenceLineNumbers = Math.abs(lineNumber - i);
-            if (differenceLineNumbers > 1) {
-                for (let j = 0; j < differenceLineNumbers - 1; j++) {
-                    decorations.push(
-                        Decoration.inline(
-                            from,
-                            from + 1,
-                            {
-                                class: 'line',
-                                style: `--line-number: ${lineNumber + j + 1};`
-                            }
-                        )
-                    );
-                }
-                from += 1;
-            }
-
+        tokens.forEach((line) => {
             line.forEach((token, v) => {
                 const to = from + token.content.length;
 
@@ -99,13 +80,10 @@ const getDecorations = (
                                 textDecoration && `text-decoration: ${textDecoration};`,
                                 token.color && `color: ${token.color};`,
                                 token.bgColor && `background-color: ${token.bgColor};`,
-                                v === 0 && `--line-number: ${i + 1};`
                             ].filter(Boolean).join(' ')
                         }
                     )
                 );
-
-                lineNumber = i + 1;
 
                 from = to;
             });
