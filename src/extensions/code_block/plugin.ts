@@ -47,7 +47,25 @@ const getDecorations = (
             }
         );
 
+        let lineNumber = 0;
+
         tokens.forEach((line, i) => {
+            const differenceLineNumbers = Math.abs(lineNumber - i);
+            if (differenceLineNumbers > 1) {
+                for (let j = 0; j < differenceLineNumbers - 1; j++) {
+                    decorations.push(
+                        Decoration.node(
+                            from,
+                            from + 1,
+                            {
+                                class: 'line'
+                            }
+                        )
+                    );
+                }
+                from += 1;
+            }
+
             line.forEach((token, v) => {
                 const to = from + token.content.length;
 
@@ -85,6 +103,8 @@ const getDecorations = (
                         }
                     )
                 );
+
+                lineNumber = i + 1;
 
                 from = to;
             });
