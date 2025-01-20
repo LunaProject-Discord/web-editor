@@ -29,8 +29,8 @@ const getDecorations = (
         let theme = block.node.attrs.theme || defaultTheme;
 
         const highlighter = getShiki();
-
-        if (!highlighter) return;
+        if (!highlighter)
+            return;
 
         if (!highlighter.getLoadedLanguages().includes(language))
             language = 'plaintext';
@@ -49,21 +49,22 @@ const getDecorations = (
 
         console.log(block);
 
-        for (const line of tokens) {
+        tokens.forEach((line, i) => {
             console.log(line);
 
             decorations.push(
-                Decoration.node(
-                    from + 2,
-                    line.reduce((acc, token) => acc + token.content.length, from) - 2,
+                Decoration.inline(
+                    from,
+                    line.reduce((acc, token) => acc + token.content.length, from),
                     {
                         nodeName: 'span',
-                        class: 'line'
+                        class: 'line',
+                        style: `--line-number: ${i + 1}`
                     }
                 )
             );
 
-            for (const token of line) {
+            line.forEach((token) => {
                 const to = from + token.content.length;
 
                 decorations.push(
@@ -77,10 +78,10 @@ const getDecorations = (
                 );
 
                 from = to;
-            }
+            });
 
             from += 1;
-        }
+        });
     });
 
     return DecorationSet.create(doc, decorations);
