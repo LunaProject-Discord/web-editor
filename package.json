@@ -56,7 +56,7 @@
         "@tiptap/pm": "^2.11.0",
         "@tiptap/react": "^2.11.0",
         "mousetrap": "^1.6.5",
-        "shiki": "^3.0.0"
+        "shiki": "^2.5.0"
     },
     "devDependencies": {
         "@emotion/react": "^11.14.0",
