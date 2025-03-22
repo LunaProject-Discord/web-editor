@@ -12,3 +12,4 @@ export const getEditorPredicate = (predicate: EditorPredicate | undefined, edito
 };
 
 export * from './ribbon';
+export * from './schema';
