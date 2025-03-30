@@ -1,7 +1,7 @@
 import { SuperscriptOutlined } from '@mui/icons-material';
 import { Superscript } from '@tiptap/extension-superscript';
 import { EditorCommand } from '../../interfaces';
-import { asRibbonButton } from '../../utils';
+import { asRibbonButton, isMarkAllowed } from '../../utils';
 
 export const SuperscriptExtension = Superscript.extend({
     addKeyboardShortcuts() {
@@ -17,7 +17,12 @@ export const SuperscriptCommand: EditorCommand = {
     label: '上付き文字',
     description: '選択したテキストを上付き文字として表示します。',
     keywords: ['superscript', '上付き文字'],
-    disabled: ({ editor }) => !editor.can().toggleSuperscript(),
+    disabled: ({ editor, state }) => {
+        const currentNodePos = editor.$pos(state.selection.from);
+        const currentNode = currentNodePos.node;
+
+        return !editor.can().toggleSuperscript() || !isMarkAllowed(currentNode, 'superscript');
+    },
     selected: ({ editor }) => editor.isActive('superscript'),
     perform: ({ editor }) => editor.chain().focus().unsetSubscript().toggleSuperscript().run()
 };

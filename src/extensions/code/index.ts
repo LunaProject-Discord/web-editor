@@ -1,7 +1,7 @@
 import { CodeOutlined } from '@mui/icons-material';
 import { Code } from '@tiptap/extension-code';
 import { EditorCommand } from '../../interfaces';
-import { asRibbonButton } from '../../utils';
+import { asRibbonButton, isMarkAllowed } from '../../utils';
 
 export const CodeExtension = Code;
 
@@ -11,7 +11,12 @@ export const CodeCommand: EditorCommand = {
     label: 'インライン コード',
     description: '選択したテキストをインライン コードとして表示します。',
     keywords: ['code', 'inline code', 'コード', 'インライン コード'],
-    disabled: ({ editor }) => !editor.can().toggleCode(),
+    disabled: ({ editor, state }) => {
+        const currentNodePos = editor.$pos(state.selection.from);
+        const currentNode = currentNodePos.node;
+
+        return !editor.can().toggleCode() || !isMarkAllowed(currentNode, 'code');
+    },
     selected: ({ editor }) => editor.isActive('code'),
     perform: ({ editor }) => editor.chain().focus().toggleCode().run()
 };

@@ -1,5 +1,6 @@
 import { SomeRequired } from '@lunaproject/web-core/dist/utils';
 import { JSONContent } from '@tiptap/core';
+import { Node as PMNode } from '@tiptap/pm/model';
 
 export type Node = SomeRequired<JSONContent, 'type'>;
 export type Mark = {
@@ -29,3 +30,14 @@ export const Schema = {
         marks: marks ?? undefined
     })
 } as const;
+
+export const isMarkAllowed = (node: PMNode, markName: string) => {
+    const nodeType = node.type;
+    const schema = nodeType.schema;
+
+    const markType = schema.marks[markName];
+    if (!markType)
+        return false;
+
+    return nodeType.allowsMarkType(markType);
+};

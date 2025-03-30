@@ -3,7 +3,7 @@ import { markInputRule, markPasteRule } from '@tiptap/core';
 import { underscoreInputRegex, underscorePasteRegex } from '@tiptap/extension-bold';
 import { Underline, UnderlineOptions } from '@tiptap/extension-underline';
 import { EditorCommand } from '../../interfaces';
-import { asRibbonButton } from '../../utils';
+import { asRibbonButton, isMarkAllowed } from '../../utils';
 
 export const UnderlineExtension = Underline.extend({
     addInputRules() {
@@ -31,7 +31,12 @@ export const UnderlineCommand: EditorCommand = {
     label: '下線',
     description: '選択したテキストの下線の状態を切り替えます。',
     keywords: ['underline', '下線'],
-    disabled: ({ editor }) => !editor.can().toggleUnderline(),
+    disabled: ({ editor, state }) => {
+        const currentNodePos = editor.$pos(state.selection.from);
+        const currentNode = currentNodePos.node;
+
+        return !editor.can().toggleUnderline() || !isMarkAllowed(currentNode, 'underline');
+    },
     selected: ({ editor }) => editor.isActive('underline'),
     perform: ({ editor }) => editor.chain().focus().toggleUnderline().run()
 };

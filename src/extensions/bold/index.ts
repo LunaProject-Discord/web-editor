@@ -1,8 +1,8 @@
 import { FormatBoldOutlined } from '@mui/icons-material';
 import { markInputRule, markPasteRule } from '@tiptap/core';
-import { Bold, BoldOptions, starInputRegex, starPasteRegex } from '@tiptap/extension-bold';
+import { Bold, starInputRegex, starPasteRegex } from '@tiptap/extension-bold';
 import { EditorCommand } from '../../interfaces';
-import { asRibbonButton } from '../../utils';
+import { asRibbonButton, isMarkAllowed } from '../../utils';
 
 export const BoldExtension = Bold.extend({
     priority: 101,
@@ -32,7 +32,12 @@ export const BoldCommand: EditorCommand = {
     label: '太字',
     description: '選択したテキストの太字の状態を切り替えます。',
     keywords: ['bold', 'strong', '太字', 'ボールド'],
-    disabled: ({ editor }) => !editor.can().toggleBold(),
+    disabled: ({ editor, state }) => {
+        const currentNodePos = editor.$pos(state.selection.from);
+        const currentNode = currentNodePos.node;
+
+        return !editor.can().toggleBold() || !isMarkAllowed(currentNode, 'bold');
+    },
     selected: ({ editor }) => editor.isActive('bold'),
     perform: ({ editor }) => editor.chain().focus().toggleBold().run()
 };
