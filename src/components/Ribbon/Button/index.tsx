@@ -36,6 +36,7 @@ export const RibbonButtonRoot = styled(
     ) => (
         <ButtonBase
             ref={ref}
+            disabled={disabled}
             className={
                 clsx(
                     ribbonButtonClasses.root,
