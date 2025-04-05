@@ -33,18 +33,19 @@ export const RibbonTabContentRoot = styled(
     ))
 )(({ theme }) => {
     const scrollButtonBackgroundStyle = (direction: 'left' | 'right') => {
+        const overlayBackground = `linear-gradient(to ${direction}, ${alpha('#fff', getOverlayAlpha(8))} ${theme.spacing(5.5)}, transparent)`;
         const baseBackground = `linear-gradient(to ${direction}, ${(theme.vars || theme).palette.background.paper} ${theme.spacing(5.5)}, transparent)`;
 
         if (!theme.vars) {
             return {
-                background: theme.palette.mode === 'light' ? baseBackground : `linear-gradient(${alpha('#fff', getOverlayAlpha(8))}, ${alpha('#fff', getOverlayAlpha(8))})}, ${baseBackground}`
+                background: theme.palette.mode === 'light' ? baseBackground : `${overlayBackground}, ${baseBackground}`,
             };
         }
 
         return {
             background: baseBackground,
             ...theme.applyStyles('dark', {
-                background: `${theme.vars.overlays[8]}, ${baseBackground}`
+                background: `${overlayBackground}, ${baseBackground}`
             })
         };
     };
