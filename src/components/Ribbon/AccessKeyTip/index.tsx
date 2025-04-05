@@ -63,7 +63,7 @@ export const RibbonAccessKeyTipLabel = styled(
     transform: 'translateX(-50%)',
     color: (theme.vars || theme).palette.common.white,
     backgroundColor: theme.vars ? theme.vars.palette.Tooltip.bg : alpha(theme.palette.grey[700], .92),
-    borderRadius: theme.spacing(.5)
+    borderRadius: (theme.vars || theme).shape.borderRadius
 }));
 
 export interface RibbonAccessKeyTipProps {

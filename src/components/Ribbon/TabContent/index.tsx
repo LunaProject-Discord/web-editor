@@ -1,7 +1,7 @@
 'use client';
 
 import { ConfigContext, generateComponentClasses } from '@lunaproject/web-core/dist/utils';
-import { Box, BoxProps, IconButton, styled } from '@mui/material';
+import { alpha, Box, BoxProps, getOverlayAlpha, IconButton, styled } from '@mui/material';
 import clsx from 'clsx';
 import React, { forwardRef, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import {
@@ -31,40 +31,59 @@ export const RibbonTabContentRoot = styled(
             {...props}
         />
     ))
-)(({ theme }) => ({
-    minHeight: theme.spacing(6),
-    // position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    gap: theme.spacing(2),
-    whiteSpace: 'nowrap',
-    overflowX: 'auto',
-    overflowY: 'hidden',
-    scrollbarWidth: 'none',
-    '&::-webkit-scrollbar': {
-        display: 'none'
-    },
-    [`&:has(.${ribbonTabContentClasses.scrollButtonLeft})`]: {
-        marginLeft: theme.spacing(-9)
-    },
-    [`&:has(.${ribbonTabContentClasses.scrollButtonRight})`]: {
-        marginRight: theme.spacing(-9)
-    },
-    [`& .${ribbonTabContentClasses.scrollButtonLeft}`]: {
-        paddingLeft: theme.spacing(.5),
-        paddingRight: theme.spacing(2),
-        left: theme.spacing(8.5),
+)(({ theme }) => {
+    const scrollButtonBackgroundStyle = (direction: 'left' | 'right') => {
+        const baseBackground = `linear-gradient(to ${direction}, ${(theme.vars || theme).palette.background.paper} ${theme.spacing(5.5)}, transparent)`;
+
+        if (!theme.vars) {
+            return {
+                background: theme.palette.mode === 'light' ? baseBackground : `linear-gradient(${alpha('#fff', getOverlayAlpha(8))}, ${alpha('#fff', getOverlayAlpha(8))})}, ${baseBackground}`
+            };
+        }
+
+        return {
+            background: baseBackground,
+            ...theme.applyStyles('dark', {
+                background: `${theme.vars.overlays[8]}, ${baseBackground}`
+            })
+        };
+    };
+
+    return {
+        minHeight: theme.spacing(6),
+        // position: 'relative',
         display: 'flex',
-        background: `linear-gradient(to right, ${theme.palette.background.paper} ${theme.spacing(5.5)}, transparent)`
-    },
-    [`& .${ribbonTabContentClasses.scrollButtonRight}`]: {
-        paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(.5),
-        right: theme.spacing(8.5),
-        display: 'flex',
-        background: `linear-gradient(to left, ${theme.palette.background.paper} ${theme.spacing(5.5)}, transparent)`
-    }
-}));
+        alignItems: 'center',
+        gap: theme.spacing(2),
+        whiteSpace: 'nowrap',
+        overflowX: 'auto',
+        overflowY: 'hidden',
+        scrollbarWidth: 'none',
+        '&::-webkit-scrollbar': {
+            display: 'none'
+        },
+        [`&:has(.${ribbonTabContentClasses.scrollButtonLeft})`]: {
+            marginLeft: theme.spacing(-9)
+        },
+        [`&:has(.${ribbonTabContentClasses.scrollButtonRight})`]: {
+            marginRight: theme.spacing(-9)
+        },
+        [`& .${ribbonTabContentClasses.scrollButtonLeft}`]: {
+            paddingLeft: theme.spacing(.5),
+            paddingRight: theme.spacing(2),
+            left: theme.spacing(8.5),
+            display: 'flex',
+            ...scrollButtonBackgroundStyle('right')
+        },
+        [`& .${ribbonTabContentClasses.scrollButtonRight}`]: {
+            paddingLeft: theme.spacing(2),
+            paddingRight: theme.spacing(.5),
+            right: theme.spacing(8.5),
+            display: 'flex',
+            ...scrollButtonBackgroundStyle('left')
+        }
+    };
+});
 
 export const RibbonTabContentScrollButtonRoot = styled(Box)({
     position: 'sticky',

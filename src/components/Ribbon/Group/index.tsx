@@ -70,8 +70,8 @@ export const RibbonGroupLabel = styled(
     transform: 'translateX(-50%)',
     color: (theme.vars || theme).palette.text.secondary,
     backgroundColor: (theme.vars || theme).palette.background.paper,
-    borderTopLeftRadius: theme.shape.borderRadius,
-    borderTopRightRadius: theme.shape.borderRadius,
+    borderTopLeftRadius: (theme.vars || theme).shape.borderRadius,
+    borderTopRightRadius: (theme.vars || theme).shape.borderRadius,
     borderBottom: 'none',
     ...borderAndBoxShadow(theme)
 }));
