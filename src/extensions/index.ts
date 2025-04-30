@@ -17,6 +17,7 @@ export * from './link';
 export * from './list_item';
 export * from './ordered_list';
 export * from './paragraph';
+export * from './selection';
 export * from './starter_kit';
 export * from './strike';
 export * from './subscript';

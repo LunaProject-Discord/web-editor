@@ -26,24 +26,29 @@ import { TextAlignOptions } from '@tiptap/extension-text-align';
 import { UnderlineOptions } from '@tiptap/extension-underline';
 import {
     AudioExtension,
-    AudioOptions,
+    AudioExtensionOptions,
     BlockquoteExtension,
     BoldExtension,
-    BulletListExtension, CodeBlockExtension, CodeBlockOptions,
+    BulletListExtension,
+    CodeBlockExtension,
+    CodeBlockOptions,
     CodeExtension,
     DocumentExtension,
     DropcursorExtension,
     GapcursorExtension,
     HardBreakExtension,
     HeadingExtension,
-    HistoryExtension, HorizontalRuleExtension,
+    HistoryExtension,
+    HorizontalRuleExtension,
     ImageExtension,
-    ImageOptions,
+    ImageExtensionOptions,
     ItalicExtension,
     LinkExtension,
     ListItemExtension,
     OrderedListExtension,
     ParagraphExtension,
+    SelectionExtension,
+    SelectionExtensionOptions,
     StrikeExtension,
     SubscriptExtension,
     SuperscriptExtension,
@@ -55,11 +60,12 @@ import {
     TaskListExtension,
     TextAlignExtension,
     TextExtension,
-    UnderlineExtension, VideoExtension,
-    VideoOptions
+    UnderlineExtension,
+    VideoExtension,
+    VideoExtensionOptions
 } from '..';
 
-export interface StarterKitOptions {
+export interface StarterKitExtensionOptions {
     document?: false;
     text?: false;
 
@@ -77,9 +83,9 @@ export interface StarterKitOptions {
     blockquote?: Partial<BlockquoteOptions> | false;
     horizontalRule?: Partial<HorizontalRuleOptions> | false;
     codeBlock?: Partial<CodeBlockOptions> | false;
-    image?: Partial<ImageOptions> | false;
-    video?: Partial<VideoOptions> | false;
-    audio?: Partial<AudioOptions> | false;
+    image?: Partial<ImageExtensionOptions> | false;
+    video?: Partial<VideoExtensionOptions> | false;
+    audio?: Partial<AudioExtensionOptions> | false;
 
     bold?: Partial<BoldOptions> | false;
     italic?: Partial<ItalicOptions> | false;
@@ -91,16 +97,17 @@ export interface StarterKitOptions {
     superscript?: Partial<SuperscriptExtensionOptions> | false;
 
     history?: Partial<HistoryOptions> | false;
+    selection?: Partial<SelectionExtensionOptions> | false;
     hardBreak?: Partial<HardBreakOptions> | false;
     dropCursor?: Partial<DropcursorOptions> | false;
     gapCursor?: false;
     textAlign?: Partial<TextAlignOptions> | false;
 }
 
-export const StarterKitExtension = Extension.create<StarterKitOptions>({
+export const StarterKitExtension = Extension.create<StarterKitExtensionOptions>({
     name: 'starterKit',
 
-    addOptions(): StarterKitOptions {
+    addOptions(): StarterKitExtensionOptions {
         return {
             document: undefined,
             text: undefined,
@@ -133,6 +140,7 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
             superscript: undefined,
 
             history: undefined,
+            selection: undefined,
             hardBreak: undefined,
             gapCursor: undefined,
             dropCursor: undefined,
@@ -202,6 +210,8 @@ export const StarterKitExtension = Extension.create<StarterKitOptions>({
 
         if (this.options.history !== false)
             extensions.push(HistoryExtension.configure(this.options?.history));
+        if (this.options.selection !== false)
+            extensions.push(SelectionExtension.configure(this.options?.selection));
         if (this.options.hardBreak !== false)
             extensions.push(HardBreakExtension.configure(this.options?.hardBreak));
         if (this.options.dropCursor !== false)
