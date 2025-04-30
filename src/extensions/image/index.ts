@@ -2,7 +2,7 @@ import { mergeAttributes, Node } from '@tiptap/core';
 
 export const ImageElementType = 'img';
 
-export interface ImageOptions {
+export interface ImageExtensionOptions {
     HTMLAttributes: Record<string, any>;
 }
 
@@ -14,7 +14,7 @@ declare module '@tiptap/core' {
     }
 }
 
-export const ImageExtension = Node.create<ImageOptions>({
+export const ImageExtension = Node.create<ImageExtensionOptions>({
     name: 'image',
 
     group: 'block',

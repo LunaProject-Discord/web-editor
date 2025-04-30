@@ -5,7 +5,7 @@ export const REGEX_NICONICO = /^https?:\/\/(?:(?:www\.)?nicovideo.jp\/watch|nico
 
 export const VideoElementType = 'video';
 
-export interface VideoOptions {
+export interface VideoExtensionOptions {
     HTMLAttributes: Record<string, any>;
 }
 
@@ -23,7 +23,7 @@ declare module '@tiptap/core' {
     }
 }
 
-export const VideoExtension = Node.create<VideoOptions>({
+export const VideoExtension = Node.create<VideoExtensionOptions>({
     name: 'video',
 
     group: 'block',

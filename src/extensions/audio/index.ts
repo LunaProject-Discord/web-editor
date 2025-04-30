@@ -2,7 +2,7 @@ import { mergeAttributes, Node } from '@tiptap/core';
 
 export const AudioElementType = 'audio';
 
-export interface AudioOptions {
+export interface AudioExtensionOptions {
     HTMLAttributes: Record<string, any>;
 }
 
@@ -20,7 +20,7 @@ declare module '@tiptap/core' {
     }
 }
 
-export const AudioExtension = Node.create<AudioOptions>({
+export const AudioExtension = Node.create<AudioExtensionOptions>({
     name: 'audio',
 
     group: 'block',
