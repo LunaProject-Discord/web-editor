@@ -31,17 +31,6 @@ export const Schema = {
     })
 } as const;
 
-export const isNodeAllowed = (node: PMNode, nodeName: string) => {
-    const nodeType = node.type;
-    const schema = nodeType.schema;
-
-    const type = schema.nodes[nodeName];
-    if (!type)
-        return false;
-
-    return nodeType.contentMatch.matchType(type) !== null;
-};
-
 export const isMarkAllowed = (node: PMNode, markName: string) => {
     const nodeType = node.type;
     const schema = nodeType.schema;
